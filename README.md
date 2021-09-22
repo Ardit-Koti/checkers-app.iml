@@ -7,7 +7,7 @@ a web micro-framework.
 ## Team
 
 - Ryan Wolford
-- MEMBER2
+- Olaf Hichwa
 - MEMBER3
 - MEMBER4
 
