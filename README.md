@@ -6,10 +6,10 @@ a web micro-framework.
 
 ## Team
 
--  Ryan Wolford
+- Ryan Wolford
 - Olaf Hichwa
 - Ben Gurevich
-- Ardit Koti
+- Member 4
 
 
 ## Prerequisites
