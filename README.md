@@ -8,8 +8,8 @@ a web micro-framework.
 
 -  Ryan Wolford
 - Olaf Hichwa
-- MEMBER3
-- MEMBER4
+- Ben Gurevich
+- Ardit Koti
 
 
 ## Prerequisites
