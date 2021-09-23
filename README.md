@@ -9,7 +9,7 @@ a web micro-framework.
 - Ryan Wolford
 - Olaf Hichwa
 - Ben Gurevich
-- Ardit (but he cant use git, bot)
+- Ardit Koti
 
 
 ## Prerequisites
