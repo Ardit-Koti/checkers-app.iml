@@ -1,3 +1,42 @@
+commit 0578b48462ded3eb9a0d693fa4a29c9ca12daf28
+Author: Ryan Wolford <rcw3446@rit.edu>
+Date:   Wed Sep 22 20:34:45 2021 -0400
+
+    Removed ardit's name to force him to go through the pain of commiting again since he can't clone like a normal person
+
+commit d021bbef51f23745569ebe8d4282319caf45737b
+Merge: 0c8dc0d c84d718
+Author: Ryan Wolford <rcw3446@rit.edu>
+Date:   Wed Sep 22 20:30:42 2021 -0400
+
+    Merge branch 'master' of https://github.com/RIT-SWEN-261-02/team-project-2211-swen-261-02-4-team4
+
+commit 0c8dc0dae826c2e7e475288557a61c0891543e99
+Author: Ryan Wolford <rcw3446@rit.edu>
+Date:   Wed Sep 22 20:30:34 2021 -0400
+
+    Chaning my name to flex on Ardit
+
+commit c84d71803e23542a90df7891e9b6b198e6741b22
+Author: ak1935 <78978500+ak1935@users.noreply.github.com>
+Date:   Wed Sep 22 20:27:34 2021 -0400
+
+    I did it, mom!
+    
+    I still can't clone though
+
+commit 3c77011519741b6bbaa0918d591910ab7a3129d9
+Author: bengurevich <69908689+bengurevich@users.noreply.github.com>
+Date:   Wed Sep 22 20:08:37 2021 -0400
+
+    Update README.md
+
+commit 373223a7a6b0fd0f82b1ab89be51df7bdf756f65
+Author: ooh5406 <70298420+ooh5406@users.noreply.github.com>
+Date:   Wed Sep 22 16:17:02 2021 -0400
+
+    added my name
+
 commit 33282c70f535ea8bc357bdcb18c39f09f0b51b7c
 Author: Ryan Wolford <rcw3446@rit.edu>
 Date:   Wed Sep 22 16:05:59 2021 -0400
