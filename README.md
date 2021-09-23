@@ -8,7 +8,7 @@ a web micro-framework.
 
 - Ryan Wolford
 - Olaf Hichwa
-- MEMBER3
+- Ben Gurevich
 - MEMBER4
 
 
