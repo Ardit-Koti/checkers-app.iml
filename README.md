@@ -10,6 +10,7 @@ a web micro-framework.
 - Olaf Hichwa
 - Ben Gurevich
 - Ardit Koti
+- Jonah Rosenberg
 
 
 ## Prerequisites
