@@ -1,3 +1,28 @@
+commit fe2d970f7ac2191b2840af84f64b2a44ea6336e6
+Author: Ardit <ak1935@rit.edu>
+Date:   Thu Sep 23 12:07:23 2021 -0400
+
+    Ardit Koti added name
+
+commit c8a39fc3324519afa52d887493512b4f4a5f6e2d
+Merge: c9e00db a626f27
+Author: Ryan Wolford <rcw3446@rit.edu>
+Date:   Wed Sep 22 21:06:18 2021 -0400
+
+    Merge branch 'master' of https://github.com/RIT-SWEN-261-02/team-project-2211-swen-261-02-4-team4
+
+commit c9e00dbfeeaa9e3439c2d631b24855b061dce6de
+Author: Ryan Wolford <rcw3446@rit.edu>
+Date:   Wed Sep 22 21:06:12 2021 -0400
+
+    Updated the github.txt log
+
+commit a626f270b77be53141f0d84d5d8534b6ca726b16
+Author: Olaf Hichwa <olafhichwa@olafs-mbp.wireless.rit.edu>
+Date:   Wed Sep 22 20:42:50 2021 -0400
+
+    fixed adits name
+
 commit 0578b48462ded3eb9a0d693fa4a29c9ca12daf28
 Author: Ryan Wolford <rcw3446@rit.edu>
 Date:   Wed Sep 22 20:34:45 2021 -0400
