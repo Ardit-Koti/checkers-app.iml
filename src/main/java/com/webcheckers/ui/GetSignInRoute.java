@@ -40,48 +40,9 @@ public class GetSignInRoute implements Route{
 
         final Map<String, Object> vm = new HashMap<>();
 
-        
+
 
         return templateEngine.render(new ModelAndView(vm,VIEW_NAME));
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
