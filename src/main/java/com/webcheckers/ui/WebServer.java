@@ -54,6 +54,7 @@ public class WebServer {
    */
   public static final String HOME_URL = "/";
   public static final String SIGN_IN_URL= "/signin";
+  public static final String GAME_URL = "/game";
 
 
   //
@@ -142,6 +143,12 @@ public class WebServer {
     get(HOME_URL, new GetHomeRoute(templateEngine));
 
     get(SIGN_IN_URL, new GetSignInRoute(templateEngine));
+
+    get(GAME_URL, new GetGameRoute(templateEngine));
+
+    post(SIGN_IN_URL, new PostSignInRoute(templateEngine));
+
+    post(HOME_URL, new PostHomeRoute(templateEngine));
 
     //
     LOG.config("WebServer is initialized.");
