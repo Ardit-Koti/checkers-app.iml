@@ -1,3 +1,15 @@
+commit b440fc86eec9c64b923a8e46d5927ccfb7d33504
+Author: Jonah Rosenberg <49052921+SnugLyfe@users.noreply.github.com>
+Date:   Mon Sep 27 18:12:01 2021 -0400
+
+    added Jonah Rosenberg to team members
+
+commit 803a3bdabddbaf22e8a259ded57bb265044cfd45
+Author: Ryan Wolford <rcw3446@rit.edu>
+Date:   Mon Sep 27 16:50:54 2021 -0400
+
+    Updating changelog
+
 commit fe2d970f7ac2191b2840af84f64b2a44ea6336e6
 Author: Ardit <ak1935@rit.edu>
 Date:   Thu Sep 23 12:07:23 2021 -0400
