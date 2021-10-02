@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SignInActions {
-    List<String> NamesInUse = new ArrayList<String>();
+    List<String> NamesInUse = new ArrayList<String>(); //
 
+    public void checkAndAddName(String Name){
+        //check
+        //add
+    }
 
     public boolean isNameValid(String Name){
         //I enter my name containing at least one alphanumeric character and optionally spaces
