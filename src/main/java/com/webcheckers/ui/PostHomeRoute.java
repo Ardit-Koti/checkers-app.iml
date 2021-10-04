@@ -35,8 +35,7 @@ public class PostHomeRoute implements Route{
         final Map<String, Object> vm = new HashMap<>();
         final String playerName = request.queryParams(NAME_PARAM);
         pLobby.checkAndAddName(playerName);
-
-
+        
 
         return templateEngine.render(new ModelAndView(vm,VIEW_NAME));
 
