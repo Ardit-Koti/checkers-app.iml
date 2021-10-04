@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerLobby {
-    List<Player> activePlayers = new ArrayList<>(); //
-    List<String> nameOfPlayers = new ArrayList<>();
+    List<String> NamesInUse = new ArrayList<>(); //
 
         public PlayerLobby(){}
     /**
@@ -21,8 +20,8 @@ public class PlayerLobby {
             return "The name '"+Name+"' is already taken, please enter a new name";
         //if we get here, name valid
         //addition
-        activePlayers.add(new Player(Name));
-        nameOfPlayers.add(Name);
+        NamesInUse.add(Name);
+        new Player(Name);
         return "Success";
     }
 
@@ -46,10 +45,9 @@ public class PlayerLobby {
     }
 
     public boolean isNameUnique(String Name){
-        if (nameOfPlayers.contains(Name))
+        if (NamesInUse.contains(Name))
             return false;
         return true;
     }
-
 
 }

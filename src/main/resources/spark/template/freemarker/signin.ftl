@@ -10,11 +10,10 @@
 <body>
     <div class="page">
         <h1>Web Checkers</h1>
-
-
         <form action="/signin.ftl" METHOD="post">
             <label for="name">Name: </label><br>
             <input type="text" id="name" name="name"><br>
+
             <input type="submit" name="sign-in" value="Sign-in"/>
         </form>
     </div>
