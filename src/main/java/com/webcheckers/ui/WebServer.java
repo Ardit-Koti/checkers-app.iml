@@ -64,7 +64,7 @@ public class WebServer {
 
   private final TemplateEngine templateEngine;
   private final Gson gson;
-
+  private final PlayerLobby pLobby;
   //
   // Constructor
   //
@@ -80,13 +80,14 @@ public class WebServer {
    * @throws NullPointerException
    *    If any of the parameters are {@code null}.
    */
-  public WebServer(final TemplateEngine templateEngine, final Gson gson) {
+  public WebServer(final TemplateEngine templateEngine, final Gson gson, final PlayerLobby pLobby) {
     // validation
     Objects.requireNonNull(templateEngine, "templateEngine must not be null");
     Objects.requireNonNull(gson, "gson must not be null");
     //
     this.templateEngine = templateEngine;
     this.gson = gson;
+    this.pLobby = pLobby;
   }
 
   //
@@ -149,9 +150,7 @@ public class WebServer {
 
     post(SIGN_IN_URL, new PostSignInRoute(templateEngine));
 
-    post(HOME_URL, new PostHomeRoute(templateEngine));
-
-    PlayerLobby lobby = new PlayerLobby();
+    post(HOME_URL, new PostHomeRoute(templateEngine,pLobby));
 
     //
     LOG.config("WebServer is initialized.");
