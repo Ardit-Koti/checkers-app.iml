@@ -7,8 +7,10 @@ import java.util.List;
 
 public class PlayerLobby {
     List<String> NamesInUse = new ArrayList<>(); //
+    private final String NAME_TAKEN = "This name can't be used because this name has already been taken. Try again with a new name.";
+    private final String NAME_INVALID = "This name is invalid, make sure to use only alphanumeric characters.";
 
-        public PlayerLobby(){}
+    public PlayerLobby(){}
     /**
      * @return String error message if check fails and name is not added, return "Success" if done
      */
