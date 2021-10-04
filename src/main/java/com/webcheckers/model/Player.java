@@ -8,7 +8,7 @@ public class Player {
 
     private String player_name;
 
-    public String getPlayer_name() {
+    public String name() {
         return player_name;
     }
 

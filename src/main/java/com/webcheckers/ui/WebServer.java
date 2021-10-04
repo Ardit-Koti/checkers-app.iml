@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import com.google.gson.Gson;
 
+import com.webcheckers.util.PlayerLobby;
 import spark.TemplateEngine;
 
 
@@ -149,6 +150,8 @@ public class WebServer {
     post(SIGN_IN_URL, new PostSignInRoute(templateEngine));
 
     post(HOME_URL, new PostHomeRoute(templateEngine));
+
+    PlayerLobby lobby = new PlayerLobby();
 
     //
     LOG.config("WebServer is initialized.");

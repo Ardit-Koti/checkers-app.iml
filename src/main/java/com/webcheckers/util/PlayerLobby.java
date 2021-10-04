@@ -9,6 +9,7 @@ public class PlayerLobby {
     List<Player> activePlayers = new ArrayList<>(); //
     List<String> nameOfPlayers = new ArrayList<>();
 
+        public PlayerLobby(){}
     /**
      * @return String error message if check fails and name is not added, return "Success" if done
      */
