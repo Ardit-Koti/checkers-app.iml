@@ -50,4 +50,8 @@ public class PlayerLobby {
         return true;
     }
 
+    public int numberOfPlayers(){
+        return NamesInUse.size();
+    }
+
 }
