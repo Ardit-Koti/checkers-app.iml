@@ -1,5 +1,6 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.util.PlayerLobby;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -17,11 +18,13 @@ public class PostHomeRoute implements Route{
 
     private final String VIEW_NAME = "home.ftl";
     private final TemplateEngine templateEngine;
+    private final String NAME_PARAM = "name";
+    private final PlayerLobby pLobby;
 
-    PostHomeRoute(TemplateEngine templateEngine){
+    PostHomeRoute(TemplateEngine templateEngine, PlayerLobby plobby){
 
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
-
+        this.pLobby = plobby;
         this.templateEngine = templateEngine;
     }
 
@@ -30,6 +33,8 @@ public class PostHomeRoute implements Route{
         final Session httpSession = request.session();
 
         final Map<String, Object> vm = new HashMap<>();
+        final String playerName = request.queryParams(NAME_PARAM);
+        pLobby.checkAndAddName(playerName);
 
 
 
