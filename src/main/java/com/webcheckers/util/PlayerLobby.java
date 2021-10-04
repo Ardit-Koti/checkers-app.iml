@@ -14,7 +14,7 @@ public class PlayerLobby {
      */
     public String checkAndAddName(String Name){
         //Checks
-        if (! isNameValid(Name)) //if the name fails validity check, return false
+        if (! this.isNameValid(Name)) //if the name fails validity check, return false
             return "The name '"+Name+"' is invalid, please insure it contains at least one alphanumeric character, please enter a new name";
         if (! this.isNameUnique(Name)) //if the name fails uniqueness check, return false
             return "The name '"+Name+"' is already taken, please enter a new name";
@@ -27,13 +27,13 @@ public class PlayerLobby {
 
     // TODO: 10/2/21 remove a name after sign out (not in sprint 1)
 
-    public boolean isNameValid(String Name){
+    private boolean isNameValid(String Name){
         if (!this.containsAlphanumeric(Name) ) //if name does NOT contain alphanumeric chars, return false,
             return false;
         return true;
     }
 
-    public boolean containsAlphanumeric(String str)
+    private boolean containsAlphanumeric(String str)
     {
         char[] charArray = str.toCharArray();
         for(char c:charArray)
@@ -44,7 +44,7 @@ public class PlayerLobby {
         return false;
     }
 
-    public boolean isNameUnique(String Name){
+    private boolean isNameUnique(String Name){
         if (NamesInUse.contains(Name))
             return false;
         return true;
