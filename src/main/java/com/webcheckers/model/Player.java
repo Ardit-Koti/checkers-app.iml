@@ -8,6 +8,10 @@ public class Player {
 
     private String player_name;
 
+    public Player() {
+
+    }
+
     public String name() {
         return player_name;
     }
