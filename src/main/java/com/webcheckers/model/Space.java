@@ -5,11 +5,17 @@ public class Space {
 
     }
     private boolean isTaken;
-    // TODO: 10/4/21 convert to enum
     public enum shade {light, dark}
     private shade shade;
 
     public void setShade(Space.shade shade) {
         this.shade = shade;
     }
+    public void moveTo(){
+        this.isTaken=true;
+    }
+    public void moveAway(){
+        this.isTaken=false;
+    }
+    //TEST2
 }
