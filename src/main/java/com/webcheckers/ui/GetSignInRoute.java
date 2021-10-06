@@ -17,7 +17,7 @@ import com.webcheckers.util.Message;
 public class GetSignInRoute implements Route{
 
     static final String VIEW_NAME = "signin.ftl";
-
+    private static final Message WELCOME_MSG = Message.info("Please Login");
     private final TemplateEngine templateEngine;
 
     /**
@@ -41,7 +41,7 @@ public class GetSignInRoute implements Route{
         final Map<String, Object> vm = new HashMap<>();
 
 
-
+        vm.put("message", WELCOME_MSG);
         return templateEngine.render(new ModelAndView(vm,VIEW_NAME));
 
     }

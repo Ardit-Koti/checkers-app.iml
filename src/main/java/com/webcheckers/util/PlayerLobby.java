@@ -17,9 +17,9 @@ public class PlayerLobby {
     public String checkAndAddName(String Name){
         //Checks
         if (! this.isNameValid(Name)) //if the name fails validity check, return false
-            return "The name '"+Name+"' is invalid, please insure it contains at least one alphanumeric character, please enter a new name";
+            return "Invalid";
         if (! this.isNameUnique(Name)) //if the name fails uniqueness check, return false
-            return "The name '"+Name+"' is already taken, please enter a new name";
+            return "Taken";
         //if we get here, name valid
         //addition
         NamesInUse.add(Name);
