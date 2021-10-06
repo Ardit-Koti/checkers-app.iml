@@ -6,7 +6,7 @@
     <button type="button">Play</button>
   </form>
   <p>
-      List of Players:
+
   </p>
   <#else>
   <p>
