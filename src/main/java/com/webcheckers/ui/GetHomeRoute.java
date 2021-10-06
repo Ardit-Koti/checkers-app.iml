@@ -22,7 +22,7 @@ public class GetHomeRoute implements Route {
   private static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
   private final String NUM_PLAYERS = "playernum";
   private PlayerLobby pLobby;
-  private final String PLAYERS = "Players";
+  private final String PLAYERS = "playerlist";
   private final TemplateEngine templateEngine;
 
   /**

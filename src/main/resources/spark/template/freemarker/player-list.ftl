@@ -5,9 +5,12 @@
   <form action="/game" METHOD="get">
     <button type="button">Play</button>
   </form>
+  <p>
+      List of Players:
+  </p>
   <#else>
   <p>
-    Number of players: ${playernum}
+
   </p>
 </#if>
 </body>
