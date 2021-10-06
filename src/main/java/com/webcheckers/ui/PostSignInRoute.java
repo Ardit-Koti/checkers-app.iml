@@ -1,5 +1,6 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.util.PlayerLobby;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -20,11 +21,13 @@ public class PostSignInRoute implements Route{
 
     private final String VIEW_NAME = "signin.ftl";
     private final TemplateEngine templateEngine;
+    private final String NAME_PARAM = "name";
+    private final PlayerLobby pLobby;
 
-    PostSignInRoute(TemplateEngine templateEngine){
+    PostSignInRoute(TemplateEngine templateEngine, PlayerLobby plobby){
 
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
-
+        this.pLobby = plobby;
         this.templateEngine = templateEngine;
     }
 
@@ -34,6 +37,11 @@ public class PostSignInRoute implements Route{
         final Session httpSession = request.session();
 
         final Map<String, Object> vm = new HashMap<>();
+
+        String playerName = request.queryParams(NAME_PARAM);
+        pLobby.checkAndAddName(playerName);
+
+
 
         return templateEngine.render(new ModelAndView(vm,VIEW_NAME));
 

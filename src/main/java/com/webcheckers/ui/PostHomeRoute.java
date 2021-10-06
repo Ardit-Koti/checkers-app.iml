@@ -33,8 +33,8 @@ public class PostHomeRoute implements Route{
         final Session httpSession = request.session();
 
         final Map<String, Object> vm = new HashMap<>();
-        final String playerName = request.queryParams(NAME_PARAM);
-        pLobby.checkAndAddName(playerName);
+        final String playerName = request.queryParams(NAME_PARAM); // need to get rid of this
+        pLobby.checkAndAddName(playerName);                        // this will get taken care of in postSignIn
         
 
         return templateEngine.render(new ModelAndView(vm,VIEW_NAME));
