@@ -10,7 +10,7 @@
   </p>
   <#else>
   <p>
-
+    Number of Players: ${playernum}
   </p>
 </#if>
 </body>
