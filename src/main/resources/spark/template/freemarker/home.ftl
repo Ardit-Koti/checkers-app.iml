@@ -19,7 +19,7 @@
 
     <!-- Provide a message to the user, if supplied. -->
     <#include "message.ftl" />
-
+    <#include "player-list.ftl"/>
     <!-- TODO: future content on the Home:
             to start games,
             spectating active games,
