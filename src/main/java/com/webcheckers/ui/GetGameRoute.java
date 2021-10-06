@@ -42,6 +42,7 @@ public class GetGameRoute implements Route{
 
 
 
+
         return templateEngine.render(new ModelAndView(vm,VIEW_NAME));
 
     }

@@ -51,11 +51,13 @@ public class GetHomeRoute implements Route {
     final Session httpSession = request.session();
     Map<String, Object> vm = new HashMap<>();
 
-    if(httpSession.attribute("currentUser") != null)
-    {
-      Player currentPlayer = httpSession.attribute("currentuser");
-      vm.put("currentUser",currentPlayer);
-
+    if (httpSession.attribute("currentUser") != null) {
+      String playerName = httpSession.attribute("playerName");
+      Message message = Message.info("Welcome " + playerName + " to the world of online checkers");
+      vm.put("currentUser",httpSession.attribute("currentUser"));
+      vm.put("message", message);
+      vm.put("title", "Welcome!");
+      return templateEngine.render(new ModelAndView(vm, "home.ftl"));
     }
     LOG.finer("GetHomeRoute is invoked.");
 
