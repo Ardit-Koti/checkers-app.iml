@@ -36,16 +36,7 @@ public class PostHomeRoute implements Route{
         final Session httpSession = request.session();
 
         final Map<String, Object> vm = new HashMap<>();
-        final String playerName = request.queryParams(NAME_PARAM);
 
-        Player user = new Player(playerName);
-
-        httpSession.attribute("currentUser",user);
-        vm.put("currentUser",user);
-
-
-
-        pLobby.checkAndAddName(playerName);
 
         vm.put("title", "Welcome!");
         vm.put("message", WELCOME_MSG);
