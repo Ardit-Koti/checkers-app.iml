@@ -2,7 +2,7 @@ package com.webcheckers.ui;
 
 import com.webcheckers.model.Player;
 import com.webcheckers.util.Message;
-import com.webcheckers.util.PlayerLobby;
+import com.webcheckers.model.PlayerLobby;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;

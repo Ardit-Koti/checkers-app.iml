@@ -2,7 +2,7 @@ package com.webcheckers;
 
 import com.google.gson.Gson;
 import com.webcheckers.ui.WebServer;
-import com.webcheckers.util.PlayerLobby;
+import com.webcheckers.model.PlayerLobby;
 import spark.TemplateEngine;
 import spark.template.freemarker.FreeMarkerEngine;
 

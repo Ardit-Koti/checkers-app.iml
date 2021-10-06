@@ -17,5 +17,4 @@ public class Space {
     public void moveAway(){
         this.isTaken=false;
     }
-    //TEST2
 }

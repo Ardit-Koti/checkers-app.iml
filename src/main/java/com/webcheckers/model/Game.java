@@ -5,10 +5,16 @@ package com.webcheckers.model;
  */
 public class Game {
 
-    Player redPlayer = new Player();
-    Player whitePlayer = new Player();
+    private Player redPlayer = new Player();
+
+    private Player whitePlayer = new Player();
+    private int gameId = 1; // TODO: 10/6/21  implement number generator for multiple games
+
 
     Board board = new Board();
+
+    // TODO: 10/6/21  put into vm from game class: game id, current user viewMode mode options redPlayer.name whitePlayer.name active color
+
 
 
     }
