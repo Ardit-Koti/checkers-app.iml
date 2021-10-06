@@ -7,6 +7,7 @@ import java.util.List;
 
 public class PlayerLobby {
     public List<String> NamesInUse = new ArrayList<>(); //
+    public List<Player> Players = new ArrayList<>();
     private final String NAME_TAKEN = "This name can't be used because this name has already been taken. Try again with a new name.";
     private final String NAME_INVALID = "This name is invalid, make sure to use only alphanumeric characters.";
 
@@ -23,7 +24,7 @@ public class PlayerLobby {
         //if we get here, name valid
         //addition
         NamesInUse.add(Name);
-        new Player(Name);
+        Players.add(new Player(Name));
         return "Success";
     }
 
