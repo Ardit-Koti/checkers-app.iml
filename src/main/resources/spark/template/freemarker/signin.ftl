@@ -14,7 +14,7 @@
         <div class="navigation">
                         <a href="/">home</a>
                     </div>
-        <form action="/signin.ftl" METHOD="post">
+        <form action="/signin" METHOD="post">
             <label for="name">Name: </label><br>
             <input type="text" id="name" name="name"><br>
 
