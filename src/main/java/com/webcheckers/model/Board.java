@@ -24,6 +24,6 @@ public class Board {
     public Space getSpace(int row, int col){
         return gameBoard[row][col];
     }
-
+// olafs change to hi
 
 }
