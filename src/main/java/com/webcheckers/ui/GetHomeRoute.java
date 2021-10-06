@@ -22,7 +22,7 @@ public class GetHomeRoute implements Route {
   private static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
   private final String NUM_PLAYERS = "playernum";
   private PlayerLobby pLobby;
-
+  private final String PLAYERS = "Players";
   private final TemplateEngine templateEngine;
 
   /**
@@ -69,7 +69,7 @@ public class GetHomeRoute implements Route {
     // display a user message in the Home page
     vm.put("message", WELCOME_MSG);
     vm.put(NUM_PLAYERS, pLobby.numberOfPlayers());
-
+    vm.put(PLAYERS, pLobby.NamesInUse);
     httpSession.maxInactiveInterval(SESSION_TIMEOUT_PERIOD);
 
     // render the View
