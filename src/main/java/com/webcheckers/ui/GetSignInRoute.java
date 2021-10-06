@@ -39,7 +39,14 @@ public class GetSignInRoute implements Route{
         final Session httpSession = request.session();
 
         final Map<String, Object> vm = new HashMap<>();
-
+        if (httpSession.attribute("currentUser") != null) {
+            String playerName = httpSession.attribute("playerName");
+            Message message = Message.info("Welcome " + playerName + " to the world of online checkers");
+            vm.put("currentUser",httpSession.attribute("currentUser"));
+            vm.put("message", message);
+            vm.put("title", "Welcome!");
+            return templateEngine.render(new ModelAndView(vm, "home.ftl"));
+        }
 
         vm.put("message", WELCOME_MSG);
         return templateEngine.render(new ModelAndView(vm,VIEW_NAME));

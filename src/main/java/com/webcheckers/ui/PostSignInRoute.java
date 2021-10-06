@@ -45,6 +45,7 @@ public class PostSignInRoute implements Route{
         if (status.equals("Success")){
             Player user = new Player(playerName);
             httpSession.attribute("currentUser",user);
+            httpSession.attribute("playerName",playerName);
             vm.put("currentUser",user);
 
 
