@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.logging.Logger;
 
 import com.webcheckers.model.Player;
+import com.webcheckers.util.PlayerLobby;
 import spark.*;
 
 import com.webcheckers.util.Message;
@@ -20,6 +21,8 @@ public class GetHomeRoute implements Route {
   private final int SESSION_TIMEOUT_PERIOD = 600;
 
   private static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
+  private final String NUM_PLAYERS = "playernum";
+  private PlayerLobby pLobby;
 
   private final TemplateEngine templateEngine;
 
@@ -29,9 +32,10 @@ public class GetHomeRoute implements Route {
    * @param templateEngine
    *   the HTML template rendering engine
    */
-  public GetHomeRoute(final TemplateEngine templateEngine) {
+  public GetHomeRoute(final TemplateEngine templateEngine, PlayerLobby pLobby) {
     this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
     //
+    this.pLobby = pLobby;
     LOG.config("GetHomeRoute is initialized.");
   }
 
@@ -65,6 +69,7 @@ public class GetHomeRoute implements Route {
 
     // display a user message in the Home page
     vm.put("message", WELCOME_MSG);
+    vm.put(NUM_PLAYERS, pLobby.numberOfPlayers());
 
     httpSession.maxInactiveInterval(SESSION_TIMEOUT_PERIOD);
 
