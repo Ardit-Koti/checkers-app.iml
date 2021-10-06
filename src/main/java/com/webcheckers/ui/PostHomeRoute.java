@@ -1,5 +1,7 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.model.Player;
+import com.webcheckers.util.Message;
 import com.webcheckers.util.PlayerLobby;
 import spark.ModelAndView;
 import spark.Request;
@@ -20,6 +22,7 @@ public class PostHomeRoute implements Route{
     private final TemplateEngine templateEngine;
     private final String NAME_PARAM = "name";
     private final PlayerLobby pLobby;
+    private static final Message WELCOME_MSG = Message.info("Welcome user! Please choose an activity");
 
     PostHomeRoute(TemplateEngine templateEngine, PlayerLobby plobby){
 
@@ -33,9 +36,19 @@ public class PostHomeRoute implements Route{
         final Session httpSession = request.session();
 
         final Map<String, Object> vm = new HashMap<>();
-        final String playerName = request.queryParams(NAME_PARAM); // need to get rid of this
-        pLobby.checkAndAddName(playerName);                        // this will get taken care of in postSignIn
-        
+        final String playerName = request.queryParams(NAME_PARAM);
+
+        Player user = new Player(playerName);
+
+        httpSession.attribute("currentUser",user);
+        vm.put("currentUser",user);
+
+
+
+        pLobby.checkAndAddName(playerName);
+
+        vm.put("title", "Welcome!");
+        vm.put("message", WELCOME_MSG);
 
         return templateEngine.render(new ModelAndView(vm,VIEW_NAME));
 
