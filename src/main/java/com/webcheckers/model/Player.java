@@ -1,5 +1,7 @@
 package com.webcheckers.model;
 
+import java.util.Iterator;
+
 public class Player {
 
     public Player(String player_name) {

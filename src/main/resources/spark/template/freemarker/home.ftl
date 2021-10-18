@@ -19,12 +19,30 @@
 
     <!-- Provide a message to the user, if supplied. -->
     <#include "message.ftl" />
-    <#include "player-list.ftl"/>
     <!-- TODO: future content on the Home:
             to start games,
             spectating active games,
             or replay archived games
     -->
+
+    <#if currentUser??>
+      <form action="/game" METHOD="get">
+        <button type="button">Play</button>
+      </form>
+      <p>
+          List of Players:
+
+      </p>
+
+        <#list players as player>
+            <h3>${player}</h3>
+
+        </#list>
+      <#else>
+      <p>
+        Number of Players: ${playernum}
+      </p>
+    </#if>
 
   </div>
 
