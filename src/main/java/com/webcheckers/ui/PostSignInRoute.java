@@ -24,7 +24,7 @@ public class PostSignInRoute implements Route{
     private Message NAMESTATUS;
     private final String VIEW_NAME = "signin.ftl";
     private final TemplateEngine templateEngine;
-    private final String NAME_PARAM = "name";
+    static final String NAME_PARAM = "name";
     private final PlayerLobby pLobby;
     private final String PLAYERS = "players";
 
