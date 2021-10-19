@@ -45,7 +45,8 @@ public class GetSignInRoute implements Route{
             vm.put("currentUser",httpSession.attribute("currentUser"));
             vm.put("message", message);
             vm.put("title", "Welcome!");
-            return templateEngine.render(new ModelAndView(vm, "home.ftl"));
+            response.redirect("/");
+            return null;
         }
 
         vm.put("message", WELCOME_MSG);

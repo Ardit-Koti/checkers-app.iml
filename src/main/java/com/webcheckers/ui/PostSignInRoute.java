@@ -26,6 +26,7 @@ public class PostSignInRoute implements Route{
     private final TemplateEngine templateEngine;
     private final String NAME_PARAM = "name";
     private final PlayerLobby pLobby;
+    private final String PLAYERS = "players";
 
     PostSignInRoute(TemplateEngine templateEngine, PlayerLobby plobby){
 
@@ -52,6 +53,7 @@ public class PostSignInRoute implements Route{
             NAMESTATUS = Message.info("Welcome " + playerName + " to the world of online checkers");
             vm.put("message", NAMESTATUS);
             vm.put("title", "Welcome!");
+            vm.put(PLAYERS, pLobby.NamesInUse);
             return templateEngine.render(new ModelAndView(vm,"home.ftl"));
         }
         else {
