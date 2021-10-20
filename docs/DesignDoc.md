@@ -9,16 +9,17 @@ geometry: margin=1in
 > and appear in the generated PDF in italics._ hi
 
 ## Team Information
-* Team name: TEAMNAME
+* Team name: SWEN-261 Team 4 
 * Team members
-  * MEMBER1
-  * MEMBER2
-  * MEMBER3
-  * MEMBER4
+  * Ben Gurevich
+  * Ryan Wolford 
+  * Olaf Hichwa
+  * Ardit Koti 
+  * Jonah Rosenberg
 
 ## Executive Summary
 
-This is a summary of the project.
+The application WebCheckers enhances the experience 
 
 ### Purpose
 > _Provide a very brief statement about the project and the most
@@ -54,7 +55,7 @@ This section describes the features of the application.
 
 This section describes the application domain.
 
-![The WebCheckers Domain Model](domain-model-placeholder.png)
+![The WebCheckers Domain Model](Team Model.png)
 
 > _Provide a high-level overview of the domain for this application. You
 > can discuss the more important domain entities and their relationship
@@ -87,7 +88,7 @@ Details of the components within these tiers are supplied below.
 This section describes the web interface flow; this is how the user views and interacts
 with the WebCheckers application.
 
-![The WebCheckers Web Interface Statechart](web-interface-placeholder.png)
+![The WebCheckers Web Interface Statechart](State_Chart_Team4.png)
 
 > _Provide a summary of the application's user interface.  Describe, from
 > the user's perspective, the flow of the pages in the web application._
