@@ -11,7 +11,6 @@ class PlayerLobbyTest {
 
         PlayerLobby Pl = new PlayerLobby();
 
-
         //test valid
         assertEquals("Success",  Pl.checkAndAddName("Joe"));
         // test invalid
@@ -25,5 +24,4 @@ class PlayerLobbyTest {
         //assertEquals(1,  Pl.numberOfPlayers());
     }
 
-    }
 }

@@ -50,23 +50,4 @@ public class GetGameRoute implements Route{
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
