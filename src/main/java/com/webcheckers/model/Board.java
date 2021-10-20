@@ -12,9 +12,9 @@ public class Board {
 
             for (int colIndex = 0; colIndex < 8; colIndex++) {
                 if ( ((colIndex+rowIndex)%2)==0 ) //row is even
-                 gameBoard[rowIndex][colIndex].setShade(Space.shade.dark);
+                 gameBoard[rowIndex][colIndex].setShade(Space.shade.DARK);
                 else if (((colIndex+rowIndex)%2)!=0 )
-                    gameBoard[rowIndex][colIndex].setShade(Space.shade.light);
+                    gameBoard[rowIndex][colIndex].setShade(Space.shade.LIGHT);
             }
 
         }

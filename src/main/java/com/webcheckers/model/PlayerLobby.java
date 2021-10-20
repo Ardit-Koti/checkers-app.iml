@@ -42,12 +42,7 @@ public class PlayerLobby {
     }
 
     private boolean containsAlphanumeric(String str) {
-        char[] charArray = str.toCharArray();
-        for (char c : charArray) {
-            if (Character.isLetterOrDigit(c))
-                return true;
-        }
-        return false;
+        return (str != "") && (str.matches("^[a-zA-Z0-9]*$")); // "^" - beginning of line | "*" - matches zero or more occurences | "$" - end of the line
     }
 
     private boolean isNameUnique(String Name) {
