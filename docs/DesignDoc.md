@@ -19,11 +19,14 @@ geometry: margin=1in
 
 ## Executive Summary
 
-The application WebCheckers enhances the experience 
+This document helps convey design implementations and states that will be encapsulated in Sprint 2 
+of the Webcheckers Project. 
 
 ### Purpose
-> _Provide a very brief statement about the project and the most
-> important user group and user goals._
+Help streamline the popular board game Checkers so that it can be played with a 
+simple interface with anyone you want to play with. With our spectator mode and 
+replay feature, it allows for the best possible experience when playing
+checkers. 
 
 ### Glossary and Acronyms
 > _Provide a table of terms and acronyms._
@@ -57,9 +60,11 @@ This section describes the application domain.
 
 ![The WebCheckers Domain Model](Team Model.png)
 
-> _Provide a high-level overview of the domain for this application. You
-> can discuss the more important domain entities and their relationship
-> to each other._
+We start off with the Player model for the Webcheckers application. 
+The Player has 4 options, regarding what they can do during their usage of the site.
+The player will be able to interact with the board and that is when they will be able
+to move their piece (if allowed). If the player is not playing a game, they can either spectate a match that is 
+being played currently, or they can watch a game that has been previously played. 
 
 
 ## Architecture and Design
