@@ -24,6 +24,8 @@ public class GetGameRoute implements Route{
     private final TemplateEngine templateEngine;
 
     private final PlayerLobby pLobby;
+
+    static final String NAME_PARAM = "name";
     /**
      * The constructor for the {@code GET /signin} route handler.
      *
@@ -45,6 +47,7 @@ public class GetGameRoute implements Route{
         final Map<String, Object> vm = new HashMap<>();
 
         httpSession.attribute(GetHomeRoute.PLAYER_LOBBY, pLobby);
+        httpSession.attribute(NAME_PARAM, NAME_PARAM);
 
         return templateEngine.render(new ModelAndView(vm,VIEW_NAME));
 

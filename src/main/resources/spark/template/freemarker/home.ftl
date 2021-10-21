@@ -35,8 +35,17 @@
       </p>
 
         <#list players as player>
-            <h3>${player}</h3>
+            <#if player != currentUser>
+            <form id="${player}" action="./" method="POST">
 
+                <input type="hidden" name="opponent" value=${player}>
+                <a href="javascript:{}"
+                   onclick="document.getElementById
+                   ('${player}').submit();
+                   return false;">${player}</a>
+
+            </form>
+            </#if>
         </#list>
       <#else>
       <p>

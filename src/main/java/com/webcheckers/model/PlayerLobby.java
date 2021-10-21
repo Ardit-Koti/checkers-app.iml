@@ -59,5 +59,4 @@ public class PlayerLobby {
     public Iterator<Player> iterator() {
         return Players.iterator();
     }
-
 }
