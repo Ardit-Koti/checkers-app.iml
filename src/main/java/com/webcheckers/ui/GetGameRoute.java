@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+import com.webcheckers.model.Player;
+import com.webcheckers.model.PlayerLobby;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -21,17 +23,19 @@ public class GetGameRoute implements Route{
 
     private final TemplateEngine templateEngine;
 
+    private final PlayerLobby pLobby;
     /**
      * The constructor for the {@code GET /signin} route handler.
      *
      * @param templateEngine
      *    The {@link TemplateEngine} used for rendering page HTML.
      */
-    GetGameRoute(final TemplateEngine templateEngine){
+    GetGameRoute(final TemplateEngine templateEngine, PlayerLobby pLobby){
 
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
 
         this.templateEngine = templateEngine;
+        this.pLobby = pLobby;
     }
 
     @Override
@@ -40,29 +44,10 @@ public class GetGameRoute implements Route{
 
         final Map<String, Object> vm = new HashMap<>();
 
-
+        httpSession.attribute(GetHomeRoute.PLAYER_LOBBY, pLobby);
 
         return templateEngine.render(new ModelAndView(vm,VIEW_NAME));
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

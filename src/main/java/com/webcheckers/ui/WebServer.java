@@ -146,7 +146,7 @@ public class WebServer {
 
     get(SIGN_IN_URL, new GetSignInRoute(templateEngine));
 
-    get(GAME_URL, new GetGameRoute(templateEngine));
+    get(GAME_URL, new GetGameRoute(templateEngine, pLobby));
 
     post(SIGN_IN_URL, new PostSignInRoute(templateEngine,pLobby));
 

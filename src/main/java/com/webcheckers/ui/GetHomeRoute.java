@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+import com.webcheckers.model.Player;
 import com.webcheckers.model.PlayerLobby;
 import spark.*;
 
@@ -16,14 +17,16 @@ import com.webcheckers.util.Message;
  * @author <a href='mailto:bdbvse@rit.edu'>Bryan Basham</a>
  */
 public class GetHomeRoute implements Route {
+  static final String PLAYER_LOBBY = "pLobby";
   private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
   private final int SESSION_TIMEOUT_PERIOD = 600;
 
   private static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
   private final String NUM_PLAYERS = "playernum";
   private PlayerLobby pLobby;
-  private final String PLAYERS = "playerlist";
+  private final String PLAYERS = "players";
   private final TemplateEngine templateEngine;
+
 
   /**
    * Create the Spark Route (UI controller) to handle all {@code GET /} HTTP requests.
@@ -53,23 +56,25 @@ public class GetHomeRoute implements Route {
   public Object handle(Request request, Response response) {
     final Session httpSession = request.session();
     Map<String, Object> vm = new HashMap<>();
-
+    pLobby.Players.add(new Player("Ben"));
     if (httpSession.attribute("currentUser") != null) {
       String playerName = httpSession.attribute("playerName");
       Message message = Message.info("Welcome " + playerName + " to the world of online checkers");
       vm.put("currentUser",httpSession.attribute("currentUser"));
       vm.put("message", message);
       vm.put("title", "Welcome!");
+      vm.put(PLAYERS, pLobby.NamesInUse);
+      System.out.println("Ploby:" + pLobby.NamesInUse);
       return templateEngine.render(new ModelAndView(vm, "home.ftl"));
     }
+    //if not logged in
     LOG.finer("GetHomeRoute is invoked.");
 
     vm.put("title", "Welcome!");
-
     // display a user message in the Home page
     vm.put("message", WELCOME_MSG);
     vm.put(NUM_PLAYERS, pLobby.numberOfPlayers());
-    vm.put(PLAYERS, pLobby.Players);
+    httpSession.attribute(PLAYER_LOBBY, pLobby);
     httpSession.maxInactiveInterval(SESSION_TIMEOUT_PERIOD);
 
     // render the View

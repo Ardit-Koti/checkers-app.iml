@@ -17,8 +17,10 @@ import com.webcheckers.util.Message;
 public class GetSignInRoute implements Route{
 
     static final String VIEW_NAME = "signin.ftl";
+    static final String HOME_VIEW = "home.ftl";
     private static final Message WELCOME_MSG = Message.info("Please Login");
     private final TemplateEngine templateEngine;
+
 
     /**
      * The constructor for the {@code GET /signin} route handler.
@@ -45,7 +47,8 @@ public class GetSignInRoute implements Route{
             vm.put("currentUser",httpSession.attribute("currentUser"));
             vm.put("message", message);
             vm.put("title", "Welcome!");
-            return templateEngine.render(new ModelAndView(vm, "home.ftl"));
+            response.redirect("/");
+            return null;
         }
 
         vm.put("message", WELCOME_MSG);

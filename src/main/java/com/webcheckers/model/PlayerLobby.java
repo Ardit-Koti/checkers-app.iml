@@ -4,22 +4,27 @@ import com.webcheckers.model.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Iterator;
 
 public class PlayerLobby {
-    public List<String> NamesInUse = new ArrayList<>(); //
-    public List<Player> Players = new ArrayList<>();
+    public List<String> NamesInUse; //
+    public List<Player> Players;
     private final String NAME_TAKEN = "This name can't be used because this name has already been taken. Try again with a new name.";
     private final String NAME_INVALID = "This name is invalid, make sure to use only alphanumeric characters.";
 
-    public PlayerLobby(){}
+    public PlayerLobby() {
+        NamesInUse = new ArrayList<>();
+        Players = new ArrayList<>();
+    }
+
     /**
      * @return String error message if check fails and name is not added, return "Success" if done
      */
-    public String checkAndAddName(String Name){
+    public String checkAndAddName(String Name) {
         //Checks
-        if (! this.isNameValid(Name)) //if the name fails validity check, return false
+        if (!this.isNameValid(Name)) //if the name fails validity check, return false
             return "Invalid";
-        if (! this.isNameUnique(Name)) //if the name fails uniqueness check, return false
+        if (!this.isNameUnique(Name)) //if the name fails uniqueness check, return false
             return "Taken";
         //if we get here, name valid
         //addition
@@ -30,31 +35,29 @@ public class PlayerLobby {
 
     // TODO: 10/2/21 remove a name after sign out (not in sprint 1)
 
-    private boolean isNameValid(String Name){
-        if (!this.containsAlphanumeric(Name) ) //if name does NOT contain alphanumeric chars, return false,
+    private boolean isNameValid(String Name) {
+        if (!this.containsAlphanumeric(Name)) //if name does NOT contain alphanumeric chars, return false,
             return false;
         return true;
     }
 
-    private boolean containsAlphanumeric(String str)
-    {
-        char[] charArray = str.toCharArray();
-        for(char c:charArray)
-        {
-            if (Character.isLetterOrDigit(c))
-                return true;
-        }
-        return false;
+    private boolean containsAlphanumeric(String str) {
+        return (str != "") && (str.matches("^[a-zA-Z0-9]*$")); // "^" - beginning of line | "*" - matches zero or more occurrences | "$" - end of the line
     }
 
-    private boolean isNameUnique(String Name){
+    private boolean isNameUnique(String Name) {
         if (NamesInUse.contains(Name))
             return false;
         return true;
     }
 
-    public int numberOfPlayers(){
+    public int numberOfPlayers() {
         return NamesInUse.size();
+    }
+
+
+    public Iterator<Player> iterator() {
+        return Players.iterator();
     }
 
 }
