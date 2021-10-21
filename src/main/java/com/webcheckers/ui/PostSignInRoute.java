@@ -22,12 +22,12 @@ import static spark.Spark.halt;
  */
 public class PostSignInRoute implements Route{
 
-    private Message NAMESTATUS;
+    public static Message NAMESTATUS; //todo there should be many static final of these, and the correct one should be returned based on method outcomes
     private final String VIEW_NAME = "signin.ftl";
     private final TemplateEngine templateEngine;
     static final String NAME_PARAM = "name";
     private final PlayerLobby pLobby;
-    private final String PLAYERS = "players";
+    public static final String PLAYERS = "players";
 
     /**
      * Constructor takes in templateEngine and plobby where
@@ -51,6 +51,7 @@ public class PostSignInRoute implements Route{
         final Session httpSession = request.session(); // creates HTTP session
         final Map<String, Object> vm = new HashMap<>(); //create view model hashmap that will be sent to the HTML
         final String playerName = request.queryParams(NAME_PARAM);
+        System.out.println(playerName);
         // when there is a post, info is being sent to server. When you click sign in, a username is entered,
         // playername is getting the string from the sign in form
 
@@ -58,6 +59,7 @@ public class PostSignInRoute implements Route{
 
 
         if (status.equals("Success")){ //based of p lobby, if a player successfully entered the lobby
+            System.out.println("I got here 1");
             Player user = new Player(playerName); //todo ask team about this, why do we have 2 players
             httpSession.attribute("currentUser",user); // http session represents a new user
             httpSession.attribute("playerName",playerName);
@@ -68,7 +70,6 @@ public class PostSignInRoute implements Route{
             vm.put("message", NAMESTATUS);
             vm.put("title", "Welcome!");
             vm.put(PLAYERS, pLobby.NamesInUse);
-
             return templateEngine.render(new ModelAndView(vm,"home.ftl"));
         }
 
@@ -86,5 +87,7 @@ public class PostSignInRoute implements Route{
             return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
         }
     }
+
+
 
 }
