@@ -93,10 +93,11 @@ Details of the components within these tiers are supplied below.
 This section describes the web interface flow; this is how the user views and interacts
 with the WebCheckers application.
 
-![The WebCheckers Web Interface Statechart](State_Chart_Team4.png)
+![The WebCheckers Web Interface Statechart](StateChart2.png)
 
-> _Provide a summary of the application's user interface.  Describe, from
-> the user's perspective, the flow of the pages in the web application._
+This Figure shows the basic state functionality of all stories that will be completed in sprint 2. Important additions
+from sprint 1 include the player sign-out route from home, the game view post, and the returning to home on game end.
+
 
 
 ### UI Tier
