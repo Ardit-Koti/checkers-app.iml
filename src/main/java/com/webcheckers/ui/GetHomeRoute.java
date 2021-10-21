@@ -64,7 +64,7 @@ public class GetHomeRoute implements Route {
       vm.put("message", message);
       vm.put("title", "Welcome!");
       vm.put(PLAYERS, pLobby.NamesInUse);
-      System.out.println("Ploby:" + pLobby.NamesInUse);
+      //System.out.println("Ploby:" + pLobby.NamesInUse);
       return templateEngine.render(new ModelAndView(vm, "home.ftl"));
     }
     //if not logged in

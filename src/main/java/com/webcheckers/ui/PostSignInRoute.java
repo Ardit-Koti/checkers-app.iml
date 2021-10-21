@@ -59,7 +59,6 @@ public class PostSignInRoute implements Route{
 
 
         if (status.equals("Success")){ //based of p lobby, if a player successfully entered the lobby
-            System.out.println("I got here 1");
             Player user = new Player(playerName); //todo ask team about this, why do we have 2 players
             httpSession.attribute("currentUser",user); // http session represents a new user
             httpSession.attribute("playerName",playerName);
