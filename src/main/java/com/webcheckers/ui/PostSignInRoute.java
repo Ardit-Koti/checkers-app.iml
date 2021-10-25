@@ -48,6 +48,7 @@ public class PostSignInRoute implements Route{
             httpSession.attribute("currentUser",user);
             httpSession.attribute("playerName",playerName);
             vm.put("currentUser",user);
+            vm.put("playerName", playerName);
 
 
             NAMESTATUS = Message.info("Welcome " + playerName + " to the world of online checkers");
