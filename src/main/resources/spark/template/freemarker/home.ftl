@@ -36,20 +36,14 @@
 
         <#list players as player>
             <#if player != currentUser>
-            <form id="${player}" action="./" method="POST">
-
-                <input type="hidden" name="opponent" value=${player}>
-                <a href="javascript:{}"
-                   onclick="document.getElementById
-                   ('${player}').submit();
-                   return false;">${player}</a>
-
-            </form>
+                <form action="/game" method="GET">
+                <button type="submit" name="white" value="${player}">${player}</button>
+                </form>
             </#if>
         </#list>
       <#else>
       <p>
-        Number of Players: ${playernum}
+        Number of Active Players: ${playernum}
       </p>
     </#if>
 
