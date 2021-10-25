@@ -20,7 +20,6 @@ public class GetHomeRoute implements Route {
   static final String PLAYER_LOBBY = "pLobby";
   private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
   private final int SESSION_TIMEOUT_PERIOD = 600;
-
   private static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
   private final String NUM_PLAYERS = "playernum";
   private PlayerLobby pLobby;
