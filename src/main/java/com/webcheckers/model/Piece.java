@@ -1,22 +1,38 @@
 package com.webcheckers.model;
 
-public abstract class Piece {
+public class Piece {
+
+
     public enum Variety {
         REGULAR, KING
+    }
+
+    public enum Color{
+        Red, White
     }
 
     public enum Status{
         OPEN, JUMP, INVALID
     }
+    public enum State{
+        Alive, Dead
+    }
 
-    // idk what to do for shade of piece
 
-    private final Variety variety;
-    private Status status;
+    private  Variety variety;
+    private Color color;
+    //private Status status;
+    private State currentState;
+    public int ID;
 
-    public Piece(Variety variety, Status status) {
+
+    public Piece(Variety variety, Color color, State currentState, int ID) {
         this.variety = variety;
-        this.status = status;
+        this.color = color;
+        this.currentState = currentState;
+        this.ID = ID;
     }
 
 }
+
+
