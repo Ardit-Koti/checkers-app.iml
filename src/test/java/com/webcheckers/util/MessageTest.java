@@ -1,9 +1,7 @@
 package com.webcheckers.util;
 import spark.*;
 import org.junit.jupiter.api.*;
-
 import javax.sound.sampled.EnumControl;
-
 import static org.mockito.Mockito.*;
 import static org.mockito.ArgumentMatchers.any;
 import java.util.logging.Logger;
