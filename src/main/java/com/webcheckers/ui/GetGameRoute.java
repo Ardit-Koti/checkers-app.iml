@@ -24,6 +24,8 @@ public class GetGameRoute implements Route{
     private final TemplateEngine templateEngine;
 
     private final PlayerLobby pLobby;
+
+    static final String NAME_PARAM = "name";
     /**
      * The constructor for the {@code GET /signin} route handler.
      *
@@ -40,33 +42,28 @@ public class GetGameRoute implements Route{
 
     @Override
     public String handle(Request request, Response response) {
+
+        //todo assign player colors based on rules "The red player moves first."
+
+
+        //todo call model classes to make model board
+
+
+        //todo sent java board info the game .ftl
+
+
+
         final Session httpSession = request.session();
 
         final Map<String, Object> vm = new HashMap<>();
 
         httpSession.attribute(GetHomeRoute.PLAYER_LOBBY, pLobby);
+        httpSession.attribute(NAME_PARAM, NAME_PARAM);
+
+        System.out.println("Game Started");
 
         return templateEngine.render(new ModelAndView(vm,VIEW_NAME));
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

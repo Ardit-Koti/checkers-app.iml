@@ -53,7 +53,7 @@ public class PlayerLobby {
     }
 
     private boolean containsAlphanumeric(String str) {
-        return (str != "") && (str.matches("^[a-zA-Z0-9]*$")); // "^" - beginning of line | "*" - matches zero or more occurences | "$" - end of the line
+        return (str != "") && (str.matches("^[a-zA-Z0-9]*$")); // "^" - beginning of line | "*" - matches zero or more occurrences | "$" - end of the line
     }
 
     private boolean isNameUnique(String Name) {
@@ -70,5 +70,4 @@ public class PlayerLobby {
     public Iterator<Player> iterator() {
         return Players.iterator();
     }
-
 }
