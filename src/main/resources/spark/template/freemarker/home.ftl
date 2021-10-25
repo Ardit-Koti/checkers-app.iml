@@ -45,7 +45,7 @@
       
       <#else>
       <p>
-        Number of Players: ${playernum}
+        Number of Active Players: ${playernum}
       </p>
     </#if>
 

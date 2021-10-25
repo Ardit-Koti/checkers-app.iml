@@ -6,6 +6,11 @@ public class Space {
     public enum Status {VALID, OCCUPIED, INVALID}
     private Status status;
     private shade shade;
+
+    public void setCurrentPiece(Piece currentPiece) {
+        this.currentPiece = currentPiece;
+    }
+
     private Piece currentPiece;
     private int index;
 
@@ -33,6 +38,10 @@ public class Space {
 
     public void setShade(Space.shade shade) {
         this.shade = shade;
+    }
+
+    public shade getShade(){
+        return shade;
     }
 
     public Piece getCurrentPiece() {
