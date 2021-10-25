@@ -38,7 +38,9 @@
       <ul style="list-style: none;">
         <#list players as player>
           <#if playerName != player>
-            <li>${player}</li>
+            <form action="/game" method="GET">
+              <button type="submit" name="white" value="${player}">${player}</button>
+            </form>
           </#if>
         </#list>
       </ul>
