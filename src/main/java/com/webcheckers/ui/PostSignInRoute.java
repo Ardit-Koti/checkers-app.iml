@@ -58,7 +58,8 @@ public class PostSignInRoute implements Route{
         }
         else {
             if (status.equals("Taken")){NAMESTATUS = Message.error("That name is taken! Please input another!");}
-            if (status.equals("Invalid")){NAMESTATUS = Message.error("That name is invalid! Please input a valid name!");}
+            if (status.equals("Invalid")){NAMESTATUS =
+                    Message.error("That name is invalid! Please input a valid name!");}
             vm.put("message", NAMESTATUS);
             return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
         }

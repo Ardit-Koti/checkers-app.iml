@@ -56,6 +56,7 @@ public class WebServer {
   public static final String HOME_URL = "/";
   public static final String SIGN_IN_URL= "/signin";
   public static final String GAME_URL = "/game";
+  public static final String SIGN_OUT_URL= "/signout";
 
 
   //
@@ -151,6 +152,8 @@ public class WebServer {
     post(SIGN_IN_URL, new PostSignInRoute(templateEngine,pLobby));
 
     post(HOME_URL, new PostHomeRoute(templateEngine,pLobby));
+
+    post(SIGN_OUT_URL, new PostSignOutRoute(templateEngine, pLobby));
 
     //
     LOG.config("WebServer is initialized.");
