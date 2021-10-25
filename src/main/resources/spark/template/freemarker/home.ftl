@@ -34,10 +34,15 @@
 
       </p>
 
-        <#list players as player>
-            <h3>${player}</h3>
 
+      <ul style="list-style: none;">
+        <#list players as player>
+          <#if playerName != player>
+            <li>${player}</li>
+          </#if>
         </#list>
+      </ul>
+      
       <#else>
       <p>
         Number of Players: ${playernum}
