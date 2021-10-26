@@ -5,9 +5,10 @@ package com.webcheckers.model;
  */
 public class Game {
 
-    private Player redPlayer = new Player();
+    private Player redPlayer;
 
-    private Player whitePlayer = new Player();
+    private Player whitePlayer;
+
     private int gameId = 1; // TODO: 10/6/21  implement number generator for multiple games
 
 
