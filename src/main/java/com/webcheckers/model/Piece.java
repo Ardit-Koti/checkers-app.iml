@@ -2,16 +2,18 @@ package com.webcheckers.model;
 
 public class Piece {
 
-
-    public enum Variety {
+    public enum Type 
+    {
         REGULAR, KING
     }
 
     public enum Color{
+
         Red, White
     }
 
-    public enum Status{
+    public enum Status
+    {
         OPEN, JUMP, INVALID
     }
     public enum State{
@@ -19,8 +21,13 @@ public class Piece {
     }
 
 
-    private  Variety variety;
-    private Color color;
+
+    private final Type type;
+    private final Color color;
+
+    public Piece(Type type, Color color) {
+        this.type = type;
+        this.color = color;
     //private Status status;
     private State currentState;
     public int ID;
@@ -31,7 +38,11 @@ public class Piece {
         this.color = color;
         this.currentState = currentState;
         this.ID = ID;
+
     }
+
+    public Type getType(){return this.type;}
+    public Color getColor(){return this.color;}
 
 }
 

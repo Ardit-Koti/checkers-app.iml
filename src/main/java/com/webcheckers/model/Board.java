@@ -1,11 +1,26 @@
 package com.webcheckers.model;
 
-public class Board {
-    // [row] [col]
-    private Space[][] gameBoard;
+import java.util.Iterator;
 
+public class Board implements Iterable{
+    private final int limit = 7;
+    private int i = 0;
 
+    @Override
+    public Iterator<Row> iterator() {
+        return new Iterator<>() {
+            @Override
+            public boolean hasNext() {
+                return i++<=7;
+            }
 
+            @Override
+            public Row next() {
+                return new Row(i);
+            }
+        };
+    }
+  
     public Board(){
 
         /**
@@ -23,11 +38,7 @@ public class Board {
         /// TODO: 10/24/21 make the default arrangement of checkers in the baord
 
     }
-    public Space getSpace(int row, int col){
-        return gameBoard[row][col];
-    }
-
-
+  
     private void setupGameBoard(){
         int uniquePieceID = 0;
         //place Piece.Color.Red players
@@ -53,4 +64,5 @@ public class Board {
         //place Piece.Color.Black players
 
     }
+
 }

@@ -2,42 +2,61 @@ package com.webcheckers.model;
 
 public class Space {
 
-    public enum shade {LIGHT, DARK}
-    public enum Status {VALID, OCCUPIED, INVALID}
+    public enum Shade {LIGHT, DARK}
+    public enum Status {VACANT, OCCUPIED, INVALID}
     private Status status;
-    private shade shade;
-
-    public void setCurrentPiece(Piece currentPiece) {
-        this.currentPiece = currentPiece;
-    }
+    private Shade shade;
 
     private Piece currentPiece;
-    private int index;
+    private int cellIdx;
+    private final int limit = 7;
 
-    public Space(Piece currentPiece, int index) {
-        this.index = index;
-        if(currentPiece != null) {
-            this.currentPiece = currentPiece;
-            this.status = Status.OCCUPIED;
+//    public Space(Piece currentPiece, int index) {
+//        this.cellIdx = index;
+//        if(currentPiece != null) {
+//            this.currentPiece = currentPiece;
+//            this.status = Status.OCCUPIED;
+//
+//        } else{
+//            this.currentPiece = null;
+//            this.status = Status.VALID;
+//        }
+//    }
 
-        } else{
-            this.currentPiece = null;
-            this.status = Status.VALID;
+//    public Space(int index, Status state) {
+//        this.cellIdx = index;
+//        this.currentPiece = null;
+//        this.status = state;
+//    }
+
+    public Space(int cellIdx, int row_index)
+    {
+        this.cellIdx = cellIdx;
+        if(row_index%2 ==0)
+        {
+            if(this.cellIdx%2 ==0)
+            {
+                this.shade = Shade.DARK;
+            }
+            else this.shade = Shade.LIGHT;
+        }
+        else if(row_index%2 == 1)
+        {
+            if(this.cellIdx%2 == 0)
+            {
+                this.shade = Shade.LIGHT;
+            }
+            else this.shade = Shade.DARK;
         }
     }
 
-    public Space(int index, Status state) {
-        this.index = index;
-        this.currentPiece = null;
-        this.status = state;
-    }
+    public int getCellIdx() { return cellIdx; }
 
-    public int getIndex() {
-        return index;
-    }
+    public void setShade(Space.Shade shade) {this.shade = shade; }
 
-    public void setShade(Space.shade shade) {
-        this.shade = shade;
+    public boolean isValid()
+    {
+        return this.shade == Shade.DARK && this.status == Status.VACANT;
     }
 
     public shade getShade(){
@@ -52,7 +71,7 @@ public class Space {
         if(origin == null) {
             return false;
         }
-        else if(status != Status.VALID) {
+        else if(status != Status.VACANT) {
             return false;
         }
         else if(origin.getCurrentPiece() == null) {
@@ -65,7 +84,7 @@ public class Space {
     }
 
     public Status addCurrentPiece(Piece pieceHelper) {
-        if(status == Status.VALID) {
+        if(status == Status.VACANT) {
             currentPiece = pieceHelper;
             status = Status.OCCUPIED;
             return status;
@@ -77,7 +96,7 @@ public class Space {
     public Status removeCurrentPiece() {
         if (status == Status.OCCUPIED) {
             currentPiece = null;
-            status = Status.VALID;
+            status = Status.VACANT;
             return status;
         } else {
             return status;
@@ -89,11 +108,11 @@ public class Space {
     }
 
     public boolean isTaken() {
-        return (this.status == status.OCCUPIED);
+        return (this.status == Status.OCCUPIED);
     }
 
     public boolean isAllowed() {
-        return(this.status == Status.VALID);
+        return(this.status == Status.VACANT);
     }
 
     public Status getState() {

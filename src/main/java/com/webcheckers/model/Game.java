@@ -7,7 +7,11 @@ public class Game {
 
     private Player redPlayer;
 
+
     private Player whitePlayer;
+
+    private int gameId = 1; // TODO: 10/6/21  implement number generator for multiple games
+
 
     private Piece.Color turn = Piece.Color.Red; // initilized to red as red goes first
 
