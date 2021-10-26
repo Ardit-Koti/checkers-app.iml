@@ -6,6 +6,7 @@ public class Space {
     public enum Status {VACANT, OCCUPIED, INVALID}
     private Status status;
     private Shade shade;
+
     private Piece currentPiece;
     private int cellIdx;
     private final int limit = 7;
@@ -56,6 +57,10 @@ public class Space {
     public boolean isValid()
     {
         return this.shade == Shade.DARK && this.status == Status.VACANT;
+    }
+
+    public shade getShade(){
+        return shade;
     }
 
     public Piece getCurrentPiece() {

@@ -11,7 +11,9 @@ public class Player {
         this.color = color;
     }
 
+
     public Player(String name){this.name = name;}
+
 
     private String name;
     private Color color;

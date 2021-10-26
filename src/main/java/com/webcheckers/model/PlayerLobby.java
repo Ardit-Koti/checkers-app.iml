@@ -33,7 +33,18 @@ public class PlayerLobby {
         return "Success";
     }
 
-    // TODO: 10/2/21 remove a name after sign out (not in sprint 1)
+    public void removeName(String Name)
+    {
+        NamesInUse.remove(Name);
+        for(int i =0; i<Players.size(); i++)
+        {
+            if (Name.equals(Players.get(i).name()))
+            {
+                Players.remove(i);
+                return;
+            }
+        }
+    }
 
     private boolean isNameValid(String Name) {
         if (!this.containsAlphanumeric(Name)) //if name does NOT contain alphanumeric chars, return false,
@@ -42,7 +53,7 @@ public class PlayerLobby {
     }
 
     private boolean containsAlphanumeric(String str) {
-        return (str != "") && (str.matches("^[a-zA-Z0-9]*$")); // "^" - beginning of line | "*" - matches zero or more occurences | "$" - end of the line
+        return (str != "") && (str.matches("^[a-zA-Z0-9]*$")); // "^" - beginning of line | "*" - matches zero or more occurrences | "$" - end of the line
     }
 
     private boolean isNameUnique(String Name) {
@@ -59,5 +70,4 @@ public class PlayerLobby {
     public Iterator<Player> iterator() {
         return Players.iterator();
     }
-
 }
