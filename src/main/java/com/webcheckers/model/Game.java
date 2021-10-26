@@ -15,8 +15,6 @@ public class Game {
 
     private Piece.Color turn = Piece.Color.Red; // initilized to red as red goes first
 
-    private int gameId = 1; // TODO: 10/6/21  implement unique number generator for multiple games
-
 
     Board gameBoard = new Board();
 

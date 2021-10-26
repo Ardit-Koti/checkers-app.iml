@@ -25,7 +25,7 @@ public class Board implements Iterable{
 
         /**
          * generate the 2d array that is the actual board in java
-         */
+
     gameBoard = new Space[8][8];
         for (int rowIndex = 0; rowIndex < 8; rowIndex++) {
             for (int colIndex = 0; colIndex < 8; colIndex++) {
@@ -35,10 +35,11 @@ public class Board implements Iterable{
                     gameBoard[rowIndex][colIndex].setShade(Space.shade.LIGHT);
             }
         }
+         */
         /// TODO: 10/24/21 make the default arrangement of checkers in the baord
 
     }
-  
+  /**
     private void setupGameBoard(){
         int uniquePieceID = 0;
         //place Piece.Color.Red players
@@ -60,9 +61,7 @@ public class Board implements Iterable{
                 }
             }
         }
-
+    */
         //place Piece.Color.Black players
 
     }
-
-}

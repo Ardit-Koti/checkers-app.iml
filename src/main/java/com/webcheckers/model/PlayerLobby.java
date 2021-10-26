@@ -38,7 +38,7 @@ public class PlayerLobby {
         NamesInUse.remove(Name);
         for(int i =0; i<Players.size(); i++)
         {
-            if (Name.equals(Players.get(i).name()))
+            if (Name.equals(Players.get(i).getName()))
             {
                 Players.remove(i);
                 return;

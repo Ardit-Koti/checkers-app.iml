@@ -59,7 +59,7 @@ public class Space {
         return this.shade == Shade.DARK && this.status == Status.VACANT;
     }
 
-    public shade getShade(){
+    public Shade getShade(){
         return shade;
     }
 
