@@ -38,21 +38,84 @@ checkers.
 
 ## Requirements
 
-This section describes the features of the application.
+Placeholder
 
 > _In this section you do not need to be exhaustive and list every
 > story.  Focus on top-level features from the Vision document and
 > maybe Epics and critical Stories._
 
 ### Definition of MVP
-> _Provide a simple description of the Minimum Viable Product._
+In order to satisfy the Product Owner, the MVP needs to include these 3 key features:
+<br>
+<br>
+First, every player must be able to sign-in(no invalid names allowed) before starting a game. Once done, they must be able to sign-out of the site.
+<br>
+<br>
+Upon signing in, two players must be able to play a game of checkers with each other, if available for a game.
+<br>
+<br>
+Finally, one of the players, may choose to resign, which will end the game instantly.
+
 
 ### MVP Features
-> _Provide a list of top-level Epics and/or Stories of the MVP._
+In order to satisfy the Product Owner, certain Epics and top-level stories need to be integrated into the project:
+<br>
+<br>
+<ul>
+<li>Player Sign-in:</li>
+<ul class="square">
+  <li>The player before finding a game must be able to sign-in with a unique and valid name.</li>
+</ul>
+<br>
+<li>Start a Game:</li>
+<ul class="square">
+  <li>The player must be able to challenge another player if they are available to play a game.</li>
+</ul>
+<br>
+<li>Game Rules:</li>
+<ul class="square">
+  <li>The player should be able to make moves that are legal based off the <a href="http://www.se.rit.edu/~swen-261/projects/WebCheckers/American%20Rules.html">American Rules.</a></li>
+</ul>
+<br>
+<li>Ending the Game:</li>
+<ul class="square">
+  <li>At any point in the game, one of the players should be able to resign their game, which will end the game immediately. If none choose to, then the game will end once one of the players lose all of their pieces.</li>
+</ul>
+<br>
+<li>Sign-out</li>
+<ul class="square">
+  <li>Once the player is done playing WebCheckers, they will be able to sign-out of the game, returning to the original front page.</li>
+</ul>
+</ul>
 
 ### Roadmap of Enhancements
-> _Provide a list of top-level features in the order you plan to consider them._
+Two possible future enhancements are as follows:
+<br>
 
+> _Spectator Mode_
+<li> Spectator mode</li>
+<ul class="square">
+  <li>While signed-in, players should be able to view on-going game that they are not playing.</li>
+</ul>
+
+> _Replay Mode_
+
+<li> Replay Backlog
+</li>
+<ul class="square">
+  <li>Every game that is played will be saved to a backlog for later viewing.
+</li>
+</ul>
+<li> Replay Viewing
+</li>
+<ul class="square">
+  <li>Once a player is signed-in they will be able to select a game that they played previously to step through.
+</li>
+</ul>
+<ul class="square">
+  <li>Once in a replay, the player will be able to step forward, backward, or exit the replay
+</li>
+</ul> 
 
 ## Application Domain
 
