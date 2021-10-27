@@ -31,6 +31,7 @@ public class PlayerLobby {
         NamesInUse.add(Name);
         Players.add(new Player(Name));
         return "Success";
+
     }
 
 
