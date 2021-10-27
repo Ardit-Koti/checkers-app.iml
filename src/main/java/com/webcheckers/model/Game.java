@@ -14,6 +14,7 @@ public class Game {
 
     // initilized to red as red goes first
 
+
     private Board gameBoard;
 
     public Game(Player redPlayer, Player whitePlayer) {
