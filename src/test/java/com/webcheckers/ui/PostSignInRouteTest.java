@@ -67,7 +67,7 @@ class PostSignInRouteTest {
 
             testHelper.assertViewModelAttribute("message",  Message.info("Welcome " + s + " to the world of online checkers"));
             testHelper.assertViewModelAttribute("title", "Welcome!");
-            testHelper.assertViewModelAttribute("players", plobby.NamesInUse);
+            testHelper.assertViewModelAttribute("players", plobby.getNamesInUse());
 
             //return statement does not need to bed tested, but we could check that it is not null
 
@@ -121,7 +121,7 @@ class PostSignInRouteTest {
             CuT.handle(request, response);
             testHelper.assertViewModelAttribute("message",PostSignInRoute.NAMESTATUS);
             testHelper.assertViewModelAttribute("title","Welcome!");
-            testHelper.assertViewModelAttribute(PostSignInRoute.PLAYERS, plobby.NamesInUse);
+            testHelper.assertViewModelAttribute(PostSignInRoute.PLAYERS, plobby.getNamesInUse());
 
         }
 

@@ -39,7 +39,7 @@ public class PostSignOutRouteTest {
         String password = "123";
         pLobby.checkAndAddName(name, password);
 
-        assertNull(pLobby.NamesInUse);
+        assertNull(pLobby.getNamesInUse());
         assertTrue(session.attributes().isEmpty());
     }
 }
