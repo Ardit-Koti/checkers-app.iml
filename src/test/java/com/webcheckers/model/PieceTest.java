@@ -1,13 +1,8 @@
 package com.webcheckers.model;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import com.webcheckers.ui.PostSignInRoute;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Tag("Model-Tier")
 class PieceTest {
@@ -29,5 +24,11 @@ class PieceTest {
         assertEquals(Piece.color.White, CuT.getColor());
     }
 
-
+    @Test
+    public void testState(){
+        CuT = new Piece(Piece.type.KING, Piece.color.Red);
+        assertEquals(Piece.State.Alive, CuT.getState());
+        CuT.killPiece();
+        assertEquals(Piece.State.Dead, CuT.getState());
+    }
 }
