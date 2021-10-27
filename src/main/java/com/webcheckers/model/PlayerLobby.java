@@ -2,19 +2,19 @@ package com.webcheckers.model;
 
 import com.webcheckers.model.Player;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Iterator;
+import java.util.*;
 
 public class PlayerLobby {
     public List<String> NamesInUse; //
     public List<Player> Players;
+    private Map<String, String> passcodes;
     private final String NAME_TAKEN = "This name can't be used because this name has already been taken. Try again with a new name.";
     private final String NAME_INVALID = "This name is invalid, make sure to use only alphanumeric characters.";
 
     public PlayerLobby() {
         NamesInUse = new ArrayList<>();
         Players = new ArrayList<>();
+        passcodes = new HashMap<>();
     }
 
     /**
@@ -26,6 +26,12 @@ public class PlayerLobby {
             return "Invalid";
         if (!this.isNameUnique(Name)) //if the name fails uniqueness check, return false
             return "Taken";
+        if(!passcodes.containsValue(Name))
+            passcodes.put(password,Name);
+        else if(passcodes.containsValue(Name) && !Name.equals(passcodes.get(password)))
+            return "BadCode";
+
+
         //if we get here, name valid
         //addition
         NamesInUse.add(Name);
