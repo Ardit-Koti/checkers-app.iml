@@ -7,7 +7,7 @@ import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Tag("Model-Tier")
-public class SpaceTest {
+public class SpaceTest { //TODO remake this entire test
     private static final int Space_int = 0;
     private static Piece pieces;
     private Space spaces;
