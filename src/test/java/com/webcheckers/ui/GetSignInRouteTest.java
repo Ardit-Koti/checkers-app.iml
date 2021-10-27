@@ -50,6 +50,7 @@ public class GetSignInRouteTest {
 
         CuT.handle(request, response);
         verify(response).redirect(WebServer.HOME_URL);
+
     }
 
     @Test

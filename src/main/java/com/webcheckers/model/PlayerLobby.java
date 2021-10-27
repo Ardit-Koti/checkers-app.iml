@@ -2,30 +2,36 @@ package com.webcheckers.model;
 
 import com.webcheckers.model.Player;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Iterator;
+import java.util.*;
 
 public class PlayerLobby {
     public List<String> NamesInUse; //
     public List<Player> Players;
+    private Map<String, String> passcodes;
     private final String NAME_TAKEN = "This name can't be used because this name has already been taken. Try again with a new name.";
     private final String NAME_INVALID = "This name is invalid, make sure to use only alphanumeric characters.";
 
     public PlayerLobby() {
         NamesInUse = new ArrayList<>();
         Players = new ArrayList<>();
+        passcodes = new HashMap<>();
     }
 
     /**
      * @return String error message if check fails and name is not added, return "Success" if done
      */
-    public String checkAndAddName(String Name) {
+    public String checkAndAddName(String Name, String password) {
         //Checks
         if (!this.isNameValid(Name)) //if the name fails validity check, return false
             return "Invalid";
         if (!this.isNameUnique(Name)) //if the name fails uniqueness check, return false
             return "Taken";
+        if(!passcodes.containsKey(Name))
+            passcodes.put(Name,password);
+        else if(passcodes.containsKey(Name) && !password.equals(passcodes.get(Name)))
+            return "BadCode";
+
+
         //if we get here, name valid
         //addition
         NamesInUse.add(Name);
@@ -33,7 +39,20 @@ public class PlayerLobby {
         return "Success";
     }
 
-    // TODO: 10/2/21 remove a name after sign out (not in sprint 1)
+
+
+    public void removeName(String Name)
+    {
+        NamesInUse.remove(Name);
+        for(int i =0; i<Players.size(); i++)
+        {
+            if (Name.equals(Players.get(i).getName()))
+            {
+                Players.remove(i);
+                return;
+            }
+        }
+    }
 
     private boolean isNameValid(String Name) {
         if (!this.containsAlphanumeric(Name)) //if name does NOT contain alphanumeric chars, return false,
@@ -42,7 +61,7 @@ public class PlayerLobby {
     }
 
     private boolean containsAlphanumeric(String str) {
-        return (str != "") && (str.matches("^[a-zA-Z0-9]*$")); // "^" - beginning of line | "*" - matches zero or more occurences | "$" - end of the line
+        return (str != "") && (str.matches("^[a-zA-Z0-9]*$")); // "^" - beginning of line | "*" - matches zero or more occurrences | "$" - end of the line
     }
 
     private boolean isNameUnique(String Name) {
@@ -59,5 +78,4 @@ public class PlayerLobby {
     public Iterator<Player> iterator() {
         return Players.iterator();
     }
-
 }

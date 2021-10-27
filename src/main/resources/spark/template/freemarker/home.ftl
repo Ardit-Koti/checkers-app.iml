@@ -34,13 +34,20 @@
 
       </p>
 
-        <#list players as player>
-            <h3>${player}</h3>
 
+      <ul style="list-style: none;">
+        <#list players as player>
+          <#if playerName != player>
+            <form action="/game" method="GET">
+              <button type="submit" name="white" value="${player}">${player}</button>
+            </form>
+          </#if>
         </#list>
+      </ul>
+      
       <#else>
       <p>
-        Number of Players: ${playernum}
+        Number of Active Players: ${playernum}
       </p>
     </#if>
 
