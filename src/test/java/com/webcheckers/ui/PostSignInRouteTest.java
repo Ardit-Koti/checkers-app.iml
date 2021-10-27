@@ -25,7 +25,7 @@ import com.webcheckers.ui.WebServer;
 
 @Tag("UI-Tier")
 class PostSignInRouteTest {
-    /**
+
     private PostSignInRoute CuT;
     private Request request;
     private Session session;
@@ -88,7 +88,7 @@ class PostSignInRouteTest {
             String s = "Joe"; //not testing, just running method
             when(request.queryParams("name")).thenReturn(s);//overriding queryParams with joe
 
-            when(plobby.checkAndAddName(any(String.class),"test")).thenReturn("Taken"); //checks the string s from above and sets it to return sucess
+            when(plobby.checkAndAddName(any(String.class),eq("test"))).thenReturn("Taken"); //checks the string s from above and sets it to return sucess
             when(engine.render(any(ModelAndView.class))).thenAnswer(testHelper.makeAnswer());
             CuT = new PostSignInRoute(engine, plobby);
 
@@ -103,7 +103,7 @@ class PostSignInRouteTest {
             final TemplateEngineTester testHelper = new TemplateEngineTester();
             String s = "Joe"; //not testing, just running method
             when(request.queryParams("name")).thenReturn(s);//overriding queryParams with joe
-            when(plobby.checkAndAddName(any(String.class),"test")).thenReturn("Invalid"); //checks the string s from above and sets it to return invalid
+            when(plobby.checkAndAddName(any(String.class),eq("test"))).thenReturn("Invalid"); //checks the string s from above and sets it to return invalid
             when(engine.render(any(ModelAndView.class))).thenAnswer(testHelper.makeAnswer());
             CuT = new PostSignInRoute(engine, plobby);
             CuT.handle(request, response);
@@ -116,7 +116,7 @@ class PostSignInRouteTest {
             final TemplateEngineTester testHelper = new TemplateEngineTester();
             String s = "Joe"; //not testing, just running method
             when(request.queryParams("name")).thenReturn(s);//overriding queryParams with joe
-            when(plobby.checkAndAddName(any(String.class),"test")).thenReturn("Success"); //checks the string s from above and sets it to return invalid
+            when(plobby.checkAndAddName(any(String.class),eq("test"))).thenReturn("Success"); //checks the string s from above and sets it to return invalid
             when(engine.render(any(ModelAndView.class))).thenAnswer(testHelper.makeAnswer());
             CuT = new PostSignInRoute(engine, plobby);
             CuT.handle(request, response);
@@ -125,5 +125,4 @@ class PostSignInRouteTest {
             testHelper.assertViewModelAttribute(PostSignInRoute.PLAYERS, plobby.getNamesInUse());
 
         }
-*/
 }

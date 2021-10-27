@@ -46,7 +46,7 @@ public class PlayerLobbyTest {
         assertEquals("Nothing",nothing);
         assertEquals("BadCode",badCode);
 
-        assertEquals(2,CuT.numberOfPlayers());
+        assertEquals(0,CuT.numberOfPlayers());
     }
 
     /**
