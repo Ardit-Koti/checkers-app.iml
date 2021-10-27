@@ -5,15 +5,22 @@ import java.util.*;
 
 public class Board implements Iterable{
     private final int limit = 7;
-    private int i = 0;
-    private ArrayList<Row> RowList;
+    private int i = -1;
+    public ArrayList<Row> RowList;
+
+    @Override
+    public String toString() {
+        return "Board{" +
+                "RowList=" + RowList +
+                '}';
+    }
 
     @Override
     public Iterator<Row> iterator() {
         return new Iterator<>() {
             @Override
             public boolean hasNext() {
-                return i+1 <=7;
+                return i+1 <=limit;
             }
 
             @Override

@@ -38,7 +38,7 @@
               <li style="margin-bottom: 20px;">
                 ${player}
                   <button style="margin-left: 50%;" type="submit" name="spectate" value="Spectate">Spectate</button>
-                  <button type="submit" name="challenge" value="Challenge">Challenge</button>
+                  <button type="submit" name="challenge" value=${player}>Challenge</button>
               </li>
             </form>
             <#--  <form action="/game" method="GET">

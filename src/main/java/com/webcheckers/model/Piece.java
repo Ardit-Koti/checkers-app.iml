@@ -6,7 +6,7 @@ public class Piece {
 
     public enum type
     {
-        REGULAR, KING
+        SINGLE, KING
     }
 
     public enum color{
@@ -21,20 +21,20 @@ public class Piece {
 
 
     private final type Type;
-    private final color color;
+    private final color Color;
     private State state;
 
 
-    public Piece(type Type, color color) {
+    public Piece(type Type, color Color) {
         this.Type = Type;
-        this.color = color;
+        this.Color = Color;
         this.state = State.Alive;
 
     }
 
     public void killPiece(){this.state = State.Dead;}
     public type getType(){return this.Type;}
-    public color getColor(){return this.color;}
+    public color getColor(){return this.Color;}
     public State getState(){return this.state;}
 
 

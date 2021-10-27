@@ -7,7 +7,15 @@ public class Space {
     private Status status;
     private Shade shade;
 
-    private Piece piece;
+    @Override
+    public String toString() {
+        return "Space{" +
+                "piece=" + piece +
+                ", cellIdx=" + cellIdx +
+                '}';
+    }
+
+    public Piece piece = null;
     private int cellIdx;
     private final int limit = 7;
 
@@ -36,25 +44,29 @@ public class Space {
         {
             if(this.cellIdx%2 ==0)
             {
-                this.shade = Shade.DARK;
+                this.shade = Shade.LIGHT;
+                this.status = Status.VACANT;
             }
-            else this.shade = Shade.LIGHT;
+            else this.shade = Shade.DARK;
+            this.status = Status.VACANT;
         }
         else if(row_index%2 == 1)
         {
             if(this.cellIdx%2 == 0)
             {
-                this.shade = Shade.LIGHT;
+                this.shade = Shade.DARK;
+                this.status = Status.VACANT;
             }
-            else this.shade = Shade.DARK;
+            else this.shade = Shade.LIGHT;
+            this.status = Status.VACANT;
         }
-        if(this.shade == Shade.DARK && row_index >= 0 && row_index <= 2)
+        if(this.shade.equals(Shade.DARK) && row_index >= 5 && row_index <= 7)
         {
-            addCurrentPiece(new Piece(Piece.type.REGULAR, Piece.color.WHITE));
+            addCurrentPiece(new Piece(Piece.type.SINGLE, Piece.color.RED));
         }
-        else if(this.shade == Shade.DARK && row_index >= 5 && row_index <= 7)
+        else if(this.shade.equals(Shade.DARK) && row_index >= 0 && row_index <= 2)
         {
-            addCurrentPiece(new Piece(Piece.type.REGULAR, Piece.color.RED));
+            addCurrentPiece(new Piece(Piece.type.SINGLE, Piece.color.WHITE));
         }
     }
 
@@ -65,7 +77,7 @@ public class Space {
 
     public boolean isValid()
     {
-        return this.shade == Shade.DARK && this.status == Status.VACANT;
+        return this.shade.equals(Shade.DARK) && this.status.equals(Status.VACANT);
     }
 
     public Shade getShade(){
@@ -93,7 +105,7 @@ public class Space {
     }
 
     public Status addCurrentPiece(Piece pieceHelper) {
-        if(status == Status.VACANT) {
+        if(status.equals(Status.VACANT)) {
             this.piece = pieceHelper;
             status = Status.OCCUPIED;
             return status;
@@ -103,7 +115,7 @@ public class Space {
     }
 
     public Status removeCurrentPiece() {
-        if (status == Status.OCCUPIED) {
+        if (status.equals(Status.OCCUPIED)) {
             this.piece = null;
             status = Status.VACANT;
             return status;
