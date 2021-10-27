@@ -65,7 +65,7 @@ public class GetHomeRoute implements Route {
       vm.put("currentUser",httpSession.attribute("currentUser"));
       vm.put("message", message);
       vm.put("title", "Welcome!");
-      vm.put(PLAYERS, pLobby.NamesInUse);
+      vm.put(PLAYERS, pLobby.getNamesInUse());
       vm.put("playerName", playerName);
       //System.out.println("Ploby:" + pLobby.NamesInUse);
       return templateEngine.render(new ModelAndView(vm, "home.ftl"));

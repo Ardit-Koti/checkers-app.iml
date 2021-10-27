@@ -73,7 +73,7 @@ public class PostSignInRoute implements Route{
             NAMESTATUS = Message.info("Welcome " + playerName + " to the world of online checkers");
             vm.put("message", NAMESTATUS);
             vm.put("title", "Welcome!");
-            vm.put(PLAYERS, pLobby.NamesInUse);
+            vm.put(PLAYERS, pLobby.getNamesInUse());
             return templateEngine.render(new ModelAndView(vm,"home.ftl"));
         }
 

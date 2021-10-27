@@ -74,6 +74,7 @@ public class PlayerLobby {
     public int numberOfPlayers() {
         return NamesInUse.size();
     }
+    public List<String> getNamesInUse() {return this.NamesInUse;}
 
 
     public Iterator<Player> iterator() {
