@@ -8,7 +8,6 @@ public class Board implements Iterable{
     private int i = 0;
     private ArrayList<Row> RowList;
 
-
     @Override
     public Iterator<Row> iterator() {
         return new Iterator<>() {

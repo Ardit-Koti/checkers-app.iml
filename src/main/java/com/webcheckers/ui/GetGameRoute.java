@@ -39,6 +39,9 @@ public class GetGameRoute implements Route{
     private final String WHITE_PLAYER = "whitePlayer";
 
     private final String BOARD = "board";
+
+    private final String CHOSEN_PLAYER = "player";
+
     /**
      * The constructor for the {@code GET /signin} route handler.
      *
@@ -73,18 +76,16 @@ public class GetGameRoute implements Route{
         httpSession.attribute(GetHomeRoute.PLAYER_LOBBY, pLobby);
         httpSession.attribute(NAME_PARAM, NAME_PARAM);
         vm.put(VIEW_MODE, ViewMode.PLAY);
-        final Player player = httpSession.attribute(USER);
+        final Player YOU = httpSession.attribute(USER);
+        System.out.println(YOU.getName());
+        YOU.setColor(Player.Color.RED);
         vm.put("title", "Welcome!");
-        vm.put(USER, player);
-        //Temporary just to see render
-        //---
-        Game newGame = new Game(new Player("red", Player.Color.RED),
-                new Player("white", Player.Color.WHITE));
-        //---
+        vm.put(USER, YOU);
+        Game newGame = new Game(YOU, new Player("white", Player.Color.WHITE));
         vm.put(BOARD, newGame.getGameBoard());
-        vm.put(RED_PLAYER, newGame.getRedPlayer());
-        vm.put(WHITE_PLAYER, newGame.getWhitePlayer());
-        vm.put(ACTIVE, ActiveColor.WHITE);
+        vm.put(RED_PLAYER, YOU);
+        vm.put(WHITE_PLAYER, new Player("white", Player.Color.WHITE));
+        vm.put(ACTIVE, ActiveColor.RED);
         System.out.println("Game Started");
         return templateEngine.render(new ModelAndView(vm,VIEW_NAME));
 
