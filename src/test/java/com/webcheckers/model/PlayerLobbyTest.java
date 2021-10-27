@@ -36,6 +36,7 @@ public class PlayerLobbyTest {
         String taken = CuT.checkAndAddName("Billy","password");
         String nothingAtAll = CuT.checkAndAddName("","");
         String nothing = CuT.checkAndAddName("Margret","");
+        CuT.removeName("Billy");
         String badCode = CuT.checkAndAddName("Billy","drowssap");
 
         assertEquals("Invalid", invalid);
