@@ -4,29 +4,34 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import static org.mockito.Mockito.*;
 
+/**
+ * Test class for the model tier class Player
+ * Updated: 10/27/2021 3:09pm
+ */
 @Tag("Model-Tier")
 public class PlayerTest {
+    private Player CuT;
 
     /**
-     * Test the player constructor with name param.
+     * Test the player constructor with name param as well as accessor for
+     * the name field.
      */
     @Test
-    public void constructTest() {
-        Player testPlayer = new Player("Charlie");
-
-        assertEquals(testPlayer.name(), "Charlie");
+    public void nameConstructTest() {
+        CuT = new Player("Charlie");
+        assertEquals(CuT.getName(), "Charlie");
     }
 
     /**
-     * Test the basic player constructor without name param.
+     * Test the basic player constructor with a name param and a color param
+     * as well as accessors for both fields.
      */
     @Test
-    public void nullConstructTest() {
-        Player testPlayer = new Player();
-
-        assertNull(testPlayer.name());
+    public void nameAndColorConstructTest() {
+        CuT = new Player("Bobby", Player.Color.RED);
+        assertEquals("Bobby",CuT.getName());
+        assertEquals(Player.Color.RED, CuT.getColor());
     }
 
     /**
@@ -34,10 +39,10 @@ public class PlayerTest {
      */
     @Test
     public void setNameTest() {
-        Player testPlayer = new Player();
-        testPlayer.setName("Tyler");
+        CuT = new Player("Null :^)");
+        CuT.setName("Tyler");
 
-        assertEquals(testPlayer.name(), "Tyler");
+        assertEquals("Tyler",CuT.getName());
     }
 
     /**
@@ -45,10 +50,34 @@ public class PlayerTest {
      */
     @Test
     public void multSetNameTest() {
-        Player testPlayer = new Player();
-        testPlayer.setName("Keith");
-        testPlayer.setName("Lily");
+        CuT = new Player("Null :^)");
+        CuT.setName("Keith");
+        CuT.setName("Lily");
 
-        assertEquals(testPlayer.name(), "Lily");
+        assertEquals("Lily",CuT.getName());
+    }
+
+    /**
+     * Test the setColor function.
+     */
+    @Test
+    public void setColorTest() {
+        CuT = new Player("Null :^)", Player.Color.RED);
+        CuT.setColor(Player.Color.WHITE);
+
+        assertEquals(Player.Color.WHITE, CuT.getColor());
+    }
+
+    /**
+     * Test multiple calls of the setColor function.
+     */
+    @Test
+    public void multSetColorTest() {
+        CuT = new Player("Null :^)", Player.Color.RED);
+        CuT.setColor(Player.Color.WHITE);
+        assertEquals(Player.Color.WHITE, CuT.getColor());
+
+        CuT.setColor(Player.Color.RED);
+        assertEquals(Player.Color.RED, CuT.getColor());
     }
 }
