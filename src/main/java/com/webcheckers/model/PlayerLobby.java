@@ -20,7 +20,7 @@ public class PlayerLobby {
     /**
      * @return String error message if check fails and name is not added, return "Success" if done
      */
-    public String checkAndAddName(String Name) {
+    public String checkAndAddName(String Name, String password) {
         //Checks
         if (!this.isNameValid(Name)) //if the name fails validity check, return false
             return "Invalid";
@@ -32,6 +32,8 @@ public class PlayerLobby {
         Players.add(new Player(Name));
         return "Success";
     }
+
+
 
     public void removeName(String Name)
     {

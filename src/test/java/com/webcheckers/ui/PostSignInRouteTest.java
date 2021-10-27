@@ -57,7 +57,7 @@ class PostSignInRouteTest {
 
             String s = "Joe"; //not testing, just running method
             when(request.queryParams("name")).thenReturn(s);//overriding queryParams with joe
-            when(plobby.checkAndAddName(s)).thenReturn("Success"); //checks the string s from above and sets it to return sucess
+            when(plobby.checkAndAddName(s,"test")).thenReturn("Success"); //checks the string s from above and sets it to return sucess
             CuT.handle(request, response);
 
             //HTTP session . attribute is just storing, so we do not need to test
@@ -87,7 +87,7 @@ class PostSignInRouteTest {
             String s = "Joe"; //not testing, just running method
             when(request.queryParams("name")).thenReturn(s);//overriding queryParams with joe
 
-            when(plobby.checkAndAddName(any(String.class))).thenReturn("Taken"); //checks the string s from above and sets it to return sucess
+            when(plobby.checkAndAddName(any(String.class),"test")).thenReturn("Taken"); //checks the string s from above and sets it to return sucess
             when(engine.render(any(ModelAndView.class))).thenAnswer(testHelper.makeAnswer());
             CuT = new PostSignInRoute(engine, plobby);
 
@@ -102,7 +102,7 @@ class PostSignInRouteTest {
             final TemplateEngineTester testHelper = new TemplateEngineTester();
             String s = "Joe"; //not testing, just running method
             when(request.queryParams("name")).thenReturn(s);//overriding queryParams with joe
-            when(plobby.checkAndAddName(any(String.class))).thenReturn("Invalid"); //checks the string s from above and sets it to return invalid
+            when(plobby.checkAndAddName(any(String.class),"test")).thenReturn("Invalid"); //checks the string s from above and sets it to return invalid
             when(engine.render(any(ModelAndView.class))).thenAnswer(testHelper.makeAnswer());
             CuT = new PostSignInRoute(engine, plobby);
             CuT.handle(request, response);
@@ -115,7 +115,7 @@ class PostSignInRouteTest {
             final TemplateEngineTester testHelper = new TemplateEngineTester();
             String s = "Joe"; //not testing, just running method
             when(request.queryParams("name")).thenReturn(s);//overriding queryParams with joe
-            when(plobby.checkAndAddName(any(String.class))).thenReturn("Success"); //checks the string s from above and sets it to return invalid
+            when(plobby.checkAndAddName(any(String.class),"test")).thenReturn("Success"); //checks the string s from above and sets it to return invalid
             when(engine.render(any(ModelAndView.class))).thenAnswer(testHelper.makeAnswer());
             CuT = new PostSignInRoute(engine, plobby);
             CuT.handle(request, response);

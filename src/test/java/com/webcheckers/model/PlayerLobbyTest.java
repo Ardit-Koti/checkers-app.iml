@@ -12,11 +12,11 @@ class PlayerLobbyTest {
         PlayerLobby Pl = new PlayerLobby();
 
         //test valid
-        assertEquals("Success",  Pl.checkAndAddName("Joe"));
+        assertEquals("Success",  Pl.checkAndAddName("Joe","test"));
         // test invalid
-        assertEquals("Invalid",  Pl.checkAndAddName("^%(#"));
+        assertEquals("Invalid",  Pl.checkAndAddName("^%(#","test"));
         // test taken
-        assertEquals("Taken",  Pl.checkAndAddName("Joe"));
+        assertEquals("Taken",  Pl.checkAndAddName("Joe","test"));
         // test number of players
         assertEquals(1,  Pl.numberOfPlayers());
         // test iterator
