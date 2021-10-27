@@ -17,9 +17,9 @@ class PieceTest {
      */
     @Test
     public void testGetType(){
-        CuT = new Piece(Piece.type.KING, Piece.color.Red);
+        CuT = new Piece(Piece.type.KING, Piece.color.RED);
         assertEquals(Piece.type.KING, CuT.getType());
-        CuT = new Piece(Piece.type.REGULAR, Piece.color.Red);
+        CuT = new Piece(Piece.type.REGULAR, Piece.color.RED);
         assertEquals(Piece.type.REGULAR, CuT.getType());
     }
 
@@ -28,10 +28,10 @@ class PieceTest {
      */
     @Test
     public void testGetColor(){
-        CuT = new Piece(Piece.type.KING, Piece.color.Red);
-        assertEquals(Piece.color.Red, CuT.getColor());
-        CuT = new Piece(Piece.type.KING, Piece.color.White);
-        assertEquals(Piece.color.White, CuT.getColor());
+        CuT = new Piece(Piece.type.KING, Piece.color.RED);
+        assertEquals(Piece.color.RED, CuT.getColor());
+        CuT = new Piece(Piece.type.KING, Piece.color.WHITE);
+        assertEquals(Piece.color.WHITE, CuT.getColor());
     }
 
     /**
@@ -40,7 +40,7 @@ class PieceTest {
      */
     @Test
     public void testState(){
-        CuT = new Piece(Piece.type.KING, Piece.color.Red);
+        CuT = new Piece(Piece.type.KING, Piece.color.RED);
         assertEquals(Piece.State.Alive, CuT.getState());
         CuT.killPiece();
         assertEquals(Piece.State.Dead, CuT.getState());
