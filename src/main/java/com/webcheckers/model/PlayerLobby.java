@@ -5,8 +5,8 @@ import com.webcheckers.model.Player;
 import java.util.*;
 
 public class PlayerLobby {
-    public List<String> NamesInUse; //
-    public List<Player> Players;
+    private final List<String> NamesInUse; //
+    private final List<Player> Players;
     private final Map<String, String> passcodes;
 
     public PlayerLobby() {
