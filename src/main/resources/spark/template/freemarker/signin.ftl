@@ -20,6 +20,9 @@
             <label for="name">Name: </label><br>
             <input type="text" id="name" name="name"><br>
 
+            <label for="password">Password: </label><br>
+            <input type="text" id="password" name="password"><br>
+
             <input type="submit" name="sign-in" value="Sign-in"/>
         </form>
         <#include "message.ftl" />
