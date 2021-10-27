@@ -50,11 +50,11 @@ public class Space {
         }
         if(this.shade == Shade.DARK && row_index >= 0 && row_index <= 2)
         {
-            addCurrentPiece(new Piece(Piece.Variety.REGULAR, Piece.Color.White, Piece.State.Alive));
+            addCurrentPiece(new Piece(Piece.type.REGULAR, Piece.color.White));
         }
         else if(this.shade == Shade.DARK && row_index >= 5 && row_index <= 7)
         {
-            addCurrentPiece(new Piece(Piece.Variety.REGULAR, Piece.Color.Red, Piece.State.Alive));
+            addCurrentPiece(new Piece(Piece.type.REGULAR, Piece.color.Red));
         }
     }
 
