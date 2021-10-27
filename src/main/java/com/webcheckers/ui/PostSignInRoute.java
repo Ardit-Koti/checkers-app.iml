@@ -84,12 +84,13 @@ public class PostSignInRoute implements Route{
             if (status.equals("Invalid"))
                 NAMESTATUS = Message.error("That name is invalid! Please input a valid name!");
 
+            if (status.equals("BadCode"))
+                NAMESTATUS = Message.error("That is the wrong password for this user. Please try again");
+
             vm.put("message", NAMESTATUS);
 
             return templateEngine.render(new ModelAndView(vm, "signin.ftl"));
         }
     }
-
-
 
 }
