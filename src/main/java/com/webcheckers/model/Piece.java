@@ -11,7 +11,7 @@ public class Piece {
 
     public enum color{
 
-        Red, White
+        RED, WHITE
     }
 
     public enum State{
@@ -20,20 +20,20 @@ public class Piece {
 
 
 
-    private final type variety;
+    private final type Type;
     private final color color;
     private State state;
 
 
-    public Piece(type variety, color color) {
-        this.variety = variety;
+    public Piece(type Type, color color) {
+        this.Type = Type;
         this.color = color;
         this.state = State.Alive;
 
     }
 
     public void killPiece(){this.state = State.Dead;}
-    public type getType(){return this.variety;}
+    public type getType(){return this.Type;}
     public color getColor(){return this.color;}
     public State getState(){return this.state;}
 
