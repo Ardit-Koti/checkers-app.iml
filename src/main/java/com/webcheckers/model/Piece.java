@@ -25,14 +25,12 @@ public class Piece {
     private final Variety variety;
     private final Color color;
     private State currentState;
-    public int ID;
 
 
-    public Piece(Variety variety, Color color, State currentState, int ID) {
+    public Piece(Variety variety, Color color, State currentState) {
         this.variety = variety;
         this.color = color;
         this.currentState = currentState;
-        this.ID = ID;
 
     }
 

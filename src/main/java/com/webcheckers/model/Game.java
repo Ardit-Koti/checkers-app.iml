@@ -12,11 +12,9 @@ public class Game {
 
     private int gameId = 1; // TODO: 10/6/21  implement number generator for multiple games
 
+    // initilized to red as red goes first
 
-    private Piece.Color turn = Piece.Color.Red; // initilized to red as red goes first
-
-
-    Board gameBoard = new Board();
+    private Board gameBoard;
 
     public Game(Player redPlayer, Player whitePlayer) {
         gameBoard = new Board();
@@ -24,6 +22,11 @@ public class Game {
         this.redPlayer = redPlayer;
         this.whitePlayer = whitePlayer;
     }
+    public Board getGameBoard(){return this.gameBoard;}
+
+    public Player getRedPlayer(){return this.redPlayer;}
+
+    public Player getWhitePlayer(){return this.whitePlayer;}
 
     //todo when a move is made, swap the turn varible
 
