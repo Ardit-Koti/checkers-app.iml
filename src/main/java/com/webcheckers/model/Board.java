@@ -1,27 +1,37 @@
 package com.webcheckers.model;
 
-import java.util.Iterator;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class Board implements Iterable{
     private final int limit = 7;
     private int i = 0;
+    private ArrayList<Row> RowList;
+
 
     @Override
     public Iterator<Row> iterator() {
         return new Iterator<>() {
             @Override
             public boolean hasNext() {
-                return i++<=7;
+                return i+1 <=7;
             }
 
             @Override
             public Row next() {
-                return new Row(i);
+                i = i+1;
+                return RowList.get(i);
             }
         };
     }
   
     public Board(){
+        RowList = new ArrayList<>();
+        for(int a = 0; a < 8; a++)
+        {
+            RowList.add(new Row(a));
+        }
+
 
         /**
          * generate the 2d array that is the actual board in java

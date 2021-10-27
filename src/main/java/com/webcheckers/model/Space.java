@@ -7,7 +7,7 @@ public class Space {
     private Status status;
     private Shade shade;
 
-    private Piece currentPiece;
+    private Piece piece;
     private int cellIdx;
     private final int limit = 7;
 
@@ -48,7 +48,16 @@ public class Space {
             }
             else this.shade = Shade.DARK;
         }
+        if(this.shade == Shade.DARK && row_index >= 0 && row_index <= 2)
+        {
+            addCurrentPiece(new Piece(Piece.Variety.REGULAR, Piece.Color.White, Piece.State.Alive));
+        }
+        else if(this.shade == Shade.DARK && row_index >= 5 && row_index <= 7)
+        {
+            addCurrentPiece(new Piece(Piece.Variety.REGULAR, Piece.Color.Red, Piece.State.Alive));
+        }
     }
+
 
     public int getCellIdx() { return cellIdx; }
 
@@ -63,8 +72,8 @@ public class Space {
         return shade;
     }
 
-    public Piece getCurrentPiece() {
-        return currentPiece;
+    public Piece getPiece() {
+        return piece;
     }
 
     public boolean moveTo (Space origin){
@@ -74,18 +83,18 @@ public class Space {
         else if(status != Status.VACANT) {
             return false;
         }
-        else if(origin.getCurrentPiece() == null) {
+        else if(origin.getPiece() == null) {
             return false;
         }
 
-        addCurrentPiece(origin.getCurrentPiece());
+        addCurrentPiece(origin.getPiece());
         origin.removeCurrentPiece();
         return true;
     }
 
     public Status addCurrentPiece(Piece pieceHelper) {
         if(status == Status.VACANT) {
-            currentPiece = pieceHelper;
+            this.piece = pieceHelper;
             status = Status.OCCUPIED;
             return status;
         } else{
@@ -95,7 +104,7 @@ public class Space {
 
     public Status removeCurrentPiece() {
         if (status == Status.OCCUPIED) {
-            currentPiece = null;
+            this.piece = null;
             status = Status.VACANT;
             return status;
         } else {
