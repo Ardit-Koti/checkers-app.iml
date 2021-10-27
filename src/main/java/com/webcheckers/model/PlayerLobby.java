@@ -26,9 +26,9 @@ public class PlayerLobby {
             return "Invalid";
         if (!this.isNameUnique(Name)) //if the name fails uniqueness check, return false
             return "Taken";
-        if(!passcodes.containsValue(Name))
-            passcodes.put(password,Name);
-        else if(passcodes.containsValue(Name) && !Name.equals(passcodes.get(password)))
+        if(!passcodes.containsKey(Name))
+            passcodes.put(Name,password);
+        else if(passcodes.containsKey(Name) && !password.equals(passcodes.get(Name)))
             return "BadCode";
 
 
