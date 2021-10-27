@@ -10,6 +10,8 @@ import spark.Route;
 import spark.Session;
 import spark.TemplateEngine;
 
+import javax.naming.Name;
+import javax.print.attribute.standard.MediaSize;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -86,6 +88,10 @@ public class PostSignInRoute implements Route{
 
             if (status.equals("BadCode"))
                 NAMESTATUS = Message.error("That is the wrong password for this user. Please try again");
+            if (status.equals("Nothing"))
+                NAMESTATUS = Message.error("No password was entered, please enter a suitable password.");
+            if (status.equals("NothingAtAll"))
+                NAMESTATUS = Message.error("No password or username was entered, please fill in the required boxes.");
 
             vm.put("message", NAMESTATUS);
 

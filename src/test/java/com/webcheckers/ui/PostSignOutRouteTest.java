@@ -1,4 +1,5 @@
 package com.webcheckers.ui;
+import com.webcheckers.model.Player;
 import com.webcheckers.model.PlayerLobby;
 import spark.*;
 import org.junit.jupiter.api.*;
@@ -33,7 +34,12 @@ public class PostSignOutRouteTest {
     }
 
     @Test
-    void handle()
-    {
+    void handle() throws Exception {
+        String name = "Ben";
+        String password = "123";
+        pLobby.checkAndAddName(name, password);
+
+        assertNull(pLobby.NamesInUse);
+        assertTrue(session.attributes().isEmpty());
     }
 }

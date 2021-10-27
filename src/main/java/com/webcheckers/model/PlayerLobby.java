@@ -22,10 +22,16 @@ public class PlayerLobby {
      */
     public String checkAndAddName(String Name, String password) {
         //Checks
+        if (Name == "" && password == "") {
+            return "NothingAtAll";
+        }
         if (!this.isNameValid(Name)) //if the name fails validity check, return false
             return "Invalid";
         if (!this.isNameUnique(Name)) //if the name fails uniqueness check, return false
             return "Taken";
+        if(password == "") {
+            return "Nothing";
+        }
         if(!passcodes.containsKey(Name))
             passcodes.put(Name,password);
         else if(passcodes.containsKey(Name) && !password.equals(passcodes.get(Name)))

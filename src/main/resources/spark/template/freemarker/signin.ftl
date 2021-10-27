@@ -21,7 +21,20 @@
             <input type="text" id="name" name="name"><br>
 
             <label for="password">Password: </label><br>
-            <input type="text" id="password" name="password"><br>
+            <input type="password" id="password" name="password"><br>
+            <input type="checkbox" onclick="switchVisibility()">Show Password<br><br>
+    
+            <script>
+                function switchVisibility() {
+                    var pwd = document.getElementById("password");
+                    if (pwd.type === "password") {
+                        pwd.type = "text";
+                    }
+                    else {
+                        pwd.type = "password";
+                    }
+                }
+            </script>
 
             <input type="submit" name="sign-in" value="Sign-in"/>
         </form>
