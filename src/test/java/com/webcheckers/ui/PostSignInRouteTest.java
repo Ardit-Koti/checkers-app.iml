@@ -97,8 +97,8 @@ class PostSignInRouteTest {
 
             String s = "Joe"; //not testing, just running method
             when(request.queryParams("name")).thenReturn(s);//overriding queryParams with joe
-
-            when(plobby.checkAndAddName(any(String.class),"test")).thenReturn("Taken"); //checks the string s from above and sets it to return sucess
+            when(request.queryParams("password")).thenReturn("testPassword");
+            when(plobby.checkAndAddName(any(String.class),any(String.class))).thenReturn("Taken"); //checks the string s from above and sets it to return sucess
             when(engine.render(any(ModelAndView.class))).thenAnswer(testHelper.makeAnswer());
 
             CuT.handle(request, response);
