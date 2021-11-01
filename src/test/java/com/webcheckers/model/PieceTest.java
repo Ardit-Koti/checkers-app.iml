@@ -19,8 +19,8 @@ class PieceTest {
     public void testGetType(){
         CuT = new Piece(Piece.type.KING, Piece.color.RED);
         assertEquals(Piece.type.KING, CuT.getType());
-        CuT = new Piece(Piece.type.REGULAR, Piece.color.RED);
-        assertEquals(Piece.type.REGULAR, CuT.getType());
+        CuT = new Piece(Piece.type.SINGLE, Piece.color.RED);
+        assertEquals(Piece.type.SINGLE, CuT.getType());
     }
 
     /**
@@ -46,3 +46,4 @@ class PieceTest {
         assertEquals(Piece.State.Dead, CuT.getState());
     }
 }
+

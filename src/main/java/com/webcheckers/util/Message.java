@@ -42,6 +42,19 @@ public final class Message {
     return new Message(message, Type.INFO);
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Message message = (Message) o;
+    return getText().equals(message.getText()) && getType() == message.getType();
+  }
+
+  @Override
+  public int hashCode() {
+    return 0;
+  }
+
   //
   // Inner Types
   //
