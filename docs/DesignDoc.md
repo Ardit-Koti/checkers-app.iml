@@ -188,15 +188,16 @@ from sprint 1 include the player sign-out route from home, the game view post, a
 
 
 ### Application Tier
-> _Provide a summary of the Application tier of your architecture. This
-> section will follow the same instructions that are given for the UI
-> Tier above._
+The Application Tier includes the Message and PlayerException class. The Message 
+class is a useful and concise class that will display either an error type message or a information type message. The PlayerException class hasn't been used yet, but it still has valuable functionality that can come in handy later.
 
 
 ### Model Tier
-> _Provide a summary of the Application tier of your architecture. This
-> section will follow the same instructions that are given for the UI
-> Tier above._
+The Model Tier encompasses all of the logic within the game based off the <a href="http://www.se.rit.edu/~swen-261/projects/WebCheckers/American%20Rules.html">American Checker Rules.</a> 
+Within the actual tier, you have the Board and Player classes. The board class creates the actual board using the Row class 
+to make it 2D. The player class is used for setting their name for the game. The Game class creates two Players, red and white. The PlayerLobby 
+class handles the name and password of the Player. Within that class, usernames and passwords are checked to see if they are valid. The Piece class has multiple states, including Color (Red or White), Variety (Regular or King), or State (Alive or Dead ).
+The Space class goes through each spot on the checkerboard and whether the spot is vacant, invalid, or not, will add a piece based on the American Rules.
 
 ### Design Improvements
 > _Discuss design improvements that you would make if the project were
