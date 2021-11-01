@@ -164,6 +164,19 @@ from sprint 1 include the player sign-out route from home, the game view post, a
 
 
 ### UI Tier
+
+The UI Tier of the application is responsible acting as an interface between the user,
+and the back end of the application. It takes their interactions with the application
+and updates their view accordingly. 
+<br><br>
+The core of this entire Tier is the Webserver class which is responsible for instantiation of 
+all the routes that the program needs to respond to the user input. 
+<br><br>
+GetHomeRoute is used to transfer the view of the user to the Home page of the application. If the user
+has not signed in at this point than only the amount of players currently signed in is displayed. Otherwise, 
+<br><br>
+
+
 > _Provide a summary of the Server-side UI tier of your architecture.
 > Describe the types of components in the tier and describe their
 > responsibilities.  This should be a narrative description, i.e. it has
@@ -194,11 +207,17 @@ from sprint 1 include the player sign-out route from home, the game view post, a
 
 
 ### Model Tier
-> _Provide a summary of the Application tier of your architecture. This
-> section will follow the same instructions that are given for the UI
-> Tier above._
+
+The Model Tier encompasses all the logic within the game based off the <a href="http://www.se.rit.edu/~swen-261/projects/WebCheckers/American%20Rules.html">American Checker Rules.</a>
+Within the actual tier, you have the Board and Player classes. The board class creates the actual board using the Row class
+to make it 2D. The player class is used for setting their name for the game. The Game class creates two Players, red and white. The PlayerLobby
+class handles the name and password of the Player. Within that class, usernames and passwords are checked to see if they are valid. The Piece class has multiple states, including Color (Red or White), Variety (Regular or King), or State (Alive or Dead ).
+The Space class goes through each spot on the checkerboard and whether the spot is vacant, invalid, or not, will add a piece based on the American Rules.
 
 ### Design Improvements
+
+
+
 > _Discuss design improvements that you would make if the project were
 > to continue. These improvement should be based on your direct
 > analysis of where there are problems in the code base which could be
