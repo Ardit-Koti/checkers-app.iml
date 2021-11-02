@@ -175,7 +175,9 @@ all the routes that the program needs to respond to the user input.
 GetHomeRoute is used to transfer the view of the user to the Home page of the application. If the user
 has not signed in at this point than only the amount of players currently signed in is displayed. Otherwise, 
 <br><br>
-
+GetSignIn is used to route the user to the signIn screen and prompt them for their login information.
+<br><br>
+PostSignIn is used to parse the login information entered. 
 
 > _Provide a summary of the Server-side UI tier of your architecture.
 > Describe the types of components in the tier and describe their
@@ -206,6 +208,8 @@ class is a useful and concise class that will display either an error type messa
 
 
 ### Model Tier
+
+
 
 ### Design Improvements
 
