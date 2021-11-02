@@ -76,29 +76,47 @@ public class GetGameRoute implements Route{
         httpSession.attribute(GetHomeRoute.PLAYER_LOBBY, pLobby);
         httpSession.attribute(NAME_PARAM, NAME_PARAM);
         vm.put(VIEW_MODE, ViewMode.PLAY);
-        final Player YOU = httpSession.attribute(USER);
-        final String player_name = request.queryParams(CHOSEN_PLAYER);
-        System.out.println(player_name);
-        Player Opps = pLobby.getPlayer(player_name);
-        if(Opps.isInGame())
+        Player YOU = httpSession.attribute(USER);
+        //If User calling this route is in a Game, gets game info and renders it
+        if(YOU.isInGame())
         {
-            vm.put("message", new Message("Player already in Game", Message.Type.ERROR));
-            response.redirect("/");
-            return null;
+            vm.put("title", "Welcome!");
+            vm.put(USER, YOU);
+            vm.put(BOARD, YOU.getGame().getGameBoard());
+            vm.put(RED_PLAYER, YOU.getGame().getRedPlayer());
+            vm.put(WHITE_PLAYER, YOU);
+            vm.put(ACTIVE, YOU.getGame().getColor());
+            System.out.println("putting player in Game");
+            return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
         }
-        YOU.setColor(Player.Color.RED);
-        Opps.setColor(Player.Color.WHITE);
-        vm.put("title", "Welcome!");
-        vm.put(USER, YOU);
-        Game newGame = new Game(YOU, Opps);
-        vm.put(BOARD, newGame.getGameBoard());
-        vm.put(RED_PLAYER, YOU);
-        vm.put(WHITE_PLAYER, Opps);
-        vm.put(ACTIVE, ActiveColor.RED);
-        System.out.println("Game Started");
-        Opps.setInGame();
-        return templateEngine.render(new ModelAndView(vm,VIEW_NAME));
-
+        else {
+            //If user is looking to start a game
+            final String player_name = request.queryParams(CHOSEN_PLAYER);
+            System.out.println(player_name);
+            Player Opps = pLobby.getPlayer(player_name);
+            if(Opps.isInGame())
+            {
+              vm.put("message", new Message("Player already in Game", Message.Type.ERROR));
+              response.redirect("/");
+              return null;
+            }
+            YOU.setColor(Player.Color.RED);
+            Opps.setColor(Player.Color.WHITE);
+            vm.put("title", "Welcome!");
+            Game newGame = new Game(YOU, Opps);
+            YOU.setGame(newGame);
+            YOU.setInGame();
+            vm.put(USER, YOU);
+            Opps.setGame(newGame);
+            Opps.setInGame();
+            vm.put(BOARD, newGame.getGameBoard());
+            vm.put(RED_PLAYER, YOU);
+            vm.put(WHITE_PLAYER, Opps);
+            vm.put(ACTIVE, ActiveColor.RED);
+            newGame.setActiveColor(ActiveColor.RED);
+            System.out.println("Game Started");
+        }
+        return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
     }
 
 }

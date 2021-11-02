@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+import com.webcheckers.model.ActiveColor;
+import com.webcheckers.model.Game;
 import com.webcheckers.model.Player;
 import com.webcheckers.model.PlayerLobby;
 import spark.*;
@@ -71,8 +73,10 @@ public class GetHomeRoute implements Route {
       Player into_game = pLobby.getPlayer(playerName);
       if(into_game.isInGame())
       {
-
+        response.redirect("/game");
+        return null;
       }
+      else
       return templateEngine.render(new ModelAndView(vm, "home.ftl"));
     }
     //if not logged in
