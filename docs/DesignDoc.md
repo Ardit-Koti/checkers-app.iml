@@ -175,12 +175,17 @@ all the routes that the program needs to respond to the user input.
 GetHomeRoute is used to transfer the view of the user to the Home page of the application. If the user
 has not signed in at this point than only the amount of players currently signed in is displayed. Otherwise, 
 <br><br>
-
-
-> _Provide a summary of the Server-side UI tier of your architecture.
-> Describe the types of components in the tier and describe their
-> responsibilities.  This should be a narrative description, i.e. it has
-> a flow or "story line" that the reader can follow._
+GetSignIn is used to route the user to the signIn screen and prompt them for their login information.
+<br><br>
+PostSignIn is used to parse the login information entered. If the login is invalid an error message is displayed
+to the User so that they can enter correct information. Otherwise the player is routed back toward the home page to 
+engage with other users
+<br><br>
+PostSignOut is called when the user interacts with the sign out button. This removes them from the active
+player base and makes them unable to join or watch games. It then directs them to the home page.
+<br><br>
+GetGame is used to start a game when one player challenges another. Both players are moved into the game view and shown
+the starting position of the board.
 
 > _At appropriate places as part of this narrative provide one or more
 > static models (UML class structure or object diagrams) with some
@@ -211,6 +216,8 @@ Within the actual tier, you have the Board and Player classes. The board class c
 to make it 2D. The player class is used for setting their name for the game. The Game class creates two Players, red and white. The PlayerLobby
 class handles the name and password of the Player. Within that class, usernames and passwords are checked to see if they are valid. The Piece class has multiple states, including Color (Red or White), Variety (Regular or King), or State (Alive or Dead ).
 The Space class goes through each spot on the checkerboard and whether the spot is vacant, invalid, or not, will add a piece based on the American Rules.
+
+
 
 ### Design Improvements
 Overall, during Sprint 2, we made great improvements to the overall design and structure of our code. To start, we didn't exactly use the vision documents given to us for each sprint until the last week of Sprint 2. 
