@@ -17,8 +17,11 @@ public class MessageTest {
     @BeforeEach
     void setup()
     {
-        CuT = mock(Message.class);
-    }*/
+
+=======
+        CuT = new Message("Alligator", Message.Type.INFO);
+    }
+
 
     @Test
     void errorTest()
@@ -34,10 +37,12 @@ public class MessageTest {
         Assertions.assertSame(Message.Type.INFO, CuT.getType());
     }
 
-    @Test
-    void toStringTest()
-    {
-        CuT = Message.info("I hear assertEquals is really nifty for comparing strings");
-        assertEquals("{Msg " + CuT.getType() + " '" + CuT.getText() + "'}" , CuT.toString() );
-    }
+
+//    @Test
+//    void toStringTest()
+//    {
+//        String s_rep = CuT.toString();
+//        Assertions.assertSame("{Msg " + CuT.getType() + " '" + CuT.getText() + "'}" , s_rep );
+//    }
+
 }

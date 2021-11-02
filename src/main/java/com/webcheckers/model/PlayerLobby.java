@@ -36,6 +36,7 @@ public class PlayerLobby {
             return "BadCode";
 
 
+
         //if we get here, name valid
         //addition
         NamesInUse.add(Name);
@@ -75,6 +76,18 @@ public class PlayerLobby {
         return NamesInUse.size();
     }
     public List<String> getNamesInUse() {return this.NamesInUse;}
+
+    public Player getPlayer(String name)
+    {
+        for(int i =0; i<Players.size(); i++)
+        {
+            if(Players.get(i).getName().equals(name))
+            {
+                return Players.get(i);
+            }
+        }
+        return null;
+    }
 
 
     public Iterator<Player> iterator() {

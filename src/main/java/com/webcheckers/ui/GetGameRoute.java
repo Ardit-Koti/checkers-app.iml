@@ -40,7 +40,7 @@ public class GetGameRoute implements Route{
 
     private final String BOARD = "board";
 
-    private final String CHOSEN_PLAYER = "player";
+    private final String CHOSEN_PLAYER = "challenge";
 
     /**
      * The constructor for the {@code GET /signin} route handler.
@@ -77,14 +77,17 @@ public class GetGameRoute implements Route{
         httpSession.attribute(NAME_PARAM, NAME_PARAM);
         vm.put(VIEW_MODE, ViewMode.PLAY);
         final Player YOU = httpSession.attribute(USER);
-        System.out.println(YOU.getName());
+        final String player_name = request.queryParams(CHOSEN_PLAYER);
+        System.out.println(player_name);
+        Player Opps = pLobby.getPlayer(player_name);
         YOU.setColor(Player.Color.RED);
+        Opps.setColor(Player.Color.WHITE);
         vm.put("title", "Welcome!");
         vm.put(USER, YOU);
-        Game newGame = new Game(YOU, new Player("white", Player.Color.WHITE));
+        Game newGame = new Game(YOU, Opps);
         vm.put(BOARD, newGame.getGameBoard());
         vm.put(RED_PLAYER, YOU);
-        vm.put(WHITE_PLAYER, new Player("white", Player.Color.WHITE));
+        vm.put(WHITE_PLAYER, Opps);
         vm.put(ACTIVE, ActiveColor.RED);
         System.out.println("Game Started");
         return templateEngine.render(new ModelAndView(vm,VIEW_NAME));

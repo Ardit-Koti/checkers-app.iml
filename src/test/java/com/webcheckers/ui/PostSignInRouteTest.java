@@ -35,6 +35,8 @@ class PostSignInRouteTest {
 
     @BeforeEach
     public void setup() {
+
+
         request = mock(Request.class);
         session = mock(Session.class);
 
@@ -43,6 +45,8 @@ class PostSignInRouteTest {
         engine = mock(TemplateEngine.class);
 
         plobby = mock(PlayerLobby.class);
+
+        CuT = new PostSignInRoute(engine, plobby);
 
     }
 
@@ -58,13 +62,20 @@ class PostSignInRouteTest {
 
             String s = "Joe"; //not testing, just running method
             when(request.queryParams("name")).thenReturn(s);//overriding queryParams with joe
-            when(plobby.checkAndAddName(s,"test")).thenReturn("Success"); //checks the string s from above and sets it to return sucess
-            CuT.handle(request, response);
+            when(request.queryParams("password")).thenReturn("testPassword");
+            when(plobby.checkAndAddName(s,"testPassword")).thenReturn("Success"); //checks the string s from above and sets it to return sucess
 
             //HTTP session . attribute is just storing, so we do not need to test
 
             final TemplateEngineTester testHelper = new TemplateEngineTester();
+
+            when(engine.render(any(ModelAndView.class))).thenAnswer(testHelper.makeAnswer());
+
+            CuT.handle(request, response);
+
             testHelper.assertViewModelExists();
+
+
 
             testHelper.assertViewModelAttribute("message",  Message.info("Welcome " + s + " to the world of online checkers"));
             testHelper.assertViewModelAttribute("title", "Welcome!");
@@ -88,9 +99,10 @@ class PostSignInRouteTest {
             String s = "Joe"; //not testing, just running method
             when(request.queryParams("name")).thenReturn(s);//overriding queryParams with joe
 
-            when(plobby.checkAndAddName(any(String.class),eq("test"))).thenReturn("Taken"); //checks the string s from above and sets it to return sucess
+            when(request.queryParams("password")).thenReturn("testPassword");
+            when(plobby.checkAndAddName(any(String.class),any(String.class))).thenReturn("Taken"); //checks the string s from above and sets it to return sucess
+
             when(engine.render(any(ModelAndView.class))).thenAnswer(testHelper.makeAnswer());
-            CuT = new PostSignInRoute(engine, plobby);
 
             CuT.handle(request, response);
 
@@ -103,9 +115,11 @@ class PostSignInRouteTest {
             final TemplateEngineTester testHelper = new TemplateEngineTester();
             String s = "Joe"; //not testing, just running method
             when(request.queryParams("name")).thenReturn(s);//overriding queryParams with joe
-            when(plobby.checkAndAddName(any(String.class),eq("test"))).thenReturn("Invalid"); //checks the string s from above and sets it to return invalid
+
+            when(request.queryParams("password")).thenReturn("testPassword");
+            when(plobby.checkAndAddName(any(String.class),any(String.class))).thenReturn("Invalid"); //checks the string s from above and sets it to return invalid
+
             when(engine.render(any(ModelAndView.class))).thenAnswer(testHelper.makeAnswer());
-            CuT = new PostSignInRoute(engine, plobby);
             CuT.handle(request, response);
             testHelper.assertViewModelExists();
             testHelper.assertViewModelAttribute("message",PostSignInRoute.NAMESTATUS);
@@ -116,9 +130,11 @@ class PostSignInRouteTest {
             final TemplateEngineTester testHelper = new TemplateEngineTester();
             String s = "Joe"; //not testing, just running method
             when(request.queryParams("name")).thenReturn(s);//overriding queryParams with joe
-            when(plobby.checkAndAddName(any(String.class),eq("test"))).thenReturn("Success"); //checks the string s from above and sets it to return invalid
+
+            when(request.queryParams(("password"))).thenReturn("testPassword");
+            when(plobby.checkAndAddName(any(String.class),any(String.class))).thenReturn("Success"); //checks the string s from above and sets it to return invalid
+
             when(engine.render(any(ModelAndView.class))).thenAnswer(testHelper.makeAnswer());
-            CuT = new PostSignInRoute(engine, plobby);
             CuT.handle(request, response);
             testHelper.assertViewModelAttribute("message",PostSignInRoute.NAMESTATUS);
             testHelper.assertViewModelAttribute("title","Welcome!");
