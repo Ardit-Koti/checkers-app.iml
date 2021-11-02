@@ -21,7 +21,9 @@ public class GetHomeRoute implements Route {
   private static final Logger LOG = Logger.getLogger(GetHomeRoute.class.getName());
   private final int SESSION_TIMEOUT_PERIOD = 600;
 
+  static final String NAME_PARAM = "name";
   private static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
+
   private final String NUM_PLAYERS = "playernum";
   private PlayerLobby pLobby;
   private final String PLAYERS = "players";
@@ -56,15 +58,16 @@ public class GetHomeRoute implements Route {
   public Object handle(Request request, Response response) {
     final Session httpSession = request.session();
     Map<String, Object> vm = new HashMap<>();
-    pLobby.Players.add(new Player("Ben"));
     if (httpSession.attribute("currentUser") != null) {
       String playerName = httpSession.attribute("playerName");
       Message message = Message.info("Welcome " + playerName + " to the world of online checkers");
+      vm.put("name", NAME_PARAM);
       vm.put("currentUser",httpSession.attribute("currentUser"));
       vm.put("message", message);
       vm.put("title", "Welcome!");
-      vm.put(PLAYERS, pLobby.NamesInUse);
-      System.out.println("Ploby:" + pLobby.NamesInUse);
+      vm.put(PLAYERS, pLobby.getNamesInUse());
+      vm.put("playerName", playerName);
+      //System.out.println("Ploby:" + pLobby.NamesInUse);
       return templateEngine.render(new ModelAndView(vm, "home.ftl"));
     }
     //if not logged in

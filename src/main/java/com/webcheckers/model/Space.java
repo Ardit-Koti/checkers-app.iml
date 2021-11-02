@@ -2,62 +2,111 @@ package com.webcheckers.model;
 
 public class Space {
 
-    public enum shade {LIGHT, DARK}
-    public enum Status {VALID, OCCUPIED, INVALID}
+    public enum Shade {LIGHT, DARK}
+    public enum Status {VACANT, OCCUPIED, INVALID}
     private Status status;
-    private shade shade;
-    private Piece currentPiece;
-    private int index;
+    private Shade shade;
 
-    public Space(Piece currentPiece, int index) {
-        this.index = index;
-        if(currentPiece != null) {
-            this.currentPiece = currentPiece;
-            this.status = Status.OCCUPIED;
+    @Override
+    public String toString() {
+        return "Space{" +
+                "piece=" + piece +
+                ", cellIdx=" + cellIdx +
+                '}';
+    }
 
-        } else{
-            this.currentPiece = null;
-            this.status = Status.VALID;
+    public Piece piece = null;
+    private int cellIdx;
+    private final int limit = 7;
+
+//    public Space(Piece currentPiece, int index) {
+//        this.cellIdx = index;
+//        if(currentPiece != null) {
+//            this.currentPiece = currentPiece;
+//            this.status = Status.OCCUPIED;
+//
+//        } else{
+//            this.currentPiece = null;
+//            this.status = Status.VALID;
+//        }
+//    }
+
+//    public Space(int index, Status state) {
+//        this.cellIdx = index;
+//        this.currentPiece = null;
+//        this.status = state;
+//    }
+
+    public Space(int cellIdx, int row_index)
+    {
+        this.cellIdx = cellIdx;
+        if(row_index%2 ==0)
+        {
+            if(this.cellIdx%2 ==0)
+            {
+                this.shade = Shade.LIGHT;
+                this.status = Status.VACANT;
+            }
+            else this.shade = Shade.DARK;
+            this.status = Status.VACANT;
+        }
+        else if(row_index%2 == 1)
+        {
+            if(this.cellIdx%2 == 0)
+            {
+                this.shade = Shade.DARK;
+                this.status = Status.VACANT;
+            }
+            else this.shade = Shade.LIGHT;
+            this.status = Status.VACANT;
+        }
+        if(this.shade.equals(Shade.DARK) && row_index >= 5 && row_index <= 7)
+        {
+            addCurrentPiece(new Piece(Piece.type.SINGLE, Piece.color.RED));
+        }
+        else if(this.shade.equals(Shade.DARK) && row_index >= 0 && row_index <= 2)
+        {
+            addCurrentPiece(new Piece(Piece.type.SINGLE, Piece.color.WHITE));
         }
     }
 
-    public Space(int index, Status state) {
-        this.index = index;
-        this.currentPiece = null;
-        this.status = state;
+
+    public int getCellIdx() { return cellIdx; }
+
+    public void setShade(Space.Shade shade) {this.shade = shade; }
+
+    public boolean isValid()
+    {
+        return this.shade.equals(Shade.DARK) && this.status.equals(Status.VACANT);
     }
 
-    public int getIndex() {
-        return index;
+    public Shade getShade(){
+        return shade;
     }
 
-    public void setShade(Space.shade shade) {
-        this.shade = shade;
-    }
-
-    public Piece getCurrentPiece() {
-        return currentPiece;
+    public Piece getPiece() {
+        return piece;
     }
 
     public boolean moveTo (Space origin){
         if(origin == null) {
             return false;
         }
-        else if(status != Status.VALID) {
+        else if(status != Status.VACANT) {
             return false;
         }
-        else if(origin.getCurrentPiece() == null) {
+        else if(origin.getPiece() == null) {
             return false;
         }
 
-        addCurrentPiece(origin.getCurrentPiece());
+        addCurrentPiece(origin.getPiece());
         origin.removeCurrentPiece();
         return true;
     }
 
     public Status addCurrentPiece(Piece pieceHelper) {
-        if(status == Status.VALID) {
-            currentPiece = pieceHelper;
+        if(status.equals(Status.VACANT)) {
+            this.piece = pieceHelper;
             status = Status.OCCUPIED;
             return status;
         } else{
@@ -66,9 +115,9 @@ public class Space {
     }
 
     public Status removeCurrentPiece() {
-        if (status == Status.OCCUPIED) {
-            currentPiece = null;
-            status = Status.VALID;
+        if (status.equals(Status.OCCUPIED)) {
+            this.piece = null;
+            status = Status.VACANT;
             return status;
         } else {
             return status;
@@ -80,11 +129,11 @@ public class Space {
     }
 
     public boolean isTaken() {
-        return (this.status == status.OCCUPIED);
+        return (this.status == Status.OCCUPIED);
     }
 
     public boolean isAllowed() {
-        return(this.status == Status.VALID);
+        return(this.status == Status.VACANT);
     }
 
     public Status getState() {

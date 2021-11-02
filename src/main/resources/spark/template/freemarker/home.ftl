@@ -26,21 +26,31 @@
     -->
 
     <#if currentUser??>
-      <form action="/game" METHOD="get">
-        <button type="button">Play</button>
-      </form>
       <p>
           List of Players:
 
       </p>
 
+      <ul style="list-style: none;">
         <#list players as player>
-            <h3>${player}</h3>
-
+          <#if playerName != player>
+            <form action="/game" method="GET">
+              <li style="margin-bottom: 20px;">
+                ${player}
+                  <button style="margin-left: 50%;" type="submit" name="spectate" value="Spectate">Spectate</button>
+                  <button type="submit" name="challenge" value=${player}>Challenge</button>
+              </li>
+            </form>
+            <#--  <form action="/game" method="GET">
+              <button type="submit" name="white" value="${player}">${player}</button>
+            </form>  -->
+          </#if>
         </#list>
+      </ul>
+      
       <#else>
       <p>
-        Number of Players: ${playernum}
+        Number of Active Players: ${playernum}
       </p>
     </#if>
 
