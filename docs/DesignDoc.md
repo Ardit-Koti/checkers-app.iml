@@ -209,17 +209,9 @@ The Space class goes through each spot on the checkerboard and whether the spot 
 ![Model class diagram](ModelTierClassDiagram.PNG)
 
 ### Design Improvements
-
-
-
-> _Discuss design improvements that you would make if the project were
-> to continue. These improvement should be based on your direct
-> analysis of where there are problems in the code base which could be
-> addressed with design changes, and describe those suggested design
-> improvements. After completion of the Code metrics exercise, you
-> will also discuss the resutling metric measurements.  Indicate the
-> hot spots the metrics identified in your code base, and your
-> suggested design improvements to address those hot spots._
+Overall, during Sprint 2, we made great improvements to the overall design and structure of our code. To start, we didn't exactly use the vision documents given to us for each sprint until the last week of Sprint 2. 
+So, now our code is more aligned with the vision documents, so they repeat less and unnecessary code has been removed from the project.
+Yet, at this point, our code is far from perfect. In order for it to meet coding standards, Law of Demeter needs to be followed. At times, our code can violate Law of Demeter. Yet, the Piece class for example helps with high cohesion, so it helps maintain the rules for checker too!
 
 ## Testing
 > _This section will provide information about the testing performed
