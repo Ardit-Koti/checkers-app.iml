@@ -164,64 +164,72 @@ from sprint 1 include the player sign-out route from home, the game view post, a
 
 
 ### UI Tier
-> _Provide a summary of the Server-side UI tier of your architecture.
-> Describe the types of components in the tier and describe their
-> responsibilities.  This should be a narrative description, i.e. it has
-> a flow or "story line" that the reader can follow._
 
-> _At appropriate places as part of this narrative provide one or more
-> static models (UML class structure or object diagrams) with some
-> details such as critical attributes and methods._
+The UI Tier of the application is responsible acting as an interface between the user,
+and the back end of the application. It takes their interactions with the application
+and updates their view accordingly. 
+<br><br>
+The core of this entire Tier is the Webserver class which is responsible for instantiation of 
+all the routes that the program needs to respond to the user input. 
+<br><br>
+GetHomeRoute is used to transfer the view of the user to the Home page of the application. If the user
+has not signed in at this point than only the amount of players currently signed in is displayed. Otherwise, 
+<br><br>
+GetSignIn is used to route the user to the signIn screen and prompt them for their login information.
+<br><br>
+PostSignIn is used to parse the login information entered. If the login is invalid an error message is displayed
+to the User so that they can enter correct information. Otherwise the player is routed back toward the home page to 
+engage with other users
+<br><br>
+PostSignOut is called when the user interacts with the sign out button. This removes them from the active
+player base and makes them unable to join or watch games. It then directs them to the home page.
+<br><br>
+GetGame is used to start a game when one player challenges another. Both players are moved into the game view and shown
+the starting position of the board.
 
-> _You must also provide any dynamic models, such as statechart and
-> sequence diagrams, as is relevant to a particular aspect of the design
-> that you are describing.  For example, in WebCheckers you might create
-> a sequence diagram of the `POST /validateMove` HTTP request processing
-> or you might show a statechart diagram if the Game component uses a
-> state machine to manage the game._
 
-> _If a dynamic model, such as a statechart describes a feature that is
-> not mostly in this tier and cuts across multiple tiers, you can
-> consider placing the narrative description of that feature in a
-> separate section for describing significant features. Place this after
-> you describe the design of the three tiers._
+
+> A Sequence Diagram from GetGameRoute
+
+![A Sequence Diagram from GetGameRoute](SeqFinal.PNG)
 
 
 ### Application Tier
-> _Provide a summary of the Application tier of your architecture. This
-> section will follow the same instructions that are given for the UI
-> Tier above._
+The Application Tier includes the Message and PlayerException class. The Message
+class is a useful and concise class that will display either an error type message or a information type message. The PlayerException class hasn't been used yet, but it still has valuable functionality that can come in handy later.
 
 
 ### Model Tier
-> _Provide a summary of the Application tier of your architecture. This
-> section will follow the same instructions that are given for the UI
-> Tier above._
+The Model Tier encompasses all of the logic within the game based off the <a href="http://www.se.rit.edu/~swen-261/projects/WebCheckers/American%20Rules.html">American Checker Rules.</a>
+Within the actual tier, you have the Board and Player classes. The board class creates the actual board using the Row class
+to make it 2D. The player class is used for setting their name for the game. The Game class creates two Players, red and white. The PlayerLobby
+class handles the name and password of the Player. Within that class, usernames and passwords are checked to see if they are valid. The Piece class has multiple states, including Color (Red or White), Variety (Regular or King), or State (Alive or Dead ).
+The Space class goes through each spot on the checkerboard and whether the spot is vacant, invalid, or not, will add a piece based on the American Rules.
+
+![Model class diagram](ModelTierClassDiagram.PNG)
 
 ### Design Improvements
-> _Discuss design improvements that you would make if the project were
-> to continue. These improvement should be based on your direct
-> analysis of where there are problems in the code base which could be
-> addressed with design changes, and describe those suggested design
-> improvements. After completion of the Code metrics exercise, you
-> will also discuss the resutling metric measurements.  Indicate the
-> hot spots the metrics identified in your code base, and your
-> suggested design improvements to address those hot spots._
+Overall, during Sprint 2, we made great improvements to the overall design and structure of our code. To start, we didn't exactly use the vision documents given to us for each sprint until the last week of Sprint 2. 
+So, now our code is more aligned with the vision documents, so they repeat less and unnecessary code has been removed from the project.
+Yet, at this point, our code is far from perfect. In order for it to meet coding standards, Law of Demeter needs to be followed. At times, our code can violate Law of Demeter. Yet, the Piece class for example helps with high cohesion, so it helps maintain the rules for checker too!
 
 ## Testing
-> _This section will provide information about the testing performed
-> and the results of the testing._
+
 
 ### Acceptance Testing
-> _Report on the number of user stories that have passed all their
-> acceptance criteria tests, the number that have some acceptance
-> criteria tests failing, and the number of user stories that
-> have not had any testing yet. Highlight the issues found during
-> acceptance testing and if there are any concerns._
+
+Three user stories fully passed all acceptance criteria tests. One story currently has failed half its tests and five
+stories did not reach the stage of testing.
 
 ### Unit Testing and Code Coverage
-> _Discuss your unit testing strategy. Report on the code coverage
-> achieved from unit testing of the code base. Discuss the team's
-> coverage targets, why you selected those values, and how well your
-> code coverage met your targets. If there are any anomalies, discuss
-> those._
+
+![](ModelTIERSTUFFS.PNG)
+
+![](UITIERSTUFF.PNG)
+
+![](UTILTIERTEST.PNG)
+
+Our overall coverage for testing was fairly low due to a last minute rush of development with which testing was not able to 
+keep pace with. This sort of rapid development can create issues later down the line when untested methods are relied upon in
+futher development. In the next sprint of development the team will address these issues to give us a solid base for final development.
+
