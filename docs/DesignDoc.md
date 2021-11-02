@@ -177,12 +177,15 @@ has not signed in at this point than only the amount of players currently signed
 <br><br>
 GetSignIn is used to route the user to the signIn screen and prompt them for their login information.
 <br><br>
-PostSignIn is used to parse the login information entered. 
-
-> _Provide a summary of the Server-side UI tier of your architecture.
-> Describe the types of components in the tier and describe their
-> responsibilities.  This should be a narrative description, i.e. it has
-> a flow or "story line" that the reader can follow._
+PostSignIn is used to parse the login information entered. If the login is invalid an error message is displayed
+to the User so that they can enter correct information. Otherwise the player is routed back toward the home page to 
+engage with other users
+<br><br>
+PostSignOut is called when the user interacts with the sign out button. This removes them from the active
+player base and makes them unable to join or watch games. It then directs them to the home page.
+<br><br>
+GetGame is used to start a game when one player challenges another. Both players are moved into the game view and shown
+the starting position of the board.
 
 > _At appropriate places as part of this narrative provide one or more
 > static models (UML class structure or object diagrams) with some
