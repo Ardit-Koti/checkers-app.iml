@@ -214,19 +214,22 @@ So, now our code is more aligned with the vision documents, so they repeat less 
 Yet, at this point, our code is far from perfect. In order for it to meet coding standards, Law of Demeter needs to be followed. At times, our code can violate Law of Demeter. Yet, the Piece class for example helps with high cohesion, so it helps maintain the rules for checker too!
 
 ## Testing
-> _This section will provide information about the testing performed
-> and the results of the testing._
+
 
 ### Acceptance Testing
-> _Report on the number of user stories that have passed all their
-> acceptance criteria tests, the number that have some acceptance
-> criteria tests failing, and the number of user stories that
-> have not had any testing yet. Highlight the issues found during
-> acceptance testing and if there are any concerns._
+
+Three user stories fully passed all acceptance criteria tests. One story currently has failed half its tests and five
+stories did not reach the stage of testing.
 
 ### Unit Testing and Code Coverage
-> _Discuss your unit testing strategy. Report on the code coverage
-> achieved from unit testing of the code base. Discuss the team's
-> coverage targets, why you selected those values, and how well your
-> code coverage met your targets. If there are any anomalies, discuss
-> those._
+
+![](ModelTIERSTUFFS.PNG)
+
+![](UITIERSTUFF.PNG)
+
+![](UTILTIERTEST.PNG)
+
+Our overall coverage for testing was fairly low due to a last minute rush of development with which testing was not able to 
+keep pace with. This sort of rapid development can create issues later down the line when untested methods are relied upon in
+futher development. In the next sprint of development the team will address these issues to give us a solid base for final development.
+
