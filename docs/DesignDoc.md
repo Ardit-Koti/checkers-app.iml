@@ -187,22 +187,11 @@ player base and makes them unable to join or watch games. It then directs them t
 GetGame is used to start a game when one player challenges another. Both players are moved into the game view and shown
 the starting position of the board.
 
-> _At appropriate places as part of this narrative provide one or more
-> static models (UML class structure or object diagrams) with some
-> details such as critical attributes and methods._
 
-> _You must also provide any dynamic models, such as statechart and
-> sequence diagrams, as is relevant to a particular aspect of the design
-> that you are describing.  For example, in WebCheckers you might create
-> a sequence diagram of the `POST /validateMove` HTTP request processing
-> or you might show a statechart diagram if the Game component uses a
-> state machine to manage the game._
 
-> _If a dynamic model, such as a statechart describes a feature that is
-> not mostly in this tier and cuts across multiple tiers, you can
-> consider placing the narrative description of that feature in a
-> separate section for describing significant features. Place this after
-> you describe the design of the three tiers._
+> A Sequence Diagram from GetGameRoute
+
+![A Sequence Diagram from GetGameRoute](SeqFinal.PNG)
 
 
 ### Application Tier
@@ -217,7 +206,7 @@ to make it 2D. The player class is used for setting their name for the game. The
 class handles the name and password of the Player. Within that class, usernames and passwords are checked to see if they are valid. The Piece class has multiple states, including Color (Red or White), Variety (Regular or King), or State (Alive or Dead ).
 The Space class goes through each spot on the checkerboard and whether the spot is vacant, invalid, or not, will add a piece based on the American Rules.
 
-
+![Model class diagram](ModelTierClassDiagram.PNG)
 
 ### Design Improvements
 
