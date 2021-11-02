@@ -21,7 +21,7 @@ public class PlayerLobby {
     public String checkAndAddName(String Name, String password) {
         //Checks
         if (Name.equals("") && password.equals("")) {
-            return "NothingAtAll";
+            return "NothingAtAll-";
         }
         if (!this.isNameValid(Name)) //if the name fails validity check, return false
             return "Invalid";

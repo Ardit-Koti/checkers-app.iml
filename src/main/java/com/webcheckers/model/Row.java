@@ -6,7 +6,7 @@ import java.util.Iterator;
 public class Row implements Iterable{
     private final int index;
     private final int limit = 7;
-    private int i =-1;
+    private int i =-1; // todo rename this
     public ArrayList<Space> spaceList;
 
     @Override
