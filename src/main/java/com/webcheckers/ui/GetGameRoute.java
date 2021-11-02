@@ -80,6 +80,12 @@ public class GetGameRoute implements Route{
         final String player_name = request.queryParams(CHOSEN_PLAYER);
         System.out.println(player_name);
         Player Opps = pLobby.getPlayer(player_name);
+        if(Opps.isInGame())
+        {
+            vm.put("message", new Message("Player already in Game", Message.Type.ERROR));
+            response.redirect("/");
+            return null;
+        }
         YOU.setColor(Player.Color.RED);
         Opps.setColor(Player.Color.WHITE);
         vm.put("title", "Welcome!");
@@ -90,6 +96,7 @@ public class GetGameRoute implements Route{
         vm.put(WHITE_PLAYER, Opps);
         vm.put(ACTIVE, ActiveColor.RED);
         System.out.println("Game Started");
+        Opps.setInGame();
         return templateEngine.render(new ModelAndView(vm,VIEW_NAME));
 
     }

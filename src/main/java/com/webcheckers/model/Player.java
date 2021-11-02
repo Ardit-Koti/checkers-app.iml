@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 public class Player {
     public enum Color{RED, WHITE}
+    private boolean inGame = false;
 
     public Player(String player_name, Color color)
     {
@@ -23,6 +24,10 @@ public class Player {
         return this.name;
     }
     public Color getColor(){return this.color;}
+
+    public boolean isInGame(){return inGame;}
+
+    public void setInGame(){inGame = true;}
 
     public void setName(String name) {
         this.name = name;

@@ -68,6 +68,11 @@ public class GetHomeRoute implements Route {
       vm.put(PLAYERS, pLobby.getNamesInUse());
       vm.put("playerName", playerName);
       //System.out.println("Ploby:" + pLobby.NamesInUse);
+      Player into_game = pLobby.getPlayer(playerName);
+      if(into_game.isInGame())
+      {
+
+      }
       return templateEngine.render(new ModelAndView(vm, "home.ftl"));
     }
     //if not logged in
