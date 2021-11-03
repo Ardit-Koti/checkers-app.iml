@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Board implements Iterable{
     private final int limit = 7;
-    private int i = -1;
+
     public ArrayList<Row> RowList;
 
     @Override
@@ -18,11 +18,11 @@ public class Board implements Iterable{
     @Override
     public Iterator<Row> iterator() {
         return new Iterator<>() {
+            int i = -1;
             @Override
             public boolean hasNext() {
                 return i+1 <=limit;
             }
-
             @Override
             public Row next() {
                 i = i+1;
