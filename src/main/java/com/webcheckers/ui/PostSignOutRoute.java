@@ -28,7 +28,6 @@ public class PostSignOutRoute implements Route {
         final Map<String, Object> vm = new HashMap<>();
         final Player p = httpSession.attribute(player);
         final String playerName = p.getName();
-        System.out.println(playerName);
         pLobby.removeName(playerName);
         httpSession.maxInactiveInterval(SESSION_TIMEOUT_PERIOD);
         httpSession.attribute("currentUser", null);

@@ -6,8 +6,11 @@ import java.util.Iterator;
 public class Row implements Iterable{
     private final int index;
     private final int limit = 7;
-    private int i =-1; // todo rename this
+
     public ArrayList<Space> spaceList;
+
+    // to reverse board, create copy of board in reversed state
+
 
     @Override
     public String toString() {
@@ -30,6 +33,7 @@ public class Row implements Iterable{
     @Override
     public Iterator<Space> iterator() {
         return new Iterator<>() {
+            int i =-1;
             @Override
             public boolean hasNext() {
                 return i+1 <= limit;

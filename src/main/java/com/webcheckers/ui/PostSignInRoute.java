@@ -55,7 +55,6 @@ public class PostSignInRoute implements Route{
         final Map<String, Object> vm = new HashMap<>(); //create view model hashmap that will be sent to the HTML
         final String playerName = request.queryParams(NAME_PARAM);
         final String password   = request.queryParams(PASS_PARAM);
-        System.out.println(playerName);
         // when there is a post, info is being sent to server. When you click sign in, a username is entered,
         // playername is getting the string from the sign in form
 
@@ -63,7 +62,8 @@ public class PostSignInRoute implements Route{
 
 
         if (status.equals("Success")){ //based of p lobby, if a player successfully entered the lobby
-            Player user = new Player(playerName); //todo ask team about this, why do we have 2 players
+//            Player user = new Player(playerName); //todo ask team about this, why do we have 2 players
+            Player user = pLobby.getPlayer(playerName);
             httpSession.attribute("currentUser",user); // http session represents a new user
             httpSession.attribute("playerName",playerName);
             vm.put("currentUser",user);

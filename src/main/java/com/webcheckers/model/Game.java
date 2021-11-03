@@ -10,6 +10,8 @@ public class Game {
 
     private Player whitePlayer;
 
+    private ActiveColor Color;
+
     private int gameId = 1; // TODO: 10/6/21  implement number generator for multiple games
 
     // initilized to red as red goes first
@@ -28,6 +30,10 @@ public class Game {
     public Player getRedPlayer(){return this.redPlayer;}
 
     public Player getWhitePlayer(){return this.whitePlayer;}
+
+    public ActiveColor getColor(){return this.Color;}
+
+    public void setActiveColor(ActiveColor color){this.Color = color;}
 
     //todo when a move is made, swap the turn varible
 
