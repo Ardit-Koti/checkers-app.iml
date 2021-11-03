@@ -77,23 +77,25 @@ public class GetGameRoute implements Route{
         httpSession.attribute(NAME_PARAM, NAME_PARAM);
         vm.put(VIEW_MODE, ViewMode.PLAY);
         Player YOU = httpSession.attribute(USER);
+        final String player_name = request.queryParams(CHOSEN_PLAYER);
+        System.out.println(player_name);
+        Player Opps = pLobby.getPlayer(player_name);
+        Game a = request.attribute("Game");
         //If User calling this route is in a Game, gets game info and renders it
-        if(YOU.isInGame())
-        {
-            vm.put("title", "Welcome!");
-            vm.put(USER, YOU);
-            vm.put(BOARD, YOU.getGame().getGameBoard());
-            vm.put(RED_PLAYER, YOU.getGame().getRedPlayer());
-            vm.put(WHITE_PLAYER, YOU);
-            vm.put(ACTIVE, YOU.getGame().getColor());
-            System.out.println("putting player in Game");
-            return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
+        if(player_name == null) {
+            if (a.getWhitePlayer().isInGame()) {
+                vm.put("title", "Welcome!");
+                vm.put(USER, a.getWhitePlayer());
+                vm.put(BOARD, a.getGameBoard());
+                vm.put(RED_PLAYER, a.getRedPlayer());
+                vm.put(WHITE_PLAYER, a.getWhitePlayer());
+                vm.put(ACTIVE, a.getColor());
+                System.out.println("putting player in Game");
+                return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
+            }
         }
         else {
             //If user is looking to start a game
-            final String player_name = request.queryParams(CHOSEN_PLAYER);
-            System.out.println(player_name);
-            Player Opps = pLobby.getPlayer(player_name);
             if(Opps.isInGame())
             {
               vm.put("message", new Message("Player already in Game", Message.Type.ERROR));
@@ -114,6 +116,7 @@ public class GetGameRoute implements Route{
             vm.put(WHITE_PLAYER, Opps);
             vm.put(ACTIVE, ActiveColor.RED);
             newGame.setActiveColor(ActiveColor.RED);
+            httpSession.attribute("Game", newGame);
             System.out.println("Game Started");
         }
         return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
