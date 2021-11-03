@@ -4,8 +4,8 @@ import java.util.Iterator;
 
 public class Player {
     public enum Color{RED, WHITE}
-    private boolean inGame = false;
-    private Game game = null;
+    private boolean inGame;
+    private Game game;
 
     public Player(String player_name, Color color)
     {
@@ -30,7 +30,7 @@ public class Player {
 
     public void setInGame(){inGame = true;}
 
-    public Game getGame(){return game;}
+    public Game getGame(){return this.game;}
 
     public void setGame(Game game){this.game = game;}
 

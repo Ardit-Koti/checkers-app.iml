@@ -78,18 +78,18 @@ public class GetGameRoute implements Route{
         vm.put(VIEW_MODE, ViewMode.PLAY);
         Player YOU = httpSession.attribute(USER);
         final String player_name = request.queryParams(CHOSEN_PLAYER);
-        System.out.println(player_name);
+        System.out.println(YOU.getName());
         Player Opps = pLobby.getPlayer(player_name);
-        Game a = request.attribute("Game");
+        System.out.println(httpSession.attributes());
         //If User calling this route is in a Game, gets game info and renders it
-        if(player_name == null) {
-            if (a.getWhitePlayer().isInGame()) {
+        if(Opps == null) {
+            if (YOU.getGame().getWhitePlayer() != null) {
                 vm.put("title", "Welcome!");
-                vm.put(USER, a.getWhitePlayer());
-                vm.put(BOARD, a.getGameBoard());
-                vm.put(RED_PLAYER, a.getRedPlayer());
-                vm.put(WHITE_PLAYER, a.getWhitePlayer());
-                vm.put(ACTIVE, a.getColor());
+                vm.put(USER, YOU);
+                vm.put(BOARD, YOU.getGame().getGameBoard());
+                vm.put(RED_PLAYER, YOU.getGame().getRedPlayer());
+                vm.put(WHITE_PLAYER, YOU.getGame().getWhitePlayer());
+                vm.put(ACTIVE, YOU.getGame().getColor());
                 System.out.println("putting player in Game");
                 return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
             }
@@ -108,15 +108,14 @@ public class GetGameRoute implements Route{
             Game newGame = new Game(YOU, Opps);
             YOU.setGame(newGame);
             YOU.setInGame();
-            vm.put(USER, YOU);
             Opps.setGame(newGame);
             Opps.setInGame();
+            vm.put(USER, YOU);
             vm.put(BOARD, newGame.getGameBoard());
             vm.put(RED_PLAYER, YOU);
             vm.put(WHITE_PLAYER, Opps);
             vm.put(ACTIVE, ActiveColor.RED);
             newGame.setActiveColor(ActiveColor.RED);
-            httpSession.attribute("Game", newGame);
             System.out.println("Game Started");
         }
         return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
