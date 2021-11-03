@@ -55,7 +55,6 @@ public class PostSignInRoute implements Route{
         final Map<String, Object> vm = new HashMap<>(); //create view model hashmap that will be sent to the HTML
         final String playerName = request.queryParams(NAME_PARAM);
         final String password   = request.queryParams(PASS_PARAM);
-        System.out.println(playerName);
         // when there is a post, info is being sent to server. When you click sign in, a username is entered,
         // playername is getting the string from the sign in form
 
