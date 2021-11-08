@@ -80,4 +80,6 @@ public class Board implements Iterable{
     */
         //place Piece.Color.Black players
 
+
+    //todo move validation
     }
