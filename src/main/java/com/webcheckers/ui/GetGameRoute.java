@@ -77,11 +77,11 @@ public class GetGameRoute implements Route{
         Player youPlayer = httpSession.attribute(USER); // originally "YOU"
         final String opponentPlayerName = request.queryParams(CHOSEN_PLAYER);
 
-        System.out.println("ln80 Chosen Player: "+opponentPlayerName);
-        System.out.println("ln81 you player: "+youPlayer.getName());
+        //System.out.println("ln80 Chosen Player: "+opponentPlayerName);
+        //System.out.println("ln81 you player: "+youPlayer.getName());
 
         Player opponentPlayer = pLobby.getPlayer(opponentPlayerName);
-        System.out.println("ln84 httpSession.attributes(): "+ httpSession.attributes());
+        //System.out.println("ln84 httpSession.attributes(): "+ httpSession.attributes());
 
 
         //If User calling this route is in a Game, gets game info and renders it
@@ -93,7 +93,7 @@ public class GetGameRoute implements Route{
                 vm.put(RED_PLAYER, youPlayer.getGame().getRedPlayer());
                 vm.put(WHITE_PLAYER, youPlayer.getGame().getWhitePlayer());
                 vm.put(ACTIVE, youPlayer.getGame().getColor());
-                System.out.println("ln 97 putting player in Game");
+                //System.out.println("ln 97 putting player in Game");
                 return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
             }
         }
@@ -109,8 +109,8 @@ public class GetGameRoute implements Route{
             opponentPlayer.setColor(Player.Color.WHITE);
             vm.put("title", "Welcome!");
             Game newGame = new Game(youPlayer, opponentPlayer);
-            System.out.println("ln 113 youPlayer: "+youPlayer);
-            System.out.println("ln 114 opponentPlayer: "+opponentPlayer);
+            //System.out.println("ln 113 youPlayer: "+youPlayer);
+            //System.out.println("ln 114 opponentPlayer: "+opponentPlayer);
             youPlayer.setGame(newGame);
             youPlayer.setInGame();
             opponentPlayer.setGame(newGame);
@@ -121,7 +121,7 @@ public class GetGameRoute implements Route{
             vm.put(WHITE_PLAYER, opponentPlayer);
             vm.put(ACTIVE, ActiveColor.RED);
             newGame.setActiveColor(ActiveColor.RED);
-            System.out.println("Game Started");
+            //System.out.println("Game Started");
         }
         return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
     }
