@@ -25,6 +25,11 @@ public class PostValidateMove implements Route{
 
     @Override
     public Object handle(Request request, Response response) throws Exception {
+        final Session httpSession = request.session();
+        final Player player = httpSession.attribute("currentUser");
+
+        Game game = player.getGame();
+
         Gson gson = new Gson(); //todo make gson object global using webserver, similar to template engine
         Move move = gson.fromJson(request.queryParams("actionData"), Move.class);
 
@@ -33,9 +38,18 @@ public class PostValidateMove implements Route{
                 "end:   ("+move.getEnd().getCell()+ ","+ move.getEnd().getRow() + ")");
 
         //todo implement checking a move
+        String message = game.takeTurn(move);
+        if(message.startsWith("ERROR")){
+            return gson.toJson(Message.error(message.substring(7)));
+        }
+        return gson.toJson(Message.info(message));
+
+        /**
         if (MoveValidator.isOneDiagonal(move)) // is a one diagonal move
             return gson.toJson(Message.info(" ~test~ valid"));
         else
             return gson.toJson(Message.error(" ~test~ not valid"));
+         */
     }
+
 }

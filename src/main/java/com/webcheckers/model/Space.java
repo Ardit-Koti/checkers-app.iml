@@ -62,11 +62,11 @@ public class Space {
         }
         if(this.shade.equals(Shade.DARK) && row_index >= 5 && row_index <= 7)
         {
-            addCurrentPiece(new Piece(Piece.type.SINGLE, Piece.color.RED));
+            addCurrentPiece(new Piece(Piece.type.SINGLE, Color.RED));
         }
         else if(this.shade.equals(Shade.DARK) && row_index >= 0 && row_index <= 2)
         {
-            addCurrentPiece(new Piece(Piece.type.SINGLE, Piece.color.WHITE));
+            addCurrentPiece(new Piece(Piece.type.SINGLE, Color.WHITE));
         }
     }
 

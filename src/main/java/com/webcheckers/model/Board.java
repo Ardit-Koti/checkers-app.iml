@@ -44,8 +44,45 @@ public class Board implements Iterable{
 
 
 
+    /**
+     * Makes a move on the board.
+     *
+     * @param move the move that is being made.
+     */
+    public void makeMove(Move move) {
+        int startRow = move.getStart().getRow();
+        int startCol = move.getStart().getCell();
+        int endRow = move.getEnd().getRow();
+        int endCol = move.getEnd().getCell();
+        // if the move is a jump, delete the Piece that is jumped over
+        if(Math.abs(endRow-startRow) > 1){
+            RowList.get((endRow + startRow) / 2).getSpaces().get(endCol + startCol / 2).removeCurrentPiece();
+        }
 
+        Piece movingPiece = RowList.get(startRow).getPieceAtIndex(startCol);
+        //remove original piece from the board
+        RowList.get(startRow).getSpaces().get(startCol).removeCurrentPiece();
+        //Add a piece to the new vacant space. Either a king or a single depending on which row it ends on
+        if (endRow == 0 || endRow == 7) {
+                RowList.get(endRow).getSpaces().get(endCol).addCurrentPiece(new Piece(Piece.type.KING, movingPiece.getColor()));
+        }
+        else {
+            RowList.get(endRow).getSpaces().get(endCol).addCurrentPiece(new Piece(movingPiece.getType(), movingPiece.getColor()));
+        }
+    }
 
+    /**
+     * Gets the piece on a space from the perspective of the player.
+     *
+     * @param position the position that is being checked.
+     * @return the piece at the position.
+     */
+    public Piece getPieceAtPosition(Position position) {
+        if(position == null) {
+            return null;
+        }
+            return RowList.get(position.getRow()).getPieceAtIndex(position.getCell());
+    }
 
     public Board(){
         RowList = new ArrayList<>();

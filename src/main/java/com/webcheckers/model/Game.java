@@ -30,6 +30,7 @@ public class Game {
         this.redPlayer = redPlayer;
         this.whitePlayer = whitePlayer;
         this.currentMove = new LinkedList<>();
+        validator = new MoveValidator(this);
     }
     public Board getGameBoard(){return this.gameBoard;}
 
@@ -41,13 +42,57 @@ public class Game {
 
     public void setActiveColor(com.webcheckers.model.Color color){this.Color = color;}
 
+    public static final String VALID_MOVE = "You have made your move";
+    public static final String JUMP_AGAIN = "You must jump again";
+    public static final String ERROR_INVALID_MOVE = "ERROR: invalid move.";
+
     /**
      * Lets the player take his or her turn.
      *
      * @param move a move that the player is making.
      * @return a string with the results of the attempt to make the move.
      */
-
+    public String takeTurn(Move move) {
+        if(currentMove.isEmpty()) {
+            boolean isValid = validator.isMoveValid(move);
+            if(isValid) {
+                currentMove.add(move);
+                gameBoard.makeMove(move);
+                if(move.isJumpMove() && validator.canJumpContinue(move)) {
+                    return JUMP_AGAIN;
+                }
+                else {
+                    return VALID_MOVE;
+                }
+            }
+            else {
+                return ERROR_INVALID_MOVE;
+            }
+        }
+        else {
+            boolean partOfJump = false;
+            if(currentMove.getLast().isJumpMove()) {
+                partOfJump = validator.isJumpContinued(move, currentMove.getLast());
+            }
+            if(partOfJump) {
+                boolean isValid = validator.canJumpContinue(currentMove.getLast());
+                if (isValid) {
+                    currentMove.add(move);
+                    gameBoard.makeMove(move);
+                    if (validator.canJumpContinue(move)) {
+                        return JUMP_AGAIN;
+                    }
+                    return VALID_MOVE;
+                }
+                else {
+                    return ERROR_INVALID_MOVE;
+                }
+            }
+            else {
+                return ERROR_INVALID_MOVE;
+            }
+        }
+    }
 
     //todo when a move is made, swap the turn varible
 

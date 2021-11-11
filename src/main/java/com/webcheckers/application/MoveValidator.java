@@ -77,6 +77,38 @@ public class MoveValidator {
     }
 
     /**
+     * Checks if you can jump again.
+     *
+     * @param lastMove a move that is being tested for validation.
+     * @return true or false.
+     */
+    public boolean canJumpContinue(Move lastMove){
+        Position endOfLastMove = lastMove.getEnd();
+        if(board.getPieceAtPosition(endOfLastMove).getType().equals(Piece.type.SINGLE)) {
+            HashSet<Move> allJumpMoves = simpleJumpMoves(endOfLastMove);
+            return !allJumpMoves.isEmpty();
+        }
+        return false;
+    }
+
+    /**
+     * Tests if the jump can be continued off the first move.
+     *
+     * @param next the second move that will be made.
+     * @param start the first move that was made.
+     * @return true or false depending on if the end of the first move matches the
+     * start of the second move.
+     */
+    public boolean isJumpContinued(Move next, Move start){
+        Position endOfLastMove = start.getEnd();
+        if(board.getPieceAtPosition(endOfLastMove).getType().equals(Piece.type.SINGLE)) {
+            HashSet<Move> allJumpMoves = simpleJumpMoves(endOfLastMove);
+            return allJumpMoves.contains(next);
+        }
+        return false;
+    }
+
+    /**
      * Validates a move and returns true or false depending on if it is valid or not.
      *
      * @param move a move that is being tested for validation.
