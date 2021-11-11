@@ -1,6 +1,8 @@
 package com.webcheckers.application;
 import com.webcheckers.model.*;
-import com.webcheckers.ui.*;
+
+import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  * called by board. The reason for this class is to separate the nitty-gritty logic from the board class.
@@ -19,6 +21,109 @@ import com.webcheckers.ui.*;
  * validate.<specific rule to check>(<info needed to check that>) ;
  */
 public class MoveValidator {
+    private final Game game;
+    private final Board board;
+    private final Color activeColor;
+
+
+    public MoveValidator(Game game) {
+        this.game = game;
+        this.board = game.getGameBoard();
+        this.activeColor = game.getColor();
+    }
+
+
+    private HashSet<Move> simpleDiagonalMoves(Position start) {
+        HashSet<Move> singleMoves = new HashSet<>();
+        Position moveNegPos = Position.createTestPosition(start.getRow() - 1, start.getCell() + 1);
+        Position moveNegNeg = Position.createTestPosition(start.getRow() - 1, start.getCell() - 1);
+        if(moveNegPos != null && board.getPiece(moveNegPos, activeColor) == null) {
+            singleMoves.add(new Move(start, moveNegPos));
+        }
+        if(moveNegNeg != null && board.getPiece(moveNegNeg, activeColor) == null) {
+            singleMoves.add(new Move(start, moveNegNeg));
+        }
+        return singleMoves;
+    }
+
+    /**
+     * Checks the jump moves that can be made by the piece at the start position.
+     * Precondition: there must be a piece at the start position because it is
+     * assumed.
+     *
+     * @param start the starting position from which a piece is moving.
+     * @return an hash set of all jump moves that can be made.
+     */
+    private HashSet<Move> simpleJumpMoves(Position start) {
+        HashSet<Move> singleMoves = new HashSet<>();
+        Position moveNegPos = Position.createTestPosition(start.getRow() - 1, start.getCell() + 1);
+        Piece pieceNegPos = board.getPiece(moveNegPos, activeColor);
+        Position moveNegNeg = Position.createTestPosition(start.getRow() - 1, start.getCell() - 1);
+        Piece pieceNegNeg = board.getPiece(moveNegNeg, activeColor);
+
+        if(moveNegPos != null && pieceNegPos != null && pieceNegPos.getColor() != activeColor) {
+            Position jumpNegPos = Position.createTestPosition(start.getRow() - 2, start.getCell() + 2);
+            if(jumpNegPos != null && board.getPiece(jumpNegPos, activeColor) == null) {
+                singleMoves.add(new Move(start, jumpNegPos));
+            }
+        }
+        if(moveNegNeg != null && pieceNegNeg != null && pieceNegNeg.getColor() != activeColor) {
+            Position jumpNegNeg = Position.createTestPosition(start.getRow() - 2, start.getCell() - 2);
+            if(jumpNegNeg != null && board.getPiece(jumpNegNeg, activeColor) == null) {
+                singleMoves.add(new Move(start, jumpNegNeg));
+            }
+        }
+        return singleMoves;
+    }
+
+    /**
+     * Validates a move and returns true or false depending on if it is valid or not.
+     *
+     * @param move a move that is being tested for validation.
+     * @return true or false.
+     */
+    public boolean isMoveValid(Move move){
+        //HashSet<Move> allLegalMoves = possibleMoves();
+        //return allLegalMoves.contains(move);
+        return true;
+    }
+
+    /**
+     * Uses all the helper methods to get a list of all possible moves that a player can make.
+     *
+     * @return a  list of all possible moves that a player can make.
+     */
+    //TODO get ardit's iterator method and update this
+    /**
+    public HashSet<Move> possibleMoves() {
+        HashSet<Move> simpleMoves = new HashSet<>();
+        HashSet<Move> jumpMoves = new HashSet<>();
+
+        Iterator<Row> boardItr = board.iterator(activeColor.equals(Color.WHITE));
+
+        while(boardItr.hasNext()) {
+            Row row = boardItr.next();
+            for(Space space : row.getSpaces()) {
+                Piece piece = space.getPiece();
+                if(piece != null && piece.getColor().equals(activeColor)) {
+
+                    if(piece.getType() == Piece.type.SINGLE) {
+                        simpleMoves.addAll(simpleDiagonalMoves(new Position(row.getIndex(), space.getCellIdx())));
+                        jumpMoves.addAll(simpleJumpMoves(new Position(row.getIndex(), space.getCellIdx())));
+                    }
+
+                }
+            }
+        }
+        if(jumpMoves.isEmpty()) {
+            return simpleMoves;
+        }
+        else {
+            return jumpMoves;
+        }
+    }
+     */
+
 
 
     /**
@@ -26,28 +131,30 @@ public class MoveValidator {
      * is forward. if king, checks for all 4 diagonal
      * @return
      */
-    public static boolean isOneDiagonal(Move move){
-        int startRow = move.getStart().getRow();
-        int startCol = move.getStart().getCell();
 
-        int endRow = move.getEnd().getRow();
-        int endCol = move.getEnd().getCell();
-        //check the following valid move positions and return true if the position is in one of these places
+     public static boolean isOneDiagonal(Move move){
+     int startRow = move.getStart().getRow();
+     int startCol = move.getStart().getCell();
 
-        // up left
-        if (endCol == startCol-1 && endRow == startRow-1)
-            return true;
-        // up right
-        if (endCol == startCol+1 && endRow == startRow-1)
-            return true;
-        //down left
-        if (endCol == startCol-1 && endRow == startRow+1)
-            return true;
-        //down right
-        if (endCol == startCol+1 && endRow ==+1)
-            return true;
+     int endRow = move.getEnd().getRow();
+     int endCol = move.getEnd().getCell();
+     //check the following valid move positions and return true if the position is in one of these places
 
-        return false;
-    }
+     // up left
+     if (endCol == startCol-1 && endRow == startRow-1)
+     return true;
+     // up right
+     if (endCol == startCol+1 && endRow == startRow-1)
+     return true;
+     //down left
+     if (endCol == startCol-1 && endRow == startRow+1)
+     return true;
+     //down right
+     if (endCol == startCol+1 && endRow ==+1)
+     return true;
+
+     return false;
+     }
+
 
 }

@@ -119,8 +119,8 @@ public class GetGameRoute implements Route{
             vm.put(BOARD, newGame.getGameBoard());
             vm.put(RED_PLAYER, youPlayer);
             vm.put(WHITE_PLAYER, opponentPlayer);
-            vm.put(ACTIVE, ActiveColor.RED);
-            newGame.setActiveColor(ActiveColor.RED);
+            vm.put(ACTIVE, Color.RED);
+            newGame.setActiveColor(Color.RED);
             //System.out.println("Game Started");
         }
         return templateEngine.render(new ModelAndView(vm, VIEW_NAME));

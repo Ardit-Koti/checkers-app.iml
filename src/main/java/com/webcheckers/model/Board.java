@@ -1,6 +1,5 @@
 package com.webcheckers.model;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Board implements Iterable{
@@ -30,13 +29,34 @@ public class Board implements Iterable{
             }
         };
     }
-  
+
+    public Piece getPiece(Position position, Color perspective) {
+        if(position == null || perspective == null) {
+            return null;
+        }
+        if(perspective.equals(Color.WHITE)) {
+            return RowList.get(position.getRow()).getPieceAtIndex(position.getCell());
+        }
+        else {
+            return RowList.get(7 - position.getRow()).getPieceAtIndex(7 - position.getCell());
+        }
+    }
+
+
+
+
+
+
     public Board(){
         RowList = new ArrayList<>();
         for(int a = 0; a < 8; a++)
         {
             RowList.add(new Row(a));
         }
+
+
+
+
 
 
         /**

@@ -5,8 +5,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-import com.webcheckers.model.ActiveColor;
-import com.webcheckers.model.Game;
 import com.webcheckers.model.Player;
 import com.webcheckers.model.PlayerLobby;
 import spark.*;

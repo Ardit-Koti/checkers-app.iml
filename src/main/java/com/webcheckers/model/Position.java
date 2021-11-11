@@ -16,4 +16,18 @@ public class Position {
     public int getCell() {
         return cell;
     }
+
+    /**
+     * Creates a new position only if the parameters are correct.
+     *
+     * @param row an int of any size.
+     * @param cell an int of any size.
+     * @return a new position with row and cell or null if the inputs are wrong.
+     */
+    public static Position createTestPosition(int row, int cell) {
+        if(row < 8 && row >= 0 && cell < 8 && cell >= 0) {
+            return new Position(row, cell);
+        }
+        return null;
+    }
 }
