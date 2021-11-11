@@ -8,6 +8,8 @@ public class Board{
     private final int whitelimit = 0;
 
     public ArrayList<Row> RowList;
+    private List<Move> moves = new ArrayList<>();
+
 
     @Override
     public String toString() {
@@ -99,5 +101,11 @@ public class Board{
         //place Piece.Color.Black players
 
 
-    //todo move validation
+    public void addMove(Move m){
+        moves.add(m);
+    }
+    public List<Move> getMoves(){
+        return moves;
+    }
+
     }
