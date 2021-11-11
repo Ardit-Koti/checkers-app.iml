@@ -114,6 +114,52 @@ public class MoveValidator {
     }
 
     /**
+     * Checks the jump moves that can be made by the piece at the start position.
+     * Precondition: there must be a piece at the start position because it is
+     * assumed.
+     *
+     * @param start the starting position from which a piece is moving.
+     * @return an hash set of all jump moves that can be made.
+     */
+    private HashSet<Move> kingJumpMoves(Position start) {
+        HashSet<Move> kingMoves = new HashSet<>();
+        Position movePosPos = Position.createTestPosition(start.getRow() + 1, start.getCell() + 1);
+        Piece piecePosPos = board.getPieceAtPosition(movePosPos);
+        Position movePosNeg = Position.createTestPosition(start.getRow() + 1, start.getCell() - 1);
+        Piece piecePosNeg = board.getPieceAtPosition(movePosNeg);
+        Position moveNegPos = Position.createTestPosition(start.getRow() - 1, start.getCell() + 1);
+        Piece pieceNegPos = board.getPieceAtPosition(moveNegPos);
+        Position moveNegNeg = Position.createTestPosition(start.getRow() - 1, start.getCell() - 1);
+        Piece pieceNegNeg = board.getPieceAtPosition(moveNegNeg);
+
+        if(movePosPos != null && piecePosPos != null && piecePosPos.getColor() != activeColor) {
+            Position jumpPosPos = Position.createTestPosition(start.getRow() + 2, start.getCell() + 2);
+            if(jumpPosPos != null && board.getPieceAtPosition(jumpPosPos) == null) {
+                kingMoves.add(new Move(start, jumpPosPos));
+            }
+        }
+        if(movePosNeg != null && piecePosNeg != null && piecePosNeg.getColor() != activeColor) {
+            Position jumpPosNeg = Position.createTestPosition(start.getRow() + 2, start.getCell() - 2);
+            if(jumpPosNeg != null && board.getPieceAtPosition(jumpPosNeg) == null) {
+                kingMoves.add(new Move(start, jumpPosNeg));
+            }
+        }
+        if(moveNegPos != null && pieceNegPos != null && pieceNegPos.getColor() != activeColor) {
+            Position jumpNegPos = Position.createTestPosition(start.getRow() - 2, start.getCell() + 2);
+            if(jumpNegPos != null && board.getPieceAtPosition(jumpNegPos) == null) {
+                kingMoves.add(new Move(start, jumpNegPos));
+            }
+        }
+        if(moveNegNeg != null && pieceNegNeg != null && pieceNegNeg.getColor() != activeColor) {
+            Position jumpNegNeg = Position.createTestPosition(start.getRow() - 2, start.getCell() - 2);
+            if(jumpNegNeg != null && board.getPieceAtPosition(jumpNegNeg) == null) {
+                kingMoves.add(new Move(start, jumpNegNeg));
+            }
+        }
+        return kingMoves;
+    }
+
+    /**
      * Checks if you can jump again.
      *
      * @param lastMove a move that is being tested for validation.
@@ -124,6 +170,10 @@ public class MoveValidator {
         if(board.getPieceAtPosition(endOfLastMove).getType().equals(Piece.type.SINGLE)) {
             HashSet<Move> allJumpMoves = simpleJumpMoves(endOfLastMove);
             return !allJumpMoves.isEmpty();
+        }
+        if(board.getPieceAtPosition(endOfLastMove).getType().equals(Piece.type.KING)) {
+            HashSet<Move> kingJumpMoves = kingJumpMoves(endOfLastMove);
+            return !kingJumpMoves.isEmpty();
         }
         return false;
     }
@@ -162,13 +212,13 @@ public class MoveValidator {
      *
      * @return a  list of all possible moves that a player can make.
      */
-    //TODO get ardit's iterator method and update this
+
     /**
     public HashSet<Move> possibleMoves() {
         HashSet<Move> simpleMoves = new HashSet<>();
         HashSet<Move> jumpMoves = new HashSet<>();
 
-        Iterator<Row> boardItr = board.iterator(activeColor.equals(Color.WHITE));
+        Iterator<Row> boardItr = board.iterator(activeColor.equals(Color.WHITE));//TODO get ardit's iterator method and update this
 
         while(boardItr.hasNext()) {
             Row row = boardItr.next();
@@ -179,6 +229,10 @@ public class MoveValidator {
                     if(piece.getType() == Piece.type.SINGLE) {
                         simpleMoves.addAll(simpleDiagonalMoves(new Position(row.getIndex(), space.getCellIdx())));
                         jumpMoves.addAll(simpleJumpMoves(new Position(row.getIndex(), space.getCellIdx())));
+                    }
+                    else if(piece.getType() == Piece.type.KING) {
+                    simpleMoves.addAll(kingDiagonalMoves(new Position(row.getIndex(), space.getCellIdx())));
+                    jumpMoves.addAll(kingJumpMoves(new Position(row.getIndex(), space.getCellIdx())));
                     }
 
                 }

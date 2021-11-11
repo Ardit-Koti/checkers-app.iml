@@ -21,7 +21,7 @@ public class Game {
 
     // initilized to red as red goes first
 
-    private MoveValidator validator;
+    private final MoveValidator validator;
     private Board gameBoard;
 
     public Game(Player redPlayer, Player whitePlayer) {
