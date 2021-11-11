@@ -7,7 +7,7 @@ import com.webcheckers.ui.*;
  * the board is the information expert and knows what data is required to validate the move, so it calls the
  * right method in this class. this class takes the information and applies logic to it.
  *
- * hirarchy of move check
+ * hierarchy of move check
  *
  * turn checks to see if its the right time to mvoe
  * board sends info to moveValidationLogic to see if a move is valid
