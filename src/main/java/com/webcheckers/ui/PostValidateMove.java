@@ -29,8 +29,8 @@ public class PostValidateMove implements Route{
         Move move = gson.fromJson(request.queryParams("actionData"), Move.class);
 
         System.out.println("Move info:: \n    " +
-                "start: (" + move.getStart().getCell()+ ","+ move.getStart().getRow() + ")"+"\n    " +
-                "end:   ("+move.getEnd().getCell()+ ","+ move.getEnd().getRow() + ")");
+                "start: (" + move.getStartPos().getCell()+ ","+ move.getStartPos().getRow() + ")"+"\n    " +
+                "end:   ("+move.getEndPos().getCell()+ ","+ move.getEndPos().getRow() + ")");
 
         //todo implement checking a move
         if (MoveValidator.isOneDiagonal(move)) // is a one diagonal move

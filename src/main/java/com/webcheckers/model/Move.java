@@ -9,11 +9,11 @@ public class Move {
         this.end = end;
     }
 
-    public Position getStart() {
+    public Position getStartPos() {
         return start;
     }
 
-    public Position getEnd() {
+    public Position getEndPos() {
         return end;
     }
 }

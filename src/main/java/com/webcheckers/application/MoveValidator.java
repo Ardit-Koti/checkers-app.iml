@@ -27,11 +27,11 @@ public class MoveValidator {
      * @return
      */
     public static boolean isOneDiagonal(Move move){
-        int startRow = move.getStart().getRow();
-        int startCol = move.getStart().getCell();
+        int startRow = move.getStartPos().getRow();
+        int startCol = move.getStartPos().getCell();
 
-        int endRow = move.getEnd().getRow();
-        int endCol = move.getEnd().getCell();
+        int endRow = move.getEndPos().getRow();
+        int endCol = move.getEndPos().getCell();
         //check the following valid move positions and return true if the position is in one of these places
 
         // up left
