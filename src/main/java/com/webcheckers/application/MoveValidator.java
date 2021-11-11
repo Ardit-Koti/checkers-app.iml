@@ -33,6 +33,14 @@ public class MoveValidator {
     }
 
 
+    /**
+     * Checks the moves that can be made by the piece at the start position.
+     * Precondition: there must be a piece at the start position because it is
+     * assumed.
+     *
+     * @param start the starting position from which a piece is moving.
+     * @return an hash set of all simple moves that can be made.
+     */
     private HashSet<Move> simpleDiagonalMoves(Position start) {
         HashSet<Move> singleMoves = new HashSet<>();
         Position moveNegPos = Position.createTestPosition(start.getRow() - 1, start.getCell() + 1);
@@ -44,6 +52,35 @@ public class MoveValidator {
             singleMoves.add(new Move(start, moveNegNeg));
         }
         return singleMoves;
+    }
+
+    /**
+     * Checks the moves that can be made by the piece at the start position.
+     * Precondition: there must be a piece at the start position because it is
+     * assumed.
+     *
+     * @param start the starting position from which a piece is moving.
+     * @return an hash set of all simple moves that can be made.
+     */
+    private HashSet<Move> kingDiagonalMoves(Position start) {
+        HashSet<Move> kingMoves = new HashSet<>();
+        Position movePosPos = Position.createTestPosition(start.getRow() + 1, start.getCell() + 1);
+        Position movePosNeg = Position.createTestPosition(start.getRow() + 1, start.getCell() - 1);
+        Position moveNegPos = Position.createTestPosition(start.getRow() - 1, start.getCell() + 1);
+        Position moveNegNeg = Position.createTestPosition(start.getRow() - 1, start.getCell() - 1);
+        if(movePosPos != null && board.getPieceAtPosition(movePosPos) == null) {
+            kingMoves.add(new Move(start, movePosPos));
+        }
+        if(movePosNeg != null && board.getPieceAtPosition(movePosNeg) == null) {
+            kingMoves.add(new Move(start, movePosNeg));
+        }
+        if(moveNegPos != null && board.getPieceAtPosition(moveNegPos) == null) {
+            kingMoves.add(new Move(start, moveNegPos));
+        }
+        if(moveNegNeg != null && board.getPieceAtPosition(moveNegNeg) == null) {
+            kingMoves.add(new Move(start, moveNegNeg));
+        }
+        return kingMoves;
     }
 
     /**
