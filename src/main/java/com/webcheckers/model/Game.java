@@ -78,6 +78,7 @@ public class Game {
 
         if (whitePieces==0){
             winner = com.webcheckers.model.Color.RED;
+            return true;
         }
 
 
