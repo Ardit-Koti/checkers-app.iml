@@ -2,6 +2,7 @@ package com.webcheckers.model;
 
 import com.webcheckers.application.MoveValidator;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
@@ -52,6 +53,23 @@ public class Game {
      * @param move a move that the player is making.
      * @return a string with the results of the attempt to make the move.
      */
+
+    public boolean isOver(){
+        // check if all pieces are dead
+        Iterator<Row> gameOverRowIterator = gameBoard.iterator();
+        for (int i = 0; i < 8; i++) {
+            Row tempRow = gameOverRowIterator.next();
+            for (int j = 0; j < 8; j++) {
+                Iterator<Space> gameOverSpaceIterator = tempRow.iterator();
+                Space tempSpace = gameOverSpaceIterator.next();
+                if (tempSpace.hasPiece())
+                    return true;
+            }
+        }
+
+        //todo check if no possible moves exist
+        return false;
+    }
     public String takeTurn(Move move) {
         if(currentMove.isEmpty()) {
             boolean isValid = validator.isMoveValid(move);

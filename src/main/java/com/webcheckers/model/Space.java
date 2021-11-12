@@ -88,6 +88,12 @@ public class Space {
         return piece;
     }
 
+    public Boolean hasPiece(){
+        if (this.piece == null)
+            return false;
+        return true;
+    }
+
     public boolean moveTo (Space origin){
         if(origin == null) {
             return false;
