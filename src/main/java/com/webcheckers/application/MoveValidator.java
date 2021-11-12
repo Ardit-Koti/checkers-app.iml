@@ -235,6 +235,8 @@ public class MoveValidator {
                     if(piece.getType() == Piece.type.SINGLE) {
                         simpleMoves.addAll(simpleDiagonalMoves(new Position(row.getIndex(), space.getCellIdx())));
                         jumpMoves.addAll(simpleJumpMoves(new Position(row.getIndex(), space.getCellIdx())));
+                        System.out.println("\n All Diag moves \n");
+                        for (Move m : simpleMoves) {m.printMove();}
 
                     }
                     else if(piece.getType() == Piece.type.KING) {

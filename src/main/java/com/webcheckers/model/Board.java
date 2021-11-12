@@ -51,7 +51,7 @@ public class Board{
 
 
     public Piece getPiece(Position position, Color perspective) {
-        if(position == null || perspective == null) {
+        if(position == null || perspective  == null) {
             return null;
         }
         if(perspective.equals(Color.RED)) {
