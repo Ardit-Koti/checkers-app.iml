@@ -23,13 +23,13 @@ import java.util.Iterator;
 public class MoveValidator {
     private final Game game;
     private final Board board;
-    private final Color activeColor;
+    private Color activeColor;
 
 
     public MoveValidator(Game game) {
         this.game = game;
         this.board = game.getGameBoard();
-        this.activeColor = game.getColor();
+        this.activeColor = game.getActiveColor();
     }
 
 
@@ -202,6 +202,7 @@ public class MoveValidator {
      * @return true or false.
      */
     public boolean isMoveValid(Move move){
+        this.activeColor = game.getActiveColor();
         HashSet<Move> allLegalMoves = possibleMoves();
         return allLegalMoves.contains(move);
     }
@@ -217,7 +218,7 @@ public class MoveValidator {
         HashSet<Move> simpleMoves = new HashSet<>();
         HashSet<Move> jumpMoves = new HashSet<>();
 
-        Iterator<Row> boardItr = board.iterate_by_color(activeColor.equals(Color.WHITE));//TODO get ardit's iterator method and update this
+        Iterator<Row> boardItr = board.iterate_by_color(activeColor.equals(Color.WHITE));
 
         while(boardItr.hasNext()) {
             Row row = boardItr.next();

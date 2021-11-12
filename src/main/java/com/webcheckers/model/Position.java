@@ -30,4 +30,14 @@ public class Position {
         }
         return null;
     }
+
+    @Override
+    public boolean equals(Object o){
+        if (this == o) {return true;}
+        if (o instanceof Position){
+            Position other = (Position)o;
+            return other.getRow() == getRow() && other.getCell() == getCell();
+        }
+        return false;
+    }
 }

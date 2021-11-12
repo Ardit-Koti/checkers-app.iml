@@ -34,4 +34,14 @@ public class Move {
     public boolean isJumpMove() {
         return Math.abs(start.getRow() - end.getRow()) == 2 && Math.abs(start.getCell() - end.getCell()) == 2;
     }
+
+    @Override
+    public boolean equals(Object o){
+        if (this == o) {return true;}
+        if (o instanceof Move){
+            Move other = (Move)o;
+            return other.getStartPos().equals(getStartPos()) && other.getEndPos().equals(getEndPos());
+        }
+        return false;
+    }
 }
