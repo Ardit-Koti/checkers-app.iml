@@ -58,6 +58,7 @@ public class WebServer {
   public static final String GAME_URL = "/game";
   public static final String SIGN_OUT_URL= "/signout";
   public static final String VALIDATE_MOVE_URL = "/validateMove";
+  public static final String SUBMIT_MOVE_URL = "/submitTurn";
 
 
 
@@ -157,7 +158,9 @@ public class WebServer {
 
     post(SIGN_OUT_URL, new PostSignOutRoute(templateEngine, pLobby));
 
-    post(VALIDATE_MOVE_URL, new PostValidateMove(templateEngine, pLobby));
+    post(VALIDATE_MOVE_URL, new PostValidateMove(templateEngine, pLobby, gson));
+
+    post(SUBMIT_MOVE_URL, new PostSubmitRoute(templateEngine, gson));
     //
     LOG.config("WebServer is initialized.");
   }

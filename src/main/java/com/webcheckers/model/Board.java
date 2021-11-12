@@ -70,10 +70,10 @@ public class Board{
      * @param move the move that is being made.
      */
     public void makeMove(Move move) {
-        int startRow = move.getStart().getRow();
-        int startCol = move.getStart().getCell();
-        int endRow = move.getEnd().getRow();
-        int endCol = move.getEnd().getCell();
+        int startRow = move.getStartPos().getRow();
+        int startCol = move.getStartPos().getCell();
+        int endRow = move.getEndPos().getRow();
+        int endCol = move.getEndPos().getCell();
         // if the move is a jump, delete the Piece that is jumped over
         if(Math.abs(endRow-startRow) > 1){
             RowList.get((endRow + startRow) / 2).getSpaces().get(endCol + startCol / 2).removeCurrentPiece();

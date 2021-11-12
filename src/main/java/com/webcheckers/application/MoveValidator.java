@@ -166,7 +166,7 @@ public class MoveValidator {
      * @return true or false.
      */
     public boolean canJumpContinue(Move lastMove){
-        Position endOfLastMove = lastMove.getEnd();
+        Position endOfLastMove = lastMove.getEndPos();
         if(board.getPieceAtPosition(endOfLastMove).getType().equals(Piece.type.SINGLE)) {
             HashSet<Move> allJumpMoves = simpleJumpMoves(endOfLastMove);
             return !allJumpMoves.isEmpty();
@@ -187,7 +187,7 @@ public class MoveValidator {
      * start of the second move.
      */
     public boolean isJumpContinued(Move next, Move start){
-        Position endOfLastMove = start.getEnd();
+        Position endOfLastMove = start.getEndPos();
         if(board.getPieceAtPosition(endOfLastMove).getType().equals(Piece.type.SINGLE)) {
             HashSet<Move> allJumpMoves = simpleJumpMoves(endOfLastMove);
             return allJumpMoves.contains(next);
@@ -202,9 +202,8 @@ public class MoveValidator {
      * @return true or false.
      */
     public boolean isMoveValid(Move move){
-        //HashSet<Move> allLegalMoves = possibleMoves();
-        //return allLegalMoves.contains(move);
-        return true;
+        HashSet<Move> allLegalMoves = possibleMoves();
+        return allLegalMoves.contains(move);
     }
 
     /**
@@ -213,12 +212,12 @@ public class MoveValidator {
      * @return a  list of all possible moves that a player can make.
      */
 
-    /**
+
     public HashSet<Move> possibleMoves() {
         HashSet<Move> simpleMoves = new HashSet<>();
         HashSet<Move> jumpMoves = new HashSet<>();
 
-        Iterator<Row> boardItr = board.iterator(activeColor.equals(Color.WHITE));//TODO get ardit's iterator method and update this
+        Iterator<Row> boardItr = board.iterate_by_color(activeColor.equals(Color.WHITE));//TODO get ardit's iterator method and update this
 
         while(boardItr.hasNext()) {
             Row row = boardItr.next();
@@ -245,7 +244,7 @@ public class MoveValidator {
             return jumpMoves;
         }
     }
-     */
+
 
 
 
@@ -275,6 +274,7 @@ public class MoveValidator {
         //down right
         if (endCol == startCol+1 && endRow ==+1)
             return true;
+        return false;
     }
 
 //      public static boolean isOneDiagonal(Move move){

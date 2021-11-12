@@ -20,7 +20,7 @@ public class Game {
 
     private com.webcheckers.model.Color Color;
 
-    private ActiveColor activeColor;
+    private Color activeColor;
 
     private int gameId = 1; // TODO: 10/6/21  implement number generator for multiple games
 
@@ -52,11 +52,13 @@ public class Game {
 
     public com.webcheckers.model.Color getColor(){return this.Color;}
 
-    public void setActiveColor(com.webcheckers.model.Color color){this.Color = color;}
 
     public static final String VALID_MOVE = "You have made your move";
     public static final String JUMP_AGAIN = "You must jump again";
     public static final String ERROR_INVALID_MOVE = "ERROR: invalid move.";
+    public static final String ERROR_NO_MOVE = "ERROR: You have not made a move to submit";
+    public static final String ERROR_MORE_JUMPS = "ERROR: You can chain more jumps";
+    public static final String SUBMITTED = "Move submitted!";
 
 
     public boolean isOver(){
@@ -65,11 +67,11 @@ public class Game {
         int whitePieces = 0;
 
 
-        Iterator<Row> gameOverRowIterator = gameBoard.iterator();
+        Iterator<Row> gameOverRowIterator = gameBoard.iterate_by_color(true);
         for (int i = 0; i < 8; i++) {
             Row tempRow = gameOverRowIterator.next();
             for (int j = 0; j < 8; j++) {
-                Iterator<Space> gameOverSpaceIterator = tempRow.iterator();
+                Iterator<Space> gameOverSpaceIterator = tempRow.iterate_by_color(true);
                 Space tempSpace = gameOverSpaceIterator.next();
                 if (tempSpace.hasPiece()){
                     if(tempSpace.piece.getColor().equals(com.webcheckers.model.Color.RED))
@@ -95,6 +97,22 @@ public class Game {
         //todo check if no possible moves exist
         return false;
     }
+
+        public String submitMove() {
+            if (currentMove.isEmpty()) {
+                return ERROR_NO_MOVE;
+            } else {
+                if (currentMove.getLast().isJumpMove()) {
+                    if (validator.canJumpContinue(currentMove.getLast())) {
+                        return ERROR_MORE_JUMPS;
+                    }
+                }
+                if (activeColor.equals(com.webcheckers.model.Color.RED)) {setActiveColor(com.webcheckers.model.Color.WHITE);}
+                else {setActiveColor(com.webcheckers.model.Color.RED);}
+                currentMove.clear();
+                return SUBMITTED;
+            }
+        }
 
     /**
      * Lets the player take his or her turn.
@@ -144,9 +162,9 @@ public class Game {
         }
     }
 
-    public void setActiveColor(ActiveColor activeColor){this.activeColor = activeColor;}
+    public void setActiveColor(Color activeColor){this.activeColor = activeColor;}
 
-    public ActiveColor getActiveColor(){return this.activeColor;}
+    public Color getActiveColor(){return this.activeColor;}
 
 
     //todo when a move is made, swap the turn varible

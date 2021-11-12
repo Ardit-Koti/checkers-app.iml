@@ -24,10 +24,12 @@ public class PostValidateMove implements Route{
 
     private final TemplateEngine templateEngine;
     private final PlayerLobby pLobby;
+    private final Gson gson;
 
-    public PostValidateMove(TemplateEngine templateEngine, PlayerLobby pLobby) {
+    public PostValidateMove(TemplateEngine templateEngine, PlayerLobby pLobby, Gson gson) {
         this.templateEngine = templateEngine;
         this.pLobby = pLobby;
+        this.gson = gson;
     }
 
 
@@ -41,7 +43,7 @@ public class PostValidateMove implements Route{
 
 
         // getting session information and the proper game
-        final Session httpSession = request.session();
+
         final Map<String, Object> vm = new HashMap<>();
         httpSession.attribute(GetHomeRoute.PLAYER_LOBBY, pLobby);
         httpSession.attribute(NAME_PARAM, NAME_PARAM);
@@ -51,12 +53,7 @@ public class PostValidateMove implements Route{
         final String opponentPlayerName = request.queryParams(CHOSEN_PLAYER);
 
 
-        //todo
 
-
-
-
-        Gson gson = new Gson(); //todo make gson object global using webserver, similar to template engine
         Move move = gson.fromJson(request.queryParams("actionData"), Move.class);
 
 
