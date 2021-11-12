@@ -20,22 +20,31 @@ public class Game {
 
     private com.webcheckers.model.Color Color;
 
+    private ActiveColor activeColor;
+
     private int gameId = 1; // TODO: 10/6/21  implement number generator for multiple games
 
     // initilized to red as red goes first
 
+
     private final MoveValidator validator;
+
     private Board gameBoard;
 
-    public Game(Player redPlayer, Player whitePlayer) {
-        gameBoard = new Board();
+    private Board futureBoard;
 
+    public Game(Player redPlayer, Player whitePlayer) {
+        this.gameBoard = new Board();
+        this.futureBoard = this.gameBoard;
         this.redPlayer = redPlayer;
         this.whitePlayer = whitePlayer;
         this.currentMove = new LinkedList<>();
         validator = new MoveValidator(this);
     }
+
     public Board getGameBoard(){return this.gameBoard;}
+
+    public Board getFutureBoard(){return this.futureBoard;}
 
     public Player getRedPlayer(){return this.redPlayer;}
 
@@ -54,6 +63,7 @@ public class Game {
         // check if all pieces are dead
         int redPieces = 0;
         int whitePieces = 0;
+
 
         Iterator<Row> gameOverRowIterator = gameBoard.iterator();
         for (int i = 0; i < 8; i++) {
@@ -134,7 +144,13 @@ public class Game {
         }
     }
 
+    public void setActiveColor(ActiveColor activeColor){this.activeColor = activeColor;}
+
+    public ActiveColor getActiveColor(){return this.activeColor;}
+
+
     //todo when a move is made, swap the turn varible
+
 
 
     // TODO: 10/6/21  put into vm from game class: game id, current user viewMode mode options redPlayer.name whitePlayer.name active color

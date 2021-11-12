@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Row implements Iterable{
+public class Row{
     private final int index;
-    private final int limit = 7;
+    private final int redlimit = 7;
+    private final int whitelimit = 0;
 
     public ArrayList<Space> spaceList;
 
@@ -31,22 +32,38 @@ public class Row implements Iterable{
     }
     public int getIndex(){return this.index;}
 
-    @Override
-    public Iterator<Space> iterator() {
-        return new Iterator<>() {
-            int i =-1;
-            @Override
-            public boolean hasNext() {
-                return i+1 <= limit;
-            }
 
-            @Override
-            public Space next()
-            {
-                i = i+1;
-                return spaceList.get(i);
-            }
-        };
+    public Iterator<Space> iterate_by_color(boolean color) {
+        if(color) {
+            return new Iterator<Space>() {
+                int i = -1;
+                @Override
+                public boolean hasNext() {
+                    return i+1 <= redlimit;
+                }
+
+                @Override
+                public Space next() {
+                    i= i+1;
+                    return spaceList.get(i);
+                }
+            };
+        }
+        else{
+            return new Iterator<Space>() {
+                int a = 8;
+                @Override
+                public boolean hasNext() {
+                    return a-1 >= whitelimit;
+                }
+
+                @Override
+                public Space next() {
+                    a = a-1;
+                    return spaceList.get(a);
+                }
+            };
+        }
     }
 
     public List<Space> getSpaces() {

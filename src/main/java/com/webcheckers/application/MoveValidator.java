@@ -9,7 +9,7 @@ import java.util.Iterator;
  * the board is the information expert and knows what data is required to validate the move, so it calls the
  * right method in this class. this class takes the information and applies logic to it.
  *
- * hirarchy of move check
+ * hierarchy of move check
  *
  * turn checks to see if its the right time to mvoe
  * board sends info to moveValidationLogic to see if a move is valid
@@ -255,29 +255,51 @@ public class MoveValidator {
      * @return
      */
 
-     public static boolean isOneDiagonal(Move move){
-     int startRow = move.getStart().getRow();
-     int startCol = move.getStart().getCell();
+    public static boolean isOneDiagonal(Move move){
+        int startRow = move.getStartPos().getRow();
+        int startCol = move.getStartPos().getCell();
 
-     int endRow = move.getEnd().getRow();
-     int endCol = move.getEnd().getCell();
-     //check the following valid move positions and return true if the position is in one of these places
+        int endRow = move.getEndPos().getRow();
+        int endCol = move.getEndPos().getCell();
+        //check the following valid move positions and return true if the position is in one of these places
 
-     // up left
-     if (endCol == startCol-1 && endRow == startRow-1)
-     return true;
-     // up right
-     if (endCol == startCol+1 && endRow == startRow-1)
-     return true;
-     //down left
-     if (endCol == startCol-1 && endRow == startRow+1)
-     return true;
-     //down right
-     if (endCol == startCol+1 && endRow ==+1)
-     return true;
+        // up left
+        if (endCol == startCol-1 && endRow == startRow-1)
+            return true;
+        // up right
+        if (endCol == startCol+1 && endRow == startRow-1)
+            return true;
+        //down left
+        if (endCol == startCol-1 && endRow == startRow+1)
+            return true;
+        //down right
+        if (endCol == startCol+1 && endRow ==+1)
+            return true;
+    }
 
-     return false;
-     }
+//      public static boolean isOneDiagonal(Move move){
+//      int startRow = move.getStart().getRow();
+//      int startCol = move.getStart().getCell();
+
+//      int endRow = move.getEnd().getRow();
+//      int endCol = move.getEnd().getCell();
+//      //check the following valid move positions and return true if the position is in one of these places
+
+//      // up left
+//      if (endCol == startCol-1 && endRow == startRow-1)
+//      return true;
+//      // up right
+//      if (endCol == startCol+1 && endRow == startRow-1)
+//      return true;
+//      //down left
+//      if (endCol == startCol-1 && endRow == startRow+1)
+//      return true;
+//      //down right
+//      if (endCol == startCol+1 && endRow ==+1)
+//      return true;
+
+//      return false;
+//      }
 
 
 }

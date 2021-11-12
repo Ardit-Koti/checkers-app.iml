@@ -11,7 +11,16 @@ import spark.Route;
 import spark.TemplateEngine;
 import spark.Session;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PostValidateMove implements Route{
+
+
+    static final String NAME_PARAM = "name";
+    private final String VIEW_MODE = "viewMode";
+    private final String USER = "currentUser";
+    private final String CHOSEN_PLAYER = "challenge";
 
     private final TemplateEngine templateEngine;
     private final PlayerLobby pLobby;
@@ -30,12 +39,30 @@ public class PostValidateMove implements Route{
 
         Game game = player.getGame();
 
+
+        // getting session information and the proper game
+        final Session httpSession = request.session();
+        final Map<String, Object> vm = new HashMap<>();
+        httpSession.attribute(GetHomeRoute.PLAYER_LOBBY, pLobby);
+        httpSession.attribute(NAME_PARAM, NAME_PARAM);
+        vm.put(VIEW_MODE, ViewMode.PLAY); // Need to pass in 3 players
+
+        Player youPlayer = httpSession.attribute(USER); // originally "YOU"
+        final String opponentPlayerName = request.queryParams(CHOSEN_PLAYER);
+
+
+        //todo
+
+
+
+
         Gson gson = new Gson(); //todo make gson object global using webserver, similar to template engine
         Move move = gson.fromJson(request.queryParams("actionData"), Move.class);
 
+
         System.out.println("Move info:: \n    " +
-                "start: (" + move.getStart().getCell()+ ","+ move.getStart().getRow() + ")"+"\n    " +
-                "end:   ("+move.getEnd().getCell()+ ","+ move.getEnd().getRow() + ")");
+                "start: (" + move.getStartPos().getCell()+ ","+ move.getStartPos().getRow() + ")"+"\n    " +
+                "end:   ("+move.getEndPos().getCell()+ ","+ move.getEndPos().getRow() + ")");
 
         //todo implement checking a move
         String message = game.takeTurn(move);

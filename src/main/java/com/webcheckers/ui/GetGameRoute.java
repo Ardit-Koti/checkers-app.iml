@@ -92,7 +92,7 @@ public class GetGameRoute implements Route{
                 vm.put(BOARD, youPlayer.getGame().getGameBoard());
                 vm.put(RED_PLAYER, youPlayer.getGame().getRedPlayer());
                 vm.put(WHITE_PLAYER, youPlayer.getGame().getWhitePlayer());
-                vm.put(ACTIVE, youPlayer.getGame().getColor());
+                vm.put(ACTIVE, youPlayer.getGame().getActiveColor());
                 //System.out.println("ln 97 putting player in Game");
                 return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
             }
@@ -103,6 +103,7 @@ public class GetGameRoute implements Route{
             {
               vm.put("message", new Message("Player already in Game", Message.Type.ERROR));
               response.redirect("/");
+              System.out.println("Player " + opponentPlayer.getName() + " is already in a game.");
               return null;
             }
             youPlayer.setColor(Player.Color.RED);

@@ -19,24 +19,6 @@ public class Space {
     private int cellIdx;
     private final int limit = 7;
 
-//    public Space(Piece currentPiece, int index) {
-//        this.cellIdx = index;
-//        if(currentPiece != null) {
-//            this.currentPiece = currentPiece;
-//            this.status = Status.OCCUPIED;
-//
-//        } else{
-//            this.currentPiece = null;
-//            this.status = Status.VALID;
-//        }
-//    }
-
-//    public Space(int index, Status state) {
-//        this.cellIdx = index;
-//        this.currentPiece = null;
-//        this.status = state;
-//    }
-
     public Space(int cellIdx, int row_index)
     {
         this.cellIdx = cellIdx;
