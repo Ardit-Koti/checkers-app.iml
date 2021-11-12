@@ -54,10 +54,6 @@ public class MoveValidator {
             newMove = new Move(start, moveNegNeg);
             singleMoves.add(newMove);
         }
-        for (Move m : singleMoves)
-        {
-            m.printMove();
-        }
         return singleMoves;
     }
 
@@ -239,22 +235,26 @@ public class MoveValidator {
                     if(piece.getType() == Piece.type.SINGLE) {
                         simpleMoves.addAll(simpleDiagonalMoves(new Position(row.getIndex(), space.getCellIdx())));
                         jumpMoves.addAll(simpleJumpMoves(new Position(row.getIndex(), space.getCellIdx())));
+
                     }
                     else if(piece.getType() == Piece.type.KING) {
                     simpleMoves.addAll(kingDiagonalMoves(new Position(row.getIndex(), space.getCellIdx())));
                     jumpMoves.addAll(kingJumpMoves(new Position(row.getIndex(), space.getCellIdx())));
+
                     }
 
                 }
             }
         }
-        return simpleMoves;
-        //if(jumpMoves.isEmpty()) {
-       //     return simpleMoves;
-       // }
-       // else {
-         //   return jumpMoves;
-       // }
+
+        if(jumpMoves.isEmpty()) {
+
+            return simpleMoves;
+        }
+        else {
+
+            return jumpMoves;
+        }
     }
 
 
