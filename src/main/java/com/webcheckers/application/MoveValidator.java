@@ -43,13 +43,20 @@ public class MoveValidator {
      */
     private HashSet<Move> simpleDiagonalMoves(Position start) {
         HashSet<Move> singleMoves = new HashSet<>();
+        Move newMove;
         Position moveNegPos = Position.createTestPosition(start.getRow() - 1, start.getCell() + 1);
         Position moveNegNeg = Position.createTestPosition(start.getRow() - 1, start.getCell() - 1);
         if(moveNegPos != null && board.getPiece(moveNegPos, activeColor) == null) {
-            singleMoves.add(new Move(start, moveNegPos));
+            newMove = new Move(start, moveNegPos);
+            singleMoves.add(newMove);
         }
         if(moveNegNeg != null && board.getPiece(moveNegNeg, activeColor) == null) {
-            singleMoves.add(new Move(start, moveNegNeg));
+            newMove = new Move(start, moveNegNeg);
+            singleMoves.add(newMove);
+        }
+        for (Move m : singleMoves)
+        {
+            m.printMove();
         }
         return singleMoves;
     }
@@ -204,7 +211,10 @@ public class MoveValidator {
     public boolean isMoveValid(Move move){
         this.activeColor = game.getActiveColor();
         HashSet<Move> allLegalMoves = possibleMoves();
-        return allLegalMoves.contains(move);
+        for(Move m : allLegalMoves){
+            if(m.equals(move)){return true;}
+        }
+        return false;
     }
 
     /**
@@ -218,7 +228,7 @@ public class MoveValidator {
         HashSet<Move> simpleMoves = new HashSet<>();
         HashSet<Move> jumpMoves = new HashSet<>();
 
-        Iterator<Row> boardItr = board.iterate_by_color(activeColor.equals(Color.WHITE));
+        Iterator<Row> boardItr = board.iterate_by_color(!activeColor.equals(Color.WHITE));
 
         while(boardItr.hasNext()) {
             Row row = boardItr.next();
@@ -238,12 +248,13 @@ public class MoveValidator {
                 }
             }
         }
-        if(jumpMoves.isEmpty()) {
-            return simpleMoves;
-        }
-        else {
-            return jumpMoves;
-        }
+        return simpleMoves;
+        //if(jumpMoves.isEmpty()) {
+       //     return simpleMoves;
+       // }
+       // else {
+         //   return jumpMoves;
+       // }
     }
 
 

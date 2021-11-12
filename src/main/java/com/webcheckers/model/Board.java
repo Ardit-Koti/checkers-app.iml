@@ -54,7 +54,7 @@ public class Board{
         if(position == null || perspective == null) {
             return null;
         }
-        if(perspective.equals(Color.WHITE)) {
+        if(perspective.equals(Color.RED)) {
             return RowList.get(position.getRow()).getPieceAtIndex(position.getCell());
         }
         else {

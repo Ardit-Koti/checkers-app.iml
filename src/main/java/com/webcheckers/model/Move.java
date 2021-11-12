@@ -35,6 +35,14 @@ public class Move {
         return Math.abs(start.getRow() - end.getRow()) == 2 && Math.abs(start.getCell() - end.getCell()) == 2;
     }
 
+    public void printMove() {
+        System.out.println("Move info:: \n    " +
+                "start: (" + getStartPos().getCell()+ ","+ getStartPos().getRow() + ")"+"\n    " +
+                "end:   ("+getEndPos().getCell()+ ","+ getEndPos().getRow() + ")");
+
+    }
+
+
     @Override
     public boolean equals(Object o){
         if (this == o) {return true;}
