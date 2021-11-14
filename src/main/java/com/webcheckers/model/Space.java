@@ -102,14 +102,9 @@ public class Space {
         }
     }
 
-    public Status removeCurrentPiece() {
-        if (status.equals(Status.OCCUPIED)) {
+    public void removeCurrentPiece() {
             this.piece = null;
             status = Status.VACANT;
-            return status;
-        } else {
-            return status;
-        }
     }
 
     public boolean isNotTaken() {

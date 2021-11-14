@@ -57,7 +57,7 @@ public class PostValidateMove implements Route{
         Move move = gson.fromJson(request.queryParams("actionData"), Move.class);
 
 
-        System.out.println("Move info:: \n    " +
+        System.out.println("\n Move input:: \n    " +
                 "start: (" + move.getStartPos().getCell()+ ","+ move.getStartPos().getRow() + ")"+"\n    " +
                 "end:   ("+move.getEndPos().getCell()+ ","+ move.getEndPos().getRow() + ")");
 

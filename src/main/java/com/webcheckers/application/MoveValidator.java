@@ -44,13 +44,23 @@ public class MoveValidator {
     private HashSet<Move> simpleDiagonalMoves(Position start) {
         HashSet<Move> singleMoves = new HashSet<>();
         Move newMove;
-        Position moveNegPos = Position.createTestPosition(start.getRow() - 1, start.getCell() + 1);
-        Position moveNegNeg = Position.createTestPosition(start.getRow() - 1, start.getCell() - 1);
-        if(moveNegPos != null && board.getPiece(moveNegPos, activeColor) == null) {
+        Position moveNegPos;
+        Position moveNegNeg;
+        if(activeColor.equals(Color.RED)) {
+            System.out.println("Red");
+            moveNegPos = Position.createTestPosition(start.getRow() - 1, start.getCell() + 1);
+            moveNegNeg = Position.createTestPosition(start.getRow() - 1, start.getCell() - 1);
+        }
+        else { //Runs if active color is white. This accounts for inverted rows
+            System.out.println("White");
+            moveNegPos = Position.createTestPosition(start.getRow() + 1, start.getCell() + 1);
+            moveNegNeg = Position.createTestPosition(start.getRow() + 1, start.getCell() - 1);
+        }
+        if (moveNegPos != null && board.getPiece(moveNegPos, activeColor) == null) {
             newMove = new Move(start, moveNegPos);
             singleMoves.add(newMove);
         }
-        if(moveNegNeg != null && board.getPiece(moveNegNeg, activeColor) == null) {
+        if (moveNegNeg != null && board.getPiece(moveNegNeg, activeColor) == null) {
             newMove = new Move(start, moveNegNeg);
             singleMoves.add(newMove);
         }
@@ -96,23 +106,51 @@ public class MoveValidator {
      */
     private HashSet<Move> simpleJumpMoves(Position start) {
         HashSet<Move> singleMoves = new HashSet<>();
-        Position moveNegPos = Position.createTestPosition(start.getRow() - 1, start.getCell() + 1);
-        Piece pieceNegPos = board.getPiece(moveNegPos, activeColor);
-        Position moveNegNeg = Position.createTestPosition(start.getRow() - 1, start.getCell() - 1);
-        Piece pieceNegNeg = board.getPiece(moveNegNeg, activeColor);
+        Move newMove;
 
-        if(moveNegPos != null && pieceNegPos != null && pieceNegPos.getColor() != activeColor) {
-            Position jumpNegPos = Position.createTestPosition(start.getRow() - 2, start.getCell() + 2);
-            if(jumpNegPos != null && board.getPiece(jumpNegPos, activeColor) == null) {
-                singleMoves.add(new Move(start, jumpNegPos));
+       // if (activeColor.equals(Color.RED)) {
+            Position moveNegPos = Position.createTestPosition(start.getRow() - 1, start.getCell() + 1);
+            Piece pieceNegPos = board.getPiece(moveNegPos, activeColor);
+            Position moveNegNeg = Position.createTestPosition(start.getRow() - 1, start.getCell() - 1);
+            Piece pieceNegNeg = board.getPiece(moveNegNeg, activeColor);
+
+            if (moveNegPos != null && pieceNegPos != null && pieceNegPos.getColor() != activeColor) {
+                Position jumpNegPos = Position.createTestPosition(start.getRow() - 2, start.getCell() + 2);
+                if (jumpNegPos != null && board.getPiece(jumpNegPos, activeColor) == null) {
+                    newMove = new Move(start, jumpNegPos);
+                    singleMoves.add(newMove);
+                }
             }
-        }
-        if(moveNegNeg != null && pieceNegNeg != null && pieceNegNeg.getColor() != activeColor) {
-            Position jumpNegNeg = Position.createTestPosition(start.getRow() - 2, start.getCell() - 2);
-            if(jumpNegNeg != null && board.getPiece(jumpNegNeg, activeColor) == null) {
-                singleMoves.add(new Move(start, jumpNegNeg));
+            if (moveNegNeg != null && pieceNegNeg != null && pieceNegNeg.getColor() != activeColor) {
+                Position jumpNegNeg = Position.createTestPosition(start.getRow() - 2, start.getCell() - 2);
+                if (jumpNegNeg != null && board.getPiece(jumpNegNeg, activeColor) == null) {
+                    newMove = new Move(start, jumpNegNeg);
+                    singleMoves.add(newMove);
+                }
             }
-        }
+       // }
+        /**
+        else{ //Runs if active color is white. This accounts for inverted rows
+            Position moveNegPos = Position.createTestPosition(start.getRow() + 1, start.getCell() + 1);
+            Piece pieceNegPos = board.getPiece(moveNegPos, activeColor);
+            Position moveNegNeg = Position.createTestPosition(start.getRow() + 1, start.getCell() - 1);
+            Piece pieceNegNeg = board.getPiece(moveNegNeg, activeColor);
+
+            if (moveNegPos != null && pieceNegPos != null && pieceNegPos.getColor() != activeColor) {
+                Position jumpNegPos = Position.createTestPosition(start.getRow() + 2, start.getCell() + 2);
+                if (jumpNegPos != null && board.getPiece(jumpNegPos, activeColor) == null) {
+                    newMove = new Move(start, jumpNegPos);
+                    singleMoves.add(newMove);
+                }
+            }
+            if (moveNegNeg != null && pieceNegNeg != null && pieceNegNeg.getColor() != activeColor) {
+                Position jumpNegNeg = Position.createTestPosition(start.getRow() + 2, start.getCell() - 2);
+                if (jumpNegNeg != null && board.getPiece(jumpNegNeg, activeColor) == null) {
+                    newMove = new Move(start, jumpNegNeg);
+                    singleMoves.add(newMove);
+                }
+            }
+        } */
         return singleMoves;
     }
 
@@ -208,6 +246,7 @@ public class MoveValidator {
         this.activeColor = game.getActiveColor();
         HashSet<Move> allLegalMoves = possibleMoves();
         for(Move m : allLegalMoves){
+            m.printMove();
             if(m.equals(move)){return true;}
         }
         return false;
@@ -235,8 +274,6 @@ public class MoveValidator {
                     if(piece.getType() == Piece.type.SINGLE) {
                         simpleMoves.addAll(simpleDiagonalMoves(new Position(row.getIndex(), space.getCellIdx())));
                         jumpMoves.addAll(simpleJumpMoves(new Position(row.getIndex(), space.getCellIdx())));
-                        System.out.println("\n All Diag moves \n");
-                        for (Move m : simpleMoves) {m.printMove();}
 
                     }
                     else if(piece.getType() == Piece.type.KING) {
@@ -248,6 +285,9 @@ public class MoveValidator {
                 }
             }
         }
+       // System.out.println("\nMoves \n");
+       // for (Move m : simpleMoves) {m.printMove();}
+
 
         if(jumpMoves.isEmpty()) {
 
