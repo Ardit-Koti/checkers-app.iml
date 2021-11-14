@@ -245,17 +245,44 @@ public class MoveValidator {
      * @param move a move that is being tested for validation.
      * @return true or false.
      */
+
+    /**
+     *
+     *
+     *
+     */
     public boolean isMoveValid(Move move){
         this.activeColor = game.getActiveColor();
         HashSet<Move> allLegalMoves = possibleMoves();
+        System.out.println("Add Valid Moves:");
+        boolean flag = false;
         for(Move m : allLegalMoves){
-            System.out.println("Add Valid Moves:");
             m.printMove();
-            System.out.println("----------------");
-            if(m.equals(move)){return true;}
+            if(m.equals(move)){
+                System.out.print( ": this is the move input" );
+                flag = true;
+            }
+
         }
-        return false;
+        System.out.println("----------------");
+
+        return flag;
     }
+
+//    public boolean isMoveValidTestIgnore(Move move){
+//        this.activeColor = game.getActiveColor();
+//        HashSet<Move> allLegalMoves = possibleMoves();
+//        System.out.println("Add Valid Moves:");
+//        for(Move m : allLegalMoves)
+//            m.printMove();
+//        System.out.println("----------------");
+//        for (Move m2:allLegalMoves) {
+//            if(m2.equals(move)){return true;}
+//        }
+//        return false;
+//        //return allLegalMoves.contains(move);
+//    }
+
 
     /**
      * Uses all the helper methods to get a list of all possible moves that a player can make.

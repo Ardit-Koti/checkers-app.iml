@@ -105,6 +105,7 @@ public class Space {
     public void removeCurrentPiece() {
             this.piece = null;
             status = Status.VACANT;
+
     }
 
     public boolean isNotTaken() {

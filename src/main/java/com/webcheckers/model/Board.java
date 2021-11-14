@@ -54,12 +54,12 @@ public class Board{
         if(position == null || perspective  == null) {
             return null;
         }
-        if(perspective.equals(Color.RED)) {
+ //       if(perspective.equals(Color.RED)) {
             return RowList.get(position.getRow()).getPieceAtIndex(position.getCell());
-        }
-        else {
-            return RowList.get(7 - position.getRow()).getPieceAtIndex(7 - position.getCell());
-        }
+//        }
+//        else {
+//            return RowList.get(7 - position.getRow()).getPieceAtIndex(7 - position.getCell());
+//        }
     }
 
 
@@ -77,6 +77,7 @@ public class Board{
         // if the move is a jump, delete the Piece that is jumped over
         if(move.isJumpMove()){
             RowList.get((endRow + startRow) / 2).getSpaces().get(endCol + startCol / 2).removeCurrentPiece();
+
         }
 
         Piece movingPiece = RowList.get(startRow).getPieceAtIndex(startCol);
