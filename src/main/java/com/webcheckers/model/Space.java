@@ -1,5 +1,7 @@
 package com.webcheckers.model;
 
+import com.webcheckers.application.DevMode;
+
 public class Space {
 
     public enum Shade {LIGHT, DARK}
@@ -51,6 +53,96 @@ public class Space {
             addCurrentPiece(new Piece(Piece.type.SINGLE, Color.WHITE));
         }
     }
+
+    public Space(int cellIdx, int row_index, DevMode devMode)
+    {
+
+        //setting pieces to be on the right color tiles
+        this.cellIdx = cellIdx;
+        if(row_index%2 ==0)
+        {
+            if(this.cellIdx%2 ==0)
+            {
+                this.shade = Shade.LIGHT;
+                this.status = Status.VACANT;
+            }
+            else this.shade = Shade.DARK;
+            this.status = Status.VACANT;
+        }
+        else if(row_index%2 == 1)
+        {
+            if(this.cellIdx%2 == 0)
+            {
+                this.shade = Shade.DARK;
+                this.status = Status.VACANT;
+            }
+
+            else this.shade = Shade.LIGHT;
+            this.status = Status.VACANT;
+        }
+
+        if (devMode==DevMode.KING){
+            if(this.shade.equals(Shade.DARK) && row_index == 1 ) // place red pieces 1 away from being king, in row 1
+                addCurrentPiece(new Piece(Piece.type.SINGLE, Color.RED));
+
+            else if(this.shade.equals(Shade.DARK) && row_index == 6) // place white 1 away from being king in row 6
+                addCurrentPiece(new Piece(Piece.type.SINGLE, Color.WHITE));
+        }
+
+        if (devMode==DevMode.CHAINING){
+            // bottom half of board, white eating 2 whites // place red pieces in row 0,
+            if(this.shade.equals(Shade.DARK) &&  row_index == 0 && cellIdx ==5)
+                addCurrentPiece(new Piece(Piece.type.SINGLE, Color.WHITE));
+                //place white pieces in row 1, 3
+            else if(this.shade.equals(Shade.DARK) &&  row_index == 1  && cellIdx == 4 )
+                addCurrentPiece(new Piece(Piece.type.SINGLE, Color.RED));
+            else if(this.shade.equals(Shade.DARK) &&  row_index == 3 && cellIdx == 2 )
+                addCurrentPiece(new Piece(Piece.type.SINGLE, Color.RED));
+
+            //top half of baord, red eating 2 reds. // place white pieces in row 7,
+            if(this.shade.equals(Shade.DARK) &&  row_index == 7  && cellIdx == 2 )
+                addCurrentPiece(new Piece(Piece.type.SINGLE, Color.RED));
+            //place red pieces in row 6, 4
+            if(this.shade.equals(Shade.DARK) &&  row_index == 6  && cellIdx == 3 )
+                addCurrentPiece(new Piece(Piece.type.SINGLE, Color.WHITE));
+            if(this.shade.equals(Shade.DARK) &&  row_index == 4 && cellIdx == 5 )
+                addCurrentPiece(new Piece(Piece.type.SINGLE, Color.WHITE));
+        }
+
+        if (devMode==DevMode.KING_CHAINING){
+            // bottom half of board, white eating 2 whites // place red pieces in row 0,
+            if(this.shade.equals(Shade.DARK) &&  row_index == 4 && cellIdx ==1)
+                addCurrentPiece(new Piece(Piece.type.KING, Color.WHITE));
+                //place white pieces in row 1, 3
+            else if(this.shade.equals(Shade.DARK) &&  row_index == 3  && cellIdx == 2 )
+                addCurrentPiece(new Piece(Piece.type.SINGLE, Color.RED));
+            else if(this.shade.equals(Shade.DARK) &&  row_index == 1 && cellIdx == 4 )
+                addCurrentPiece(new Piece(Piece.type.SINGLE, Color.RED));
+
+            //top half of board, red eating 2 reds. // place white pieces in row 7,
+            if(this.shade.equals(Shade.DARK) &&  row_index == 3  && cellIdx == 6 )
+                addCurrentPiece(new Piece(Piece.type.KING, Color.RED));
+            //place red pieces in row 6, 4
+            if(this.shade.equals(Shade.DARK) &&  row_index == 4  && cellIdx == 5 )
+                addCurrentPiece(new Piece(Piece.type.SINGLE, Color.WHITE));
+            if(this.shade.equals(Shade.DARK) &&  row_index == 6 && cellIdx == 3 )
+                addCurrentPiece(new Piece(Piece.type.SINGLE, Color.WHITE));
+        }
+
+
+        else { //no dev mode
+            if(this.shade.equals(Shade.DARK) && row_index >= 5 && row_index <= 7)
+            {
+                addCurrentPiece(new Piece(Piece.type.SINGLE, Color.RED));
+            }
+            else if(this.shade.equals(Shade.DARK) && row_index >= 0 && row_index <= 2)
+            {
+                addCurrentPiece(new Piece(Piece.type.SINGLE, Color.WHITE));
+            }
+        }
+
+    }
+
 
 
     public int getCellIdx() { return cellIdx; }

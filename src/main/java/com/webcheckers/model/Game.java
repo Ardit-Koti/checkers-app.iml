@@ -104,6 +104,11 @@ public class Game {
         return false;
     }
 
+
+    public void declareWinner(Color winnerColor){
+        this.winner= winnerColor;
+    }
+
         public String submitMove() {
             if (currentMove.isEmpty()) {
                 return ERROR_NO_MOVE;
@@ -146,6 +151,7 @@ public class Game {
         else {
             boolean partOfJump = false;
             if(currentMove.getLast().isJumpMove()) {
+                System.out.println("ENTERING CHAINING");
                 partOfJump = validator.isJumpContinued(move, currentMove.getLast());
             }
             if(partOfJump) {

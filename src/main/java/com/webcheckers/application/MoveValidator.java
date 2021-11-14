@@ -230,14 +230,50 @@ public class MoveValidator {
      * @return true or false depending on if the end of the first move matches the
      * start of the second move.
      */
-    public boolean isJumpContinued(Move next, Move start){
+    public boolean isJumpContinued(Move next, Move start) {
         Position endOfLastMove = start.getEndPos();
-        if(board.getPieceAtPosition(endOfLastMove).getType().equals(Piece.type.SINGLE)) {
+        if (board.getPieceAtPosition(endOfLastMove).getType().equals(Piece.type.SINGLE)) { // if single
             HashSet<Move> allJumpMoves = simpleJumpMoves(endOfLastMove);
-            System.out.println("           Jump Move Possibilities: " +simpleJumpMoves(endOfLastMove));
-            return allJumpMoves.contains(next);
+
+
+            boolean flag = false; // this will go true if the input move matches the valid move
+
+            for (Move m : allJumpMoves) {
+                if (m.equals(next)) { // next move is valid!!
+                    flag = true;
+                }
+            }
+            return flag;
+
+            //return allJumpMoves.contains(next);
         }
-        return false;
+        if (board.getPieceAtPosition(endOfLastMove).getType().equals(Piece.type.KING)) {
+            HashSet<Move> allJumpMoves = kingJumpMoves(endOfLastMove);
+            boolean flag = false; // this will go true if the input move matches the valid move
+            for (Move m : allJumpMoves) {
+                if (m.equals(next)) { // next move is valid!!
+                    flag = true;
+                }
+            }
+
+
+            // debug stuff
+            int numberOfPossibleJumpMoves = 0;
+
+            for (Move m : allJumpMoves) {
+                numberOfPossibleJumpMoves++;
+            }
+            System.out.println("           There are " + numberOfPossibleJumpMoves + " King Jump Move Possibilities: ");
+
+            for (Move m : allJumpMoves) {
+                m.printMove();
+            }
+            System.out.println("------ end possible jump move ---------");
+            // end debug stuff
+            return flag;
+        }
+        System.out.println("error invalid piece type");
+     return false;
     }
 
     /**

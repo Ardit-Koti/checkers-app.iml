@@ -1,5 +1,7 @@
 package com.webcheckers.model;
 
+import com.webcheckers.application.DevMode;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -26,8 +28,8 @@ public class Row{
         spaceList = new ArrayList<>();
         this.index = index;
         for(int a = 0; a<8; a++)
-        {
-            spaceList.add(new Space(a, index));
+        {   //devmode determines the board start arrangement
+            spaceList.add(new Space(a, index, DevMode.KING_CHAINING));
         }
     }
     public int getIndex(){return this.index;}
