@@ -50,12 +50,12 @@ public class MoveValidator {
 
 
         if(activeColor.equals(Color.RED)) {
-            System.out.println("Red");
+            //System.out.println("Red");
             validMove1 = Position.createTestPosition(start.getRow() - 1, start.getCell() + 1); //moveNegPos
             validMove2 = Position.createTestPosition(start.getRow() - 1, start.getCell() - 1); //moveNegNeg
         }
         else { //Runs if active color is white. This accounts for inverted rows
-            System.out.println("White");
+            //System.out.println("White");
             validMove1 = Position.createTestPosition(start.getRow() + 1, start.getCell() + 1); //movePosPos
             validMove2 = Position.createTestPosition(start.getRow() + 1, start.getCell() - 1); //movePosNeg
         }
@@ -111,7 +111,7 @@ public class MoveValidator {
         HashSet<Move> singleMoves = new HashSet<>();
         Move newMove;
 
-       // if (activeColor.equals(Color.RED)) {
+        if (activeColor.equals(Color.RED)) {
             Position moveNegPos = Position.createTestPosition(start.getRow() - 1, start.getCell() + 1);
             Piece pieceNegPos = board.getPiece(moveNegPos, activeColor);
             Position moveNegNeg = Position.createTestPosition(start.getRow() - 1, start.getCell() - 1);
@@ -131,8 +131,8 @@ public class MoveValidator {
                     singleMoves.add(newMove);
                 }
             }
-       // }
-        /**
+        }
+
         else{ //Runs if active color is white. This accounts for inverted rows
             Position moveNegPos = Position.createTestPosition(start.getRow() + 1, start.getCell() + 1);
             Piece pieceNegPos = board.getPiece(moveNegPos, activeColor);
@@ -153,7 +153,7 @@ public class MoveValidator {
                     singleMoves.add(newMove);
                 }
             }
-        } */
+        }
         return singleMoves;
     }
 
@@ -234,6 +234,7 @@ public class MoveValidator {
         Position endOfLastMove = start.getEndPos();
         if(board.getPieceAtPosition(endOfLastMove).getType().equals(Piece.type.SINGLE)) {
             HashSet<Move> allJumpMoves = simpleJumpMoves(endOfLastMove);
+            System.out.println("           Jump Move Possibilities: " +simpleJumpMoves(endOfLastMove));
             return allJumpMoves.contains(next);
         }
         return false;
@@ -259,7 +260,7 @@ public class MoveValidator {
         for(Move m : allLegalMoves){
             m.printMove();
             if(m.equals(move)){
-                System.out.print( ": this is the move input" );
+                System.out.print( "         ^^^ this is the move input" );
                 flag = true;
             }
 

@@ -76,7 +76,9 @@ public class Board{
         int endCol = move.getEndPos().getCell();
         // if the move is a jump, delete the Piece that is jumped over
         if(move.isJumpMove()){
-            RowList.get((endRow + startRow) / 2).getSpaces().get(endCol + startCol / 2).removeCurrentPiece();
+            System.out.println(" Jump Move detected, removing this piece: (" +
+                    "Row: "+ ((endRow + startRow) / 2) + ", Col " + (endCol + startCol / 2) + ")");
+            RowList.get((endRow + startRow) / 2).getSpaces().get( (endCol + startCol) / 2).removeCurrentPiece();
 
         }
 

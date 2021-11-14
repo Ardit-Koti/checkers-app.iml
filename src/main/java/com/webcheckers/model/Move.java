@@ -36,7 +36,7 @@ public class Move {
     }
 
     public void printMove() {
-        System.out.println("Move info:: (Row, Cell/Col \n    " +
+        System.out.println("Move info:: (Row, Cell/Col) \n    " +
                 "start: (" + getStartPos().getCell()+ ","+ getStartPos().getRow() + ")"+"\n    " +
                 "end:   ("+getEndPos().getCell()+ ","+ getEndPos().getRow() + ")");
 
