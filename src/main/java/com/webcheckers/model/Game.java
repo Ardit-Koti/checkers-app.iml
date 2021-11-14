@@ -60,7 +60,13 @@ public class Game {
     public static final String ERROR_MORE_JUMPS = "ERROR: You can chain more jumps";
     public static final String SUBMITTED = "Move submitted!";
 
-
+    /**
+     * checks if the game is over. This check should occur before each move.
+     *
+     * if a game is over, the winner object is set.
+     *
+     * @return
+     */
     public boolean isOver(){
         // check if all pieces are dead
         int redPieces = 0;

@@ -44,24 +44,27 @@ public class MoveValidator {
     private HashSet<Move> simpleDiagonalMoves(Position start) {
         HashSet<Move> singleMoves = new HashSet<>();
         Move newMove;
-        Position moveNegPos;
-        Position moveNegNeg;
+
+        Position validMove1;
+        Position validMove2;
+
+
         if(activeColor.equals(Color.RED)) {
             System.out.println("Red");
-            moveNegPos = Position.createTestPosition(start.getRow() - 1, start.getCell() + 1);
-            moveNegNeg = Position.createTestPosition(start.getRow() - 1, start.getCell() - 1);
+            validMove1 = Position.createTestPosition(start.getRow() - 1, start.getCell() + 1); //moveNegPos
+            validMove2 = Position.createTestPosition(start.getRow() - 1, start.getCell() - 1); //moveNegNeg
         }
         else { //Runs if active color is white. This accounts for inverted rows
             System.out.println("White");
-            moveNegPos = Position.createTestPosition(start.getRow() + 1, start.getCell() + 1);
-            moveNegNeg = Position.createTestPosition(start.getRow() + 1, start.getCell() - 1);
+            validMove1 = Position.createTestPosition(start.getRow() + 1, start.getCell() + 1); //movePosPos
+            validMove2 = Position.createTestPosition(start.getRow() + 1, start.getCell() - 1); //movePosNeg
         }
-        if (moveNegPos != null && board.getPiece(moveNegPos, activeColor) == null) {
-            newMove = new Move(start, moveNegPos);
+        if ((validMove1 != null) && board.getPiece(validMove1, activeColor) == null) {
+            newMove = new Move(start, validMove1);
             singleMoves.add(newMove);
         }
-        if (moveNegNeg != null && board.getPiece(moveNegNeg, activeColor) == null) {
-            newMove = new Move(start, moveNegNeg);
+        if (validMove2 != null && board.getPiece(validMove2, activeColor) == null) {
+            newMove = new Move(start, validMove2);
             singleMoves.add(newMove);
         }
         return singleMoves;
@@ -246,7 +249,9 @@ public class MoveValidator {
         this.activeColor = game.getActiveColor();
         HashSet<Move> allLegalMoves = possibleMoves();
         for(Move m : allLegalMoves){
+            System.out.println("Add Valid Moves:");
             m.printMove();
+            System.out.println("----------------");
             if(m.equals(move)){return true;}
         }
         return false;
