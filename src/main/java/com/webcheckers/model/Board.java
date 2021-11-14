@@ -119,6 +119,11 @@ public class Board{
 
     }
 
+    public Board(Board prev_board)
+    {
+        this.RowList = prev_board.RowList;
+    }
+
     public void addMove(Move m){
         moves.add(m);
     }
