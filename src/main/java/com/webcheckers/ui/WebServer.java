@@ -168,6 +168,8 @@ public class WebServer {
     post(CHECKTURN_URL, new PostCheckTurnRoute(templateEngine,gson));
 
     post(RESIGN_URL, new PostResignRoute(templateEngine));
+
+    post(BACKUP_MOVE_URL, new PostBackupRoute());
     //
     LOG.config("WebServer is initialized.");
   }
