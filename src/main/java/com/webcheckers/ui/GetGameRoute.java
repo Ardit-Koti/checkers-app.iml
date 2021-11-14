@@ -106,8 +106,8 @@ public class GetGameRoute implements Route{
               System.out.println("Player " + opponentPlayer.getName() + " is already in a game.");
               return null;
             }
-            youPlayer.setColor(Player.Color.RED);
-            opponentPlayer.setColor(Player.Color.WHITE);
+            youPlayer.setColor(Color.RED);
+            opponentPlayer.setColor(Color.WHITE);
             vm.put("title", "Welcome!");
             Game newGame = new Game(youPlayer, opponentPlayer);
             //System.out.println("ln 113 youPlayer: "+youPlayer);

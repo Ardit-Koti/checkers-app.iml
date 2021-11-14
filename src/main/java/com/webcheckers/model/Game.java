@@ -203,6 +203,11 @@ public class Game {
         }
     }
 
+    public String resignGame(Color color){
+        return "FooBar";
+
+    }
+
 
 
     //todo when a move is made, swap the turn varible

@@ -167,7 +167,7 @@ public class WebServer {
 
     post(CHECKTURN_URL, new PostCheckTurnRoute(templateEngine,gson));
 
-    post(RESIGN_URL, new PostResignRoute(templateEngine));
+    post(RESIGN_URL, new PostResignRoute(templateEngine,gson));
 
     post(BACKUP_MOVE_URL, new PostBackupRoute());
     //

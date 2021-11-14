@@ -3,7 +3,7 @@ package com.webcheckers.model;
 import java.util.Iterator;
 
 public class Player {
-    public enum Color{RED, WHITE}
+
     private boolean inGame;
     private Game game;
 
