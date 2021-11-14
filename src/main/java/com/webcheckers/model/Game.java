@@ -2,6 +2,8 @@ package com.webcheckers.model;
 
 import com.webcheckers.application.MoveValidator;
 
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -33,12 +35,16 @@ public class Game {
 
     private Board futureBoard;
 
+    private LinkedList<Board> boardList;
+
     public Game(Player redPlayer, Player whitePlayer) {
         this.gameBoard = new Board();
         this.futureBoard = this.gameBoard;
         this.redPlayer = redPlayer;
         this.whitePlayer = whitePlayer;
         this.currentMove = new LinkedList<>();
+        this.boardList = new LinkedList<Board>();
+        boardList.add(new Board(this.gameBoard));
         validator = new MoveValidator(this);
     }
 
@@ -59,6 +65,8 @@ public class Game {
     public static final String ERROR_NO_MOVE = "ERROR: You have not made a move to submit";
     public static final String ERROR_MORE_JUMPS = "ERROR: You can chain more jumps";
     public static final String SUBMITTED = "Move submitted!";
+    public static final String ERROR_NO_MOVE_BACKUP = "ERROR: You have not made a move to backup from.";
+    public static final String BACKUP_SUCCESS = "Move backed up.";
 
     /**
      * checks if the game is over. This check should occur before each move.
@@ -116,6 +124,7 @@ public class Game {
                 if (activeColor.equals(com.webcheckers.model.Color.RED)) {setActiveColor(com.webcheckers.model.Color.WHITE);}
                 else {setActiveColor(com.webcheckers.model.Color.RED);}
                 currentMove.clear();
+                this.boardList.add(new Board(this.gameBoard));
                 return SUBMITTED;
             }
         }
@@ -171,6 +180,23 @@ public class Game {
     public void setActiveColor(Color activeColor){this.activeColor = activeColor;}
 
     public Color getActiveColor(){return this.activeColor;}
+
+    public void setGameBoard(Board gameBoard){this.gameBoard = gameBoard;}
+
+    public String backup()
+    {
+        if(this.currentMove.isEmpty())
+        {
+            return ERROR_NO_MOVE_BACKUP;
+        }
+        else
+        {
+            this.gameBoard = boardList.getLast();
+            currentMove.clear();
+            return BACKUP_SUCCESS;
+        }
+    }
+
 
 
     //todo when a move is made, swap the turn varible

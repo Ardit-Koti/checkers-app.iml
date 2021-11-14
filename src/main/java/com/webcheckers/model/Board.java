@@ -9,7 +9,6 @@ public class Board{
     public ArrayList<Row> RowList;
     private List<Move> moves = new ArrayList<>();
 
-
     @Override
     public String toString() {
         return "Board{" +
@@ -116,10 +115,6 @@ public class Board{
         }
 
 
-
-
-
-
         /**
          * generate the 2d array that is the actual board in java
 
@@ -136,6 +131,11 @@ public class Board{
         /// TODO: 10/24/21 make the default arrangement of checkers in the baord
 
 
+    }
+
+    public Board(Board prev_board)
+    {
+        this.RowList = prev_board.RowList;
     }
 
     public void addMove(Move m){
