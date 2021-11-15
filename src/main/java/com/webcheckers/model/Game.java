@@ -28,6 +28,7 @@ public class Game {
 
     // initilized to red as red goes first
 
+    //private boolean isOver;
 
     private final MoveValidator validator;
 
@@ -80,36 +81,40 @@ public class Game {
         int redPieces = 0;
         int whitePieces = 0;
 
+        // TODO: 11/14/21 add return true for resign.
 
         Iterator<Row> gameOverRowIterator = gameBoard.iterate_by_color(true);
-        for (int i = 0; i < 8; i++) {
+        while (gameOverRowIterator.hasNext()) {
             Row tempRow = gameOverRowIterator.next();
-            for (int j = 0; j < 8; j++) {
-                Iterator<Space> gameOverSpaceIterator = tempRow.iterate_by_color(true);
+            Iterator<Space> gameOverSpaceIterator = tempRow.iterate_by_color(true);
+            while (gameOverSpaceIterator.hasNext()) {
                 Space tempSpace = gameOverSpaceIterator.next();
                 if (tempSpace.hasPiece()){
-                    if(tempSpace.piece.getColor().equals(com.webcheckers.model.Color.RED))
+                    if(tempSpace.getPiece().getColor() == (com.webcheckers.model.Color.RED))
                         redPieces++;
-                    if(tempSpace.piece.getColor().equals(com.webcheckers.model.Color.WHITE))
+                    if(tempSpace.getPiece().getColor() == (com.webcheckers.model.Color.WHITE))
                         whitePieces++;
                 }
 
             }
         }
 
-        if (redPieces == 0 ){ //white one
+        if (redPieces == 0 ){ //white won
+            System.out.println("zero red Pieces");
             winner = com.webcheckers.model.Color.WHITE;
             return true;
         }
 
-        if (whitePieces==0){
+        if (whitePieces==0){ // red won
+            System.out.println("zero white Pieces");
             winner = com.webcheckers.model.Color.RED;
             return true;
         }
 
 
         //todo check if no possible moves exist
-        return false;
+
+        return false; // game is not over
     }
 
 
@@ -118,6 +123,19 @@ public class Game {
     }
 
         public String submitMove() {
+
+            if(this.isOver()){
+                System.out.print(" WINNER WINNER CHICKEN DINNER!! Congratulations ");
+                if (this.winner == com.webcheckers.model.Color.RED)
+                    System.out.println("Red player");
+                if (this.winner == com.webcheckers.model.Color.WHITE)
+                    System.out.println("WHITE player");
+                    
+            }
+
+
+
+
             if (currentMove.isEmpty()) {
                 return ERROR_NO_MOVE;
             } else {
@@ -141,7 +159,9 @@ public class Game {
      * @return a string with the results of the attempt to make the move.
      */
     public String takeTurn(Move move) {
-        if(currentMove.isEmpty()) {
+
+
+        if(currentMove.isEmpty()) { // if there is no move
             boolean isValid = validator.isMoveValid(move);
             if(isValid) {
                 currentMove.add(move);
@@ -160,7 +180,7 @@ public class Game {
         else {
             boolean partOfJump = false;
             if(currentMove.getLast().isJumpMove()) {
-                System.out.println("ENTERING CHAINING");
+                //System.out.println("ENTERING CHAINING");
                 partOfJump = validator.isJumpContinued(move, currentMove.getLast());
             }
             if(partOfJump) {
@@ -215,8 +235,6 @@ public class Game {
 
 
     // TODO: 10/6/21  put into vm from game class: game id, current user viewMode mode options redPlayer.name whitePlayer.name active color
-
-
 
 
     }

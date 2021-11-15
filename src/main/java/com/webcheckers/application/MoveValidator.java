@@ -257,19 +257,19 @@ public class MoveValidator {
             }
 
 
-            // debug stuff
-            int numberOfPossibleJumpMoves = 0;
-
-            for (Move m : allJumpMoves) {
-                numberOfPossibleJumpMoves++;
-            }
-            System.out.println("           There are " + numberOfPossibleJumpMoves + " King Jump Move Possibilities: ");
-
-            for (Move m : allJumpMoves) {
-                m.printMove();
-            }
-            System.out.println("------ end possible jump move ---------");
-            // end debug stuff
+//            // debug stuff
+//            int numberOfPossibleJumpMoves = 0;
+//
+//            for (Move m : allJumpMoves) {
+//                numberOfPossibleJumpMoves++;
+//            }
+//            System.out.println("           There are " + numberOfPossibleJumpMoves + " King Jump Move Possibilities: ");
+//
+//            for (Move m : allJumpMoves) {
+//                m.printMove();
+//            }
+//            System.out.println("------ end possible jump move ---------");
+//            // end debug stuff
             return flag;
         }
         System.out.println("error invalid piece type");
@@ -291,34 +291,22 @@ public class MoveValidator {
     public boolean isMoveValid(Move move){
         this.activeColor = game.getActiveColor();
         HashSet<Move> allLegalMoves = possibleMoves();
-        System.out.println("Add Valid Moves:");
+        //System.out.println("Add Valid Moves:");
         boolean flag = false;
         for(Move m : allLegalMoves){
-            m.printMove();
+            //m.printMove();
             if(m.equals(move)){
-                System.out.print( "         ^^^ this is the move input" );
+                //System.out.print( "         ^^^ this is the move input" );
                 flag = true;
             }
 
         }
-        System.out.println("----------------");
+        //System.out.println("----------------");
 
         return flag;
     }
 
-//    public boolean isMoveValidTestIgnore(Move move){
-//        this.activeColor = game.getActiveColor();
-//        HashSet<Move> allLegalMoves = possibleMoves();
-//        System.out.println("Add Valid Moves:");
-//        for(Move m : allLegalMoves)
-//            m.printMove();
-//        System.out.println("----------------");
-//        for (Move m2:allLegalMoves) {
-//            if(m2.equals(move)){return true;}
-//        }
-//        return false;
-//        //return allLegalMoves.contains(move);
-//    }
+
 
 
     /**
