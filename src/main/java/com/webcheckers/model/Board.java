@@ -16,6 +16,8 @@ public class Board{
                 "RowList=" + RowList +
                 '}';
     }
+
+
     public Iterator<Row> iterate_by_color(boolean color) {
         if(color) {
             return new Iterator<Row>() {
@@ -48,7 +50,38 @@ public class Board{
             };
         }
     }
-
+//    public Iterator<Row> iterate_by_color(Color color) {
+//        if(color == Color.RED ) {
+//            return new Iterator<Row>() {
+//                int i = -1;
+//                @Override
+//                public boolean hasNext() {
+//                    return i+1 <= redlimit;
+//                }
+//
+//                @Override
+//                public Row next() {
+//                    i= i+1;
+//                    return RowList.get(i);
+//                }
+//            };
+//        }
+//        else{
+//            return new Iterator<Row>() {
+//                int a = 8;
+//                @Override
+//                public boolean hasNext() {
+//                    return a-1 >= whitelimit;
+//                }
+//
+//                @Override
+//                public Row next() {
+//                    a = a-1;
+//                    return RowList.get(a);
+//                }
+//            };
+//        }
+//    }
 
     public Piece getPiece(Position position, Color perspective) {
         if(position == null || perspective  == null) {
@@ -76,8 +109,8 @@ public class Board{
         int endCol = move.getEndPos().getCell();
         // if the move is a jump, delete the Piece that is jumped over
         if(move.isJumpMove()){
-            System.out.println(" Jump Move detected, removing this piece: (" +
-                    "Row: "+ ((endRow + startRow) / 2) + ", Col " + (endCol + startCol / 2) + ")");
+//            System.out.println(" Jump Move detected, removing this piece: (" +
+//                    "Row: "+ ((endRow + startRow) / 2) + ", Col " + (endCol + startCol / 2) + ")");
             RowList.get((endRow + startRow) / 2).getSpaces().get( (endCol + startCol) / 2).removeCurrentPiece();
 
         }

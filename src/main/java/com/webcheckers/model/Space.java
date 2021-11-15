@@ -89,7 +89,7 @@ public class Space {
                 addCurrentPiece(new Piece(Piece.type.SINGLE, Color.WHITE));
         }
 
-        if (devMode==DevMode.CHAINING){
+        else if  (devMode==DevMode.CHAINING){
             // bottom half of board, white eating 2 whites // place red pieces in row 0,
             if(this.shade.equals(Shade.DARK) &&  row_index == 0 && cellIdx ==5)
                 addCurrentPiece(new Piece(Piece.type.SINGLE, Color.WHITE));
@@ -109,7 +109,7 @@ public class Space {
                 addCurrentPiece(new Piece(Piece.type.SINGLE, Color.WHITE));
         }
 
-        if (devMode==DevMode.KING_CHAINING){
+        else if (devMode==DevMode.KING_CHAINING){
             // bottom half of board, white eating 2 whites // place red pieces in row 0,
             if(this.shade.equals(Shade.DARK) &&  row_index == 4 && cellIdx ==1)
                 addCurrentPiece(new Piece(Piece.type.KING, Color.WHITE));
@@ -129,8 +129,21 @@ public class Space {
                 addCurrentPiece(new Piece(Piece.type.SINGLE, Color.WHITE));
         }
 
+        else if (devMode==DevMode.ENDGAME){
+            if(this.shade.equals(Shade.DARK) &&  row_index == 4 && cellIdx ==1)
+                addCurrentPiece(new Piece(Piece.type.KING, Color.WHITE));
 
-        else { //no dev mode
+            if(this.shade.equals(Shade.DARK) &&  row_index == 3 && cellIdx ==2)
+                addCurrentPiece(new Piece(Piece.type.KING, Color.RED));
+        }
+
+        else if(devMode == DevMode.TIE){
+            if(this.shade.equals(Shade.DARK) &&  row_index == 0 && cellIdx ==7)
+                addCurrentPiece(new Piece(Piece.type.SINGLE, Color.RED));
+            if(this.shade.equals(Shade.DARK) &&  row_index == 6 && cellIdx ==1)
+                addCurrentPiece(new Piece(Piece.type.SINGLE, Color.WHITE));
+        }
+        else if(devMode == DevMode.NONE) { //no dev mode
             if(this.shade.equals(Shade.DARK) && row_index >= 5 && row_index <= 7)
             {
                 addCurrentPiece(new Piece(Piece.type.SINGLE, Color.RED));

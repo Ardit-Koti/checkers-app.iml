@@ -103,7 +103,7 @@ public class GetGameRoute implements Route{
             {
               vm.put("message", new Message("Player already in Game", Message.Type.ERROR));
               response.redirect("/");
-              System.out.println("Player " + opponentPlayer.getName() + " is already in a game.");
+              //System.out.println("Player " + opponentPlayer.getName() + " is already in a game.");
               return null;
             }
             youPlayer.setColor(Color.RED);

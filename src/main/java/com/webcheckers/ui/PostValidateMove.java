@@ -57,9 +57,9 @@ public class PostValidateMove implements Route{
         Move move = gson.fromJson(request.queryParams("actionData"), Move.class);
 
 
-        System.out.println("\n Move input:: \n    " +
-                "start: (" + move.getStartPos().getCell()+ ","+ move.getStartPos().getRow() + ")"+"\n    " +
-                "end:   ("+move.getEndPos().getCell()+ ","+ move.getEndPos().getRow() + ")");
+        //System.out.println("\n Move input:: \n    " +
+        //        "start: (" + move.getStartPos().getCell()+ ","+ move.getStartPos().getRow() + ")"+"\n    " +
+        //       "end:   ("+move.getEndPos().getCell()+ ","+ move.getEndPos().getRow() + ")");
 
         //todo implement checking a move
         String message = game.takeTurn(move);
