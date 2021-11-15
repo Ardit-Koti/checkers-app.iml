@@ -224,8 +224,20 @@ public class Game {
     }
 
     public String resignGame(Color color){
-        return "FooBar";
-
+        if(color.equals(this.activeColor))
+        {
+            if(color.equals(com.webcheckers.model.Color.RED))
+            {
+                this.declareWinner(com.webcheckers.model.Color.WHITE);
+                return this.getWhitePlayer().getName() + " wins due to opponent resignation.";
+            }
+            else if(color.equals(com.webcheckers.model.Color.WHITE))
+            {
+                this.declareWinner(com.webcheckers.model.Color.RED);
+                return this.getRedPlayer().getName() + " wins due to opponent resignation.";
+            }
+        }
+        return "ERROR: Cannot resign when it is not your turn.";
     }
 
 
