@@ -48,6 +48,7 @@ public class GetGameRoute implements Route{
     private final PlayerLobby pLobby;
 
     private Gson gson;
+    private Game game;
 
     /**
      * The constructor for the {@code GET /signin} route handler.
@@ -56,7 +57,7 @@ public class GetGameRoute implements Route{
      *    The {@link TemplateEngine} used for rendering page HTML.
      */
 
-    GetGameRoute(final TemplateEngine templateEngine, GameCenter gameCenter){
+    GetGameRoute(final TemplateEngine templateEngine, GameCenter gameCenter, Gson gson){
 
 
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
@@ -77,76 +78,66 @@ public class GetGameRoute implements Route{
         httpSession.attribute(NAME_PARAM, NAME_PARAM);
         Player youPlayer = httpSession.attribute(USER); // originally "YOU"
 
-        final String opponentPlayerName = request.queryParams(CHOSEN_PLAYER);
-        Player opponentPlayer = gameCenter.getPlayerLobby().getPlayer(opponentPlayerName);
+        if(!youPlayer.isInGame()) { // handles creating a new game between two players
 
-        //If User calling this route is in a Game, gets game info and renders it
-        if(opponentPlayer == null) {
-            if (youPlayer.getGame() == null){
+
+
+            final String opponentPlayerName = request.queryParams(CHOSEN_PLAYER);
+            Player opponentPlayer = gameCenter.getPlayerLobby().getPlayer(opponentPlayerName);
+
+            if(opponentPlayer.isInGame())
+            {
+                vm.put("message", new Message("Player already in Game", Message.Type.ERROR));
+                response.redirect("/");
+                return null;
+            }
+
+            game = new Game(youPlayer, opponentPlayer);
+            game.setActiveColor(Color.RED);
+            youPlayer.setInGame();
+            youPlayer.setGame(game);
+            youPlayer.setColor(Color.RED);
+            opponentPlayer.setGame(game);
+            opponentPlayer.setInGame();
+            opponentPlayer.setColor(Color.WHITE);
+
+        }
+        else{
+            if (youPlayer.getGame() == null) { // if player resigned
                 String playerName = httpSession.attribute("playerName");
                 Message message = Message.info("Welcome " + playerName + " to the world of online checkers");
                 vm.put("name", NAME_PARAM);
                 vm.put("currentUser",httpSession.attribute("currentUser"));
                 vm.put("message", message);
                 vm.put("title", "Welcome!");
-                vm.put("players", pLobby.getNamesInUse());
+                vm.put("players", gameCenter.getPlayerLobby().getNamesInUse());
                 vm.put("playerName", playerName);
-                Player user = pLobby.getPlayer(playerName);
-                user.leaveGame();
-                return templateEngine.render(new ModelAndView(vm, "home.ftl"));
+                youPlayer.leaveGame();
+                return templateEngine.render(new ModelAndView(vm , "home.ftl"));
             }
-            if (!youPlayer.getGame().getOtherPlayer(youPlayer).isInGame()) //Complicated way to check if the other player of your game is not still in your game
-            {
-                final Map<String, Object> modeOptions = new HashMap<>();
-                modeOptions.put("isGameOver", true);
-                modeOptions.put("gameOverMessage", new Message("Your opponent resigned", Message.Type.INFO));
-                vm.put("modeOptionsAsJSON", gson.toJson(modeOptions));
-                return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
-            }
-
-
-            if (youPlayer.getGame().getWhitePlayer() != null) {
-                vm.put("title", "Welcome!");
-                vm.put(USER, youPlayer);
-                vm.put(VIEW_MODE, ViewMode.PLAY);
-                vm.put(BOARD, youPlayer.getGame().getGameBoard());
-                vm.put(RED_PLAYER, youPlayer.getGame().getRedPlayer());
-                vm.put(WHITE_PLAYER, youPlayer.getGame().getWhitePlayer());
-                vm.put(ACTIVE, youPlayer.getGame().getActiveColor());
-                //System.out.println("ln 97 putting player in Game");
-                return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
-            }
+            game = youPlayer.getGame();
         }
-        else {
-            //If user is looking to start a game
-            if(opponentPlayer.isInGame())
-            {
-              vm.put("message", new Message("Player already in Game", Message.Type.ERROR));
-              response.redirect("/");
-              return null;
-            }
-            youPlayer.setColor(Color.RED);
-            opponentPlayer.setColor(Color.WHITE);
-            vm.put("title", "Welcome!");
-            Game newGame = new Game(youPlayer, opponentPlayer);
-            youPlayer.setGame(newGame);
-            youPlayer.setInGame();
-            opponentPlayer.setGame(newGame);
-            opponentPlayer.setInGame();
 
-            vm.put(VIEW_MODE, ViewMode.PLAY);
-
-            gameCenter.getGamesList().put(newGame.getGameId(), newGame);
-
-            vm.put(USER, youPlayer);
-            vm.put(BOARD, newGame.getGameBoard());
-            vm.put(RED_PLAYER, youPlayer);
-            vm.put(WHITE_PLAYER, opponentPlayer);
-            vm.put(ACTIVE, Color.RED);
-            newGame.setActiveColor(Color.RED);
-            //System.out.println("Game Started");
+        vm.put("title", "Welcome!");
+        vm.put(USER, youPlayer);
+        vm.put(VIEW_MODE, ViewMode.PLAY);
+        vm.put(BOARD, game.getGameBoard());
+        vm.put(RED_PLAYER, game.getRedPlayer());
+        vm.put(WHITE_PLAYER, game.getWhitePlayer());
+        vm.put(ACTIVE, game.getActiveColor());
+        game.isOver();
+        if (game.getWinner() != null){
+            final Map<String, Object> modeOptions = new HashMap<>(2);
+            modeOptions.put("isGameOver", true);
+            modeOptions.put("gameOverMessage", String.format("Congratulation, %s won!", game.getWinPlayer().getName()));
+            vm.put("modeOptionsAsJSON", gson.toJson(modeOptions));
+            youPlayer.setGame(null);
+            youPlayer.leaveGame();
         }
         return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
+
+
+
     }
 
 }

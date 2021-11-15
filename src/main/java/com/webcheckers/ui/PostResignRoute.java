@@ -29,14 +29,15 @@ public class PostResignRoute implements Route{
         final Session httpSession = request.session();
         final Player player = httpSession.attribute("currentUser");
         Game game = player.getGame();
-        Color color = player.getColor();
-        String message = game.resignGame(color);
-        if(message.startsWith("ERROR")){
-            return gson.toJson(Message.error(message.substring(7)));
+        Player opponent = game.getOtherPlayer(player);
 
+        if (game.declareWinner(opponent)){
+            player.setGame(null);
+            final Message message = Message.info("You resigned from the game.");
+            return gson.toJson(message);
         }
-        player.setGame(null);
-        return gson.toJson(Message.info(message));
+        final Message message = Message.error("You cannot resign.");
+        return gson.toJson(message);
 
     }
 }

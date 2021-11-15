@@ -19,15 +19,12 @@ public class Game {
 
     private Player whitePlayer;
 
-    private Color winner;
+    private Color winner = null;
 
     private Color activeColor;
 
     private int gameId; // TODO: 10/6/21  implement number generator for multiple games
 
-    // initilized to red as red goes first
-
-    //private boolean isOver;
 
     private final MoveValidator validator;
 
@@ -51,8 +48,6 @@ public class Game {
     }
 
     public Board getGameBoard(){return this.gameBoard;}
-
-    public Board getFutureBoard(){return this.futureBoard;}
 
     public Player getRedPlayer(){return this.redPlayer;}
 
@@ -106,13 +101,13 @@ public class Game {
 
         if (redPieces == 0 ){ //white won
             System.out.println("zero red Pieces");
-            winner = com.webcheckers.model.Color.WHITE;
+            winner = Color.WHITE;
             return true;
         }
 
         if (whitePieces==0){ // red won
             System.out.println("zero white Pieces");
-            winner = com.webcheckers.model.Color.RED;
+            winner = Color.RED;
             return true;
         }
 
@@ -214,7 +209,21 @@ public class Game {
 
     public void setGameBoard(Board gameBoard){this.gameBoard = gameBoard;}
 
+    public Color getWinner(){return this.winner;}
+    public Player getWinPlayer(){
+        if (winner.equals(Color.RED)) return getRedPlayer();
+        else return getWhitePlayer();
+    }
+
     public int getGameId(){return this.gameId;}
+
+    public boolean declareWinner(Player winner) {
+        if((winner.equals(redPlayer) || winner.equals(whitePlayer)) && this.winner == null) {
+            this.winner = winner.getColor();
+            return true;
+        }
+        return false;
+    }
 
     public String backup()
     {
@@ -245,13 +254,4 @@ public class Game {
         return RESIGN_ERROR;
     }
 
-
-
-    //todo when a move is made, swap the turn varible
-
-
-
-    // TODO: 10/6/21  put into vm from game class: game id, current user viewMode mode options redPlayer.name whitePlayer.name active color
-
-
-    }
+}

@@ -44,10 +44,10 @@ class PostCheckTurnRoute implements Route {
         Game game = user.getGame();
         Color activeColor = game.getActiveColor();
 
-        if(user.equals(game.getRedPlayer()) && activeColor.equals(Color.RED)){
+        if(user.equals(game.getRedPlayer()) && activeColor.equals(Color.RED) || game.getWinner() != null){
             return gson.toJson(Message.info("true"));
         }
-        else if((user.equals(game.getWhitePlayer()) && activeColor.equals(Color.WHITE))){
+        else if((user.equals(game.getWhitePlayer()) && activeColor.equals(Color.WHITE) || game.getWinner() != null)){
             return gson.toJson(Message.info("true"));
         }
         return gson.toJson(Message.info("false"));
