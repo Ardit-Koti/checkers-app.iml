@@ -1,5 +1,7 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.application.GameCenter;
+import com.webcheckers.model.Game;
 import com.webcheckers.model.Player;
 import com.webcheckers.model.PlayerLobby;
 import com.webcheckers.util.Message;
@@ -14,12 +16,12 @@ public class PostSignOutRoute implements Route {
     private static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
     private final String VIEW_NAME = "home.ftl";
     private final TemplateEngine templateEngine;
-    private final PlayerLobby pLobby;
     private final String player = "currentUser";
+    private final GameCenter gameCenter;
 
-    public PostSignOutRoute(TemplateEngine templateEngine, PlayerLobby pLobby) {
+    public PostSignOutRoute(TemplateEngine templateEngine, GameCenter gameCenter) {
         this.templateEngine = templateEngine;
-        this.pLobby = pLobby;
+        this.gameCenter = gameCenter;
     }
 
     @Override
@@ -28,13 +30,13 @@ public class PostSignOutRoute implements Route {
         final Map<String, Object> vm = new HashMap<>();
         final Player p = httpSession.attribute(player);
         final String playerName = p.getName();
-        pLobby.removeName(playerName);
+        gameCenter.getPlayerLobby().removeName(playerName);
         httpSession.maxInactiveInterval(SESSION_TIMEOUT_PERIOD);
         httpSession.attribute("currentUser", null);
-        httpSession.attribute(PLAYER_LOBBY, pLobby);
+        httpSession.attribute(PLAYER_LOBBY, gameCenter.getPlayerLobby());
         vm.put("title", "Welcome!");
         vm.put("message", WELCOME_MSG);
-        vm.put(NUM_PLAYERS, pLobby.numberOfPlayers());
+        vm.put(NUM_PLAYERS, gameCenter.getPlayerLobby().numberOfPlayers());
         response.redirect("/");
         return null;
     }

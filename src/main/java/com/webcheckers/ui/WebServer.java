@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import com.google.gson.Gson;
 
+import com.webcheckers.application.GameCenter;
 import com.webcheckers.model.PlayerLobby;
 import spark.TemplateEngine;
 
@@ -71,7 +72,7 @@ public class WebServer {
 
   private final TemplateEngine templateEngine;
   private final Gson gson;
-  private final PlayerLobby pLobby;
+  private final GameCenter gameCenter;
   //
   // Constructor
   //
@@ -87,14 +88,14 @@ public class WebServer {
    * @throws NullPointerException
    *    If any of the parameters are {@code null}.
    */
-  public WebServer(final TemplateEngine templateEngine, final Gson gson, final PlayerLobby pLobby) {
+  public WebServer(final TemplateEngine templateEngine, final Gson gson, final GameCenter gameCenter) {
     // validation
     Objects.requireNonNull(templateEngine, "templateEngine must not be null");
     Objects.requireNonNull(gson, "gson must not be null");
     //
     this.templateEngine = templateEngine;
     this.gson = gson;
-    this.pLobby = pLobby;
+    this.gameCenter = gameCenter;
   }
 
   //
@@ -149,25 +150,25 @@ public class WebServer {
     //// code clean; using small classes.
     //ardit change
     // Shows the Checkers game Home page.
-    get(HOME_URL, new GetHomeRoute(templateEngine, pLobby));
+    get(HOME_URL, new GetHomeRoute(templateEngine, gameCenter));
 
-    get(SIGN_IN_URL, new GetSignInRoute(templateEngine));
+    get(SIGN_IN_URL, new GetSignInRoute(templateEngine, gameCenter));
 
-    get(GAME_URL, new GetGameRoute(templateEngine, pLobby));
+    get(GAME_URL, new GetGameRoute(templateEngine, gameCenter));
 
-    post(SIGN_IN_URL, new PostSignInRoute(templateEngine,pLobby));
+    post(SIGN_IN_URL, new PostSignInRoute(templateEngine, gameCenter));
 
-    post(HOME_URL, new PostHomeRoute(templateEngine,pLobby));
+    post(HOME_URL, new PostHomeRoute(templateEngine, gameCenter));
 
-    post(SIGN_OUT_URL, new PostSignOutRoute(templateEngine, pLobby));
+    post(SIGN_OUT_URL, new PostSignOutRoute(templateEngine, gameCenter));
 
-    post(VALIDATE_MOVE_URL, new PostValidateMove(templateEngine, pLobby, gson));
+    post(VALIDATE_MOVE_URL, new PostValidateMove(templateEngine, gameCenter, gson));
 
-    post(SUBMIT_MOVE_URL, new PostSubmitRoute(templateEngine, gson));
+    post(SUBMIT_MOVE_URL, new PostSubmitRoute(templateEngine, gameCenter, gson));
 
-    post(CHECKTURN_URL, new PostCheckTurnRoute(templateEngine,gson));
+    post(CHECKTURN_URL, new PostCheckTurnRoute(templateEngine, gameCenter, gson));
 
-    post(RESIGN_URL, new PostResignRoute(templateEngine,gson));
+    post(RESIGN_URL, new PostResignRoute(templateEngine, gameCenter ,gson));
 
     post(BACKUP_MOVE_URL, new PostBackupRoute());
     //

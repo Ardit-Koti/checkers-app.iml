@@ -1,6 +1,7 @@
 package com.webcheckers.ui;
 
 import com.google.gson.Gson;
+import com.webcheckers.application.GameCenter;
 import com.webcheckers.model.Game;
 import com.webcheckers.model.Player;
 import com.webcheckers.util.Message;
@@ -13,10 +14,12 @@ public class PostSubmitRoute implements Route{
 
     private final TemplateEngine templateEngine;
     private final Gson gson;
+    private final GameCenter gameCenter;
 
-    public PostSubmitRoute(TemplateEngine templateEngine, Gson gson){
+    public PostSubmitRoute(TemplateEngine templateEngine, GameCenter gameCenter, Gson gson){
         this.templateEngine = templateEngine;
         this.gson = gson;
+        this.gameCenter = gameCenter;
     }
 
 

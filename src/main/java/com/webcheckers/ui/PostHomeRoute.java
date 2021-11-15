@@ -1,5 +1,7 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.application.GameCenter;
+import com.webcheckers.model.Game;
 import com.webcheckers.util.Message;
 import com.webcheckers.model.PlayerLobby;
 import spark.ModelAndView;
@@ -20,13 +22,13 @@ public class PostHomeRoute implements Route{
     private final String VIEW_NAME = "home.ftl";
     private final TemplateEngine templateEngine;
     private final String NAME_PARAM = "name";
-    private final PlayerLobby pLobby;
     private static final Message WELCOME_MSG = Message.info("Welcome user! Please choose an activity");
+    private final GameCenter gameCenter;
 
-    PostHomeRoute(TemplateEngine templateEngine, PlayerLobby plobby){
+    PostHomeRoute(TemplateEngine templateEngine, GameCenter gameCenter){
 
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
-        this.pLobby = plobby;
+        this.gameCenter = gameCenter;
         this.templateEngine = templateEngine;
     }
 

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import com.webcheckers.application.GameCenter;
 import com.webcheckers.model.*;
 import spark.ModelAndView;
 import spark.Request;
@@ -21,7 +22,6 @@ public class GetGameRoute implements Route{
 
     private final TemplateEngine templateEngine;
 
-    private final PlayerLobby pLobby;
 
     private static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
 
@@ -40,6 +40,7 @@ public class GetGameRoute implements Route{
     private final String BOARD = "board";
 
     private final String CHOSEN_PLAYER = "challenge";
+    private final GameCenter gameCenter;
 
     /**
      * The constructor for the {@code GET /signin} route handler.
@@ -47,12 +48,12 @@ public class GetGameRoute implements Route{
      * @param templateEngine
      *    The {@link TemplateEngine} used for rendering page HTML.
      */
-    GetGameRoute(final TemplateEngine templateEngine, PlayerLobby pLobby){
+    GetGameRoute(final TemplateEngine templateEngine, GameCenter gameCenter){
 
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
 
         this.templateEngine = templateEngine;
-        this.pLobby = pLobby;
+        this.gameCenter = gameCenter;
     }
 
     @Override
@@ -70,7 +71,6 @@ public class GetGameRoute implements Route{
 
         final Session httpSession = request.session();
         final Map<String, Object> vm = new HashMap<>();
-        httpSession.attribute(GetHomeRoute.PLAYER_LOBBY, pLobby);
         httpSession.attribute(NAME_PARAM, NAME_PARAM);
         vm.put(VIEW_MODE, ViewMode.PLAY); // Need to pass in 3 players
 
@@ -80,7 +80,7 @@ public class GetGameRoute implements Route{
         //System.out.println("ln80 Chosen Player: "+opponentPlayerName);
         //System.out.println("ln81 you player: "+youPlayer.getName());
 
-        Player opponentPlayer = pLobby.getPlayer(opponentPlayerName);
+        Player opponentPlayer = gameCenter.getPlayerLobby().getPlayer(opponentPlayerName);
         //System.out.println("ln84 httpSession.attributes(): "+ httpSession.attributes());
 
 
@@ -116,6 +116,7 @@ public class GetGameRoute implements Route{
             youPlayer.setInGame();
             opponentPlayer.setGame(newGame);
             opponentPlayer.setInGame();
+            gameCenter.getGamesList().put(newGame.getGameId(), newGame);
             vm.put(USER, youPlayer);
             vm.put(BOARD, newGame.getGameBoard());
             vm.put(RED_PLAYER, youPlayer);

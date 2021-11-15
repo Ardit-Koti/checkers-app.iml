@@ -1,5 +1,6 @@
 package com.webcheckers.model;
 
+import com.webcheckers.application.GameCenter;
 import com.webcheckers.application.MoveValidator;
 
 import java.awt.*;
@@ -24,7 +25,7 @@ public class Game {
 
     private Color activeColor;
 
-    private int gameId = 1; // TODO: 10/6/21  implement number generator for multiple games
+    private int gameId; // TODO: 10/6/21  implement number generator for multiple games
 
     // initilized to red as red goes first
 
@@ -47,6 +48,8 @@ public class Game {
         this.boardList = new LinkedList<Board>();
         boardList.add(new Board(this.gameBoard));
         validator = new MoveValidator(this);
+        GameCenter.id = GameCenter.id +1;
+        gameId = GameCenter.id;
     }
 
     public Board getGameBoard(){return this.gameBoard;}
@@ -209,6 +212,8 @@ public class Game {
     public Color getActiveColor(){return this.activeColor;}
 
     public void setGameBoard(Board gameBoard){this.gameBoard = gameBoard;}
+
+    public int getGameId(){return this.gameId;}
 
     public String backup()
     {

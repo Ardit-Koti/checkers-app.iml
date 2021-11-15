@@ -2,6 +2,7 @@ package com.webcheckers.ui;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.webcheckers.application.GameCenter;
 import com.webcheckers.model.Game;
 import com.webcheckers.model.Player;
 import com.webcheckers.model.ViewMode;
@@ -21,6 +22,7 @@ public class PostBackupRoute implements Route {
     private static final String BACKUP = "Go back to your last valid move!";
     private static final String USER = "currentUser";
     private static final String VIEW_MODE = "viewMode";
+    private GameCenter gameCenter;
     private Player redPlayer;
 
     private Player whitePlayer;

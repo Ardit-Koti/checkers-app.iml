@@ -8,26 +8,29 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameCenter {
-    private ArrayList<Game> listGame = new ArrayList<>();
+    private HashMap<Integer, Game > GameList = new HashMap<>();
     private PlayerLobby pLobby;
-    private HashMap<Player, Player> spectators;
+    private ArrayList<Player> Playing_players;
+    public static int id;
 
 
-    public GameCenter( PlayerLobby pLobby ) {
-        this.pLobby = pLobby;
-        spectators = new HashMap<>();
+    public GameCenter() {
+        pLobby = new PlayerLobby();
+        Playing_players = new ArrayList<>();
+        id = 0;
     }
-    public ArrayList<Game> getGamesList() {
-        return listGame;
-    }
-
-    public void listRemove(Game game){
-        listGame.remove(game);
+    public HashMap<Integer, Game> getGamesList() {
+        return GameList;
     }
 
-    public boolean spectatorFinder(Player player){
-        return spectators.containsKey(player);
+    public void listRemove(Game game)
+    {
+        GameList.remove(game.getGameId());
     }
+
+    public void addGame(Game game){GameList.put(game.getGameId(), game);}
+
+    public PlayerLobby getPlayerLobby(){return this.pLobby;}
 
 
 
