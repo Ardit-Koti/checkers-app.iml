@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+import com.webcheckers.application.GameCenter;
+import com.webcheckers.model.Game;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -20,6 +22,7 @@ public class GetSignInRoute implements Route{
     static final String HOME_VIEW = "home.ftl";
     private static final Message WELCOME_MSG = Message.info("Please Login");
     private final TemplateEngine templateEngine;
+    private GameCenter gameCenter;
 
 
     /**
@@ -28,11 +31,12 @@ public class GetSignInRoute implements Route{
      * @param templateEngine
      *    The {@link TemplateEngine} used for rendering page HTML.
      */
-    GetSignInRoute(final TemplateEngine templateEngine){
+    GetSignInRoute(final TemplateEngine templateEngine, GameCenter gameCenter){
 
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
 
         this.templateEngine = templateEngine;
+        this.gameCenter = gameCenter;
     }
 
 

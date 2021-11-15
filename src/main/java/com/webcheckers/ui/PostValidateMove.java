@@ -1,6 +1,7 @@
 package com.webcheckers.ui;
 
 import com.google.gson.Gson;
+import com.webcheckers.application.GameCenter;
 import com.webcheckers.application.MoveValidator;
 import com.webcheckers.model.*;
 import com.webcheckers.util.Message;
@@ -23,12 +24,12 @@ public class PostValidateMove implements Route{
     private final String CHOSEN_PLAYER = "challenge";
 
     private final TemplateEngine templateEngine;
-    private final PlayerLobby pLobby;
     private final Gson gson;
+    private final GameCenter gameCenter;
 
-    public PostValidateMove(TemplateEngine templateEngine, PlayerLobby pLobby, Gson gson) {
+    public PostValidateMove(TemplateEngine templateEngine, GameCenter gameCenter, Gson gson) {
         this.templateEngine = templateEngine;
-        this.pLobby = pLobby;
+        this.gameCenter = gameCenter;
         this.gson = gson;
     }
 
@@ -45,7 +46,7 @@ public class PostValidateMove implements Route{
         // getting session information and the proper game
 
         final Map<String, Object> vm = new HashMap<>();
-        httpSession.attribute(GetHomeRoute.PLAYER_LOBBY, pLobby);
+        httpSession.attribute(GetHomeRoute.PLAYER_LOBBY, gameCenter.getPlayerLobby());
         httpSession.attribute(NAME_PARAM, NAME_PARAM);
         vm.put(VIEW_MODE, ViewMode.PLAY); // Need to pass in 3 players
 

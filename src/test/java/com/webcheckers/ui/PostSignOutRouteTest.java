@@ -1,4 +1,5 @@
 package com.webcheckers.ui;
+import com.webcheckers.application.GameCenter;
 import com.webcheckers.model.Player;
 import com.webcheckers.model.PlayerLobby;
 import spark.*;
@@ -20,6 +21,7 @@ public class PostSignOutRouteTest {
     private Session session;
     private TemplateEngine engine;
     private PlayerLobby pLobby;
+    private GameCenter gameCenter;
 
     @BeforeEach
     void setup()
@@ -30,7 +32,8 @@ public class PostSignOutRouteTest {
         response = mock(Response.class);
         engine = mock(TemplateEngine.class);
         pLobby = mock(PlayerLobby.class);
-        CuT = new PostSignOutRoute(engine, pLobby);
+        gameCenter = mock(GameCenter.class);
+        CuT = new PostSignOutRoute(engine, gameCenter);
     }
 
 //    @Test

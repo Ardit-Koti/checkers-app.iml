@@ -1,5 +1,6 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.application.GameCenter;
 import com.webcheckers.model.PlayerLobby;
 import org.junit.jupiter.api.*;
 import spark.*;
@@ -19,6 +20,7 @@ public class PostHomeRouteTest {
     private Session session;
     private TemplateEngine engine;
     private PlayerLobby pLobby;
+    private GameCenter gameCenter;
 
     @BeforeEach
     public void setup()
@@ -29,7 +31,8 @@ public class PostHomeRouteTest {
         response = mock(Response.class);
         engine = mock(TemplateEngine.class);
         pLobby = mock(PlayerLobby.class);
-        CuT = new PostHomeRoute(engine, pLobby);
+        gameCenter = mock(GameCenter.class);
+        CuT = new PostHomeRoute(engine, gameCenter);
     }
 
 

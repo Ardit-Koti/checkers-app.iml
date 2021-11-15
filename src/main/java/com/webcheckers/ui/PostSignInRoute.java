@@ -1,5 +1,7 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.application.GameCenter;
+import com.webcheckers.model.Game;
 import com.webcheckers.model.Player;
 import com.webcheckers.util.Message;
 import com.webcheckers.model.PlayerLobby;
@@ -29,17 +31,17 @@ public class PostSignInRoute implements Route{
     private final TemplateEngine templateEngine;
     static final String NAME_PARAM = "name";
     static final String PASS_PARAM = "password";
-    private final PlayerLobby pLobby;
     public static final String PLAYERS = "players";
+    private final GameCenter gameCenter;
 
     /**
      * Constructor takes in templateEngine and plobby where
      * @param templateEngine is how the page is rendered  and
-     * @param plobby the lobby of players
+     * @param gameCenter the gameCenter
      */
-    PostSignInRoute(TemplateEngine templateEngine, PlayerLobby plobby){
+    PostSignInRoute(TemplateEngine templateEngine, GameCenter gameCenter){
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
-        this.pLobby = plobby;
+        this.gameCenter = gameCenter;
         this.templateEngine = templateEngine;
     }
 
@@ -58,12 +60,12 @@ public class PostSignInRoute implements Route{
         // when there is a post, info is being sent to server. When you click sign in, a username is entered,
         // playername is getting the string from the sign in form
 
-        String status = pLobby.checkAndAddName(playerName, password); // status is if the player is successfully joined
+        String status = gameCenter.getPlayerLobby().checkAndAddName(playerName, password); // status is if the player is successfully joined
 
 
         if (status.equals("Success")){ //based of p lobby, if a player successfully entered the lobby
 //            Player user = new Player(playerName); //todo ask team about this, why do we have 2 players
-            Player user = pLobby.getPlayer(playerName);
+            Player user = gameCenter.getPlayerLobby().getPlayer(playerName);
             httpSession.attribute("currentUser",user); // http session represents a new user
             httpSession.attribute("playerName",playerName);
             vm.put("currentUser",user);
@@ -73,7 +75,7 @@ public class PostSignInRoute implements Route{
             NAMESTATUS = Message.info("Welcome " + playerName + " to the world of online checkers");
             vm.put("message", NAMESTATUS);
             vm.put("title", "Welcome!");
-            vm.put(PLAYERS, pLobby.getNamesInUse());
+            vm.put(PLAYERS, gameCenter.getPlayerLobby().getNamesInUse());
             return templateEngine.render(new ModelAndView(vm,"home.ftl"));
         }
 

@@ -1,6 +1,7 @@
 package com.webcheckers.ui;
 
 import com.google.gson.Gson;
+import com.webcheckers.application.GameCenter;
 import com.webcheckers.model.Color;
 import com.webcheckers.model.Game;
 import com.webcheckers.model.Player;
@@ -15,6 +16,7 @@ class PostCheckTurnRoute implements Route {
 
     private final Gson gson;
     private final TemplateEngine templateEngine;
+
     private final String ACTIVE = "activeColor";
     private final String VIEW_MODE = "viewMode";
     private final String USER = "currentUser";
@@ -23,9 +25,13 @@ class PostCheckTurnRoute implements Route {
     private final String BOARD = "board";
     static final String VIEW_NAME = "game.ftl";
 
-    public PostCheckTurnRoute(final TemplateEngine templateEngine, final Gson gson) {
+    private final GameCenter gameCenter;
+
+
+    public PostCheckTurnRoute(final TemplateEngine templateEngine, GameCenter gameCenter, final Gson gson) {
         this.gson = gson;
         this.templateEngine = templateEngine;
+        this.gameCenter = gameCenter;
     }
 
 

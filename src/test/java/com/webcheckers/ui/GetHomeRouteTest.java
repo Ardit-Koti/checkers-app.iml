@@ -5,6 +5,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import com.webcheckers.application.GameCenter;
 import com.webcheckers.model.PlayerLobby;
 import com.webcheckers.util.Message;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,6 +21,7 @@ public class GetHomeRouteTest {
     private Session session;
     private Response response;
     private TemplateEngine engine;
+    private GameCenter gameCenter;
 
     @BeforeEach
     public void setup() {
@@ -28,9 +30,8 @@ public class GetHomeRouteTest {
         when(request.session()).thenReturn(session);
         response = mock(Response.class);
         engine = mock(TemplateEngine.class);
-
-        PlayerLobby pLobby = new PlayerLobby();
-        CuT = new GetHomeRoute(engine, pLobby);
+        gameCenter = new GameCenter();
+        CuT = new GetHomeRoute(engine, gameCenter);
     }
 
     @Test

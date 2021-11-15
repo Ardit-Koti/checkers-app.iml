@@ -2,6 +2,7 @@ package com.webcheckers.ui;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.webcheckers.application.GameCenter;
 import com.webcheckers.model.Player;
 import com.webcheckers.util.Message;
 import com.webcheckers.ui.GetSignInRoute;
@@ -32,6 +33,7 @@ class PostSignInRouteTest {
     private Response response;
     private TemplateEngine engine;
     private PlayerLobby plobby;
+    private GameCenter gameCenter;
 
     @BeforeEach
     public void setup() {
@@ -44,9 +46,8 @@ class PostSignInRouteTest {
         response = mock(Response.class);
         engine = mock(TemplateEngine.class);
 
-        plobby = mock(PlayerLobby.class);
-
-        CuT = new PostSignInRoute(engine, plobby);
+        gameCenter = mock(GameCenter.class);
+        CuT = new PostSignInRoute(engine, gameCenter);
 
     }
 

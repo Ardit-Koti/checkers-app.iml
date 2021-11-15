@@ -1,5 +1,6 @@
 package com.webcheckers.ui;
 
+import com.webcheckers.application.GameCenter;
 import com.webcheckers.model.Player;
 import com.webcheckers.util.Message;
 import com.webcheckers.ui.GetSignInRoute;
@@ -27,6 +28,7 @@ public class GetSignInRouteTest {
     private Session session;
     private Response response;
     private TemplateEngine engine;
+    private GameCenter gameCenter;
 
 
 
@@ -37,7 +39,8 @@ public class GetSignInRouteTest {
         when(request.session()).thenReturn(session);
         response = mock(Response.class);
         engine = mock(TemplateEngine.class);
-        CuT = new GetSignInRoute(engine);
+        gameCenter = new GameCenter();
+        CuT = new GetSignInRoute(engine, gameCenter);
 
 
     }

@@ -4,7 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+
 import com.google.gson.Gson;
+
+import com.webcheckers.application.GameCenter;
+
 import com.webcheckers.model.*;
 import spark.ModelAndView;
 import spark.Request;
@@ -22,7 +26,6 @@ public class GetGameRoute implements Route{
 
     private final TemplateEngine templateEngine;
 
-    private final PlayerLobby pLobby;
 
     private static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
 
@@ -41,6 +44,8 @@ public class GetGameRoute implements Route{
     private final String BOARD = "board";
 
     private final String CHOSEN_PLAYER = "challenge";
+    private final GameCenter gameCenter;
+    private final PlayerLobby pLobby;
 
     private Gson gson;
 
@@ -50,27 +55,30 @@ public class GetGameRoute implements Route{
      * @param templateEngine
      *    The {@link TemplateEngine} used for rendering page HTML.
      */
-    GetGameRoute(final TemplateEngine templateEngine, PlayerLobby pLobby, Gson gson){
+
+    GetGameRoute(final TemplateEngine templateEngine, GameCenter gameCenter){
+
 
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
 
         this.templateEngine = templateEngine;
-        this.pLobby = pLobby;
+
         this.gson = gson;
+
+        this.gameCenter = gameCenter;
+        this.pLobby = gameCenter.getPlayerLobby();
+
     }
 
     @Override
     public String handle(Request request, Response response) {
         final Session httpSession = request.session();
         final Map<String, Object> vm = new HashMap<>();
-        httpSession.attribute(GetHomeRoute.PLAYER_LOBBY, pLobby);
         httpSession.attribute(NAME_PARAM, NAME_PARAM);
         Player youPlayer = httpSession.attribute(USER); // originally "YOU"
 
-
-
         final String opponentPlayerName = request.queryParams(CHOSEN_PLAYER);
-        Player opponentPlayer = pLobby.getPlayer(opponentPlayerName);
+        Player opponentPlayer = gameCenter.getPlayerLobby().getPlayer(opponentPlayerName);
 
         //If User calling this route is in a Game, gets game info and renders it
         if(opponentPlayer == null) {
@@ -125,7 +133,11 @@ public class GetGameRoute implements Route{
             youPlayer.setInGame();
             opponentPlayer.setGame(newGame);
             opponentPlayer.setInGame();
+
             vm.put(VIEW_MODE, ViewMode.PLAY);
+
+            gameCenter.getGamesList().put(newGame.getGameId(), newGame);
+
             vm.put(USER, youPlayer);
             vm.put(BOARD, newGame.getGameBoard());
             vm.put(RED_PLAYER, youPlayer);
