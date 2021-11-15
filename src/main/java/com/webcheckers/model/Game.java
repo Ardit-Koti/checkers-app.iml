@@ -68,6 +68,7 @@ public class Game {
     public static final String SUBMITTED = "Move submitted!";
     public static final String ERROR_NO_MOVE_BACKUP = "ERROR: You have not made a move to backup from.";
     public static final String BACKUP_SUCCESS = "Move backed up.";
+    public static final String RESIGN_ERROR = "ERROR: Cannot resign when it is not your turn.";
 
     /**
      * checks if the game is over. This check should occur before each move.
@@ -237,7 +238,7 @@ public class Game {
                 return this.getRedPlayer().getName() + " wins due to opponent resignation.";
             }
         }
-        return "ERROR: Cannot resign when it is not your turn.";
+        return RESIGN_ERROR;
     }
 
 
