@@ -30,6 +30,8 @@ public class Player {
 
     public void setInGame(){inGame = true;}
 
+    public void leaveGame(){inGame = false;}
+
     public Game getGame(){return this.game;}
 
     public void setGame(Game game){this.game = game;}

@@ -29,7 +29,10 @@ public class PostResignRoute implements Route{
         String message = game.resignGame(color);
         if(message.startsWith("ERROR")){
             return gson.toJson(Message.error(message.substring(7)));
+
         }
+        player.setGame(null);
         return gson.toJson(Message.info(message));
+
     }
 }

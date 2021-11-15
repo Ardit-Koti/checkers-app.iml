@@ -20,8 +20,6 @@ public class Game {
 
     private Color winner;
 
-    private com.webcheckers.model.Color Color;
-
     private Color activeColor;
 
     private int gameId = 1; // TODO: 10/6/21  implement number generator for multiple games
@@ -57,7 +55,10 @@ public class Game {
 
     public Player getWhitePlayer(){return this.whitePlayer;}
 
-    public com.webcheckers.model.Color getColor(){return this.Color;}
+    public Player getOtherPlayer(Player you){
+        if (you.getColor().equals(Color.RED)) { return getWhitePlayer();}
+        return getRedPlayer();
+    }
 
 
     public static final String VALID_MOVE = "You have made your move";
@@ -225,12 +226,9 @@ public class Game {
     }
 
     public String resignGame(Color color){
-
-        if(color.equals(this.activeColor))
-        {
-            if(color.equals(com.webcheckers.model.Color.RED))
+            if(color.equals(Color.RED))
             {
-                this.declareWinner(com.webcheckers.model.Color.WHITE);
+                this.declareWinner(Color.WHITE);
                 return this.getWhitePlayer().getName() + " wins due to opponent resignation.";
             }
             else if(color.equals(com.webcheckers.model.Color.WHITE))
@@ -238,7 +236,7 @@ public class Game {
                 this.declareWinner(com.webcheckers.model.Color.RED);
                 return this.getRedPlayer().getName() + " wins due to opponent resignation.";
             }
-        }
+
         return RESIGN_ERROR;
     }
 

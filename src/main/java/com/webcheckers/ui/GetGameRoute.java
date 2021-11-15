@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import com.google.gson.Gson;
 import com.webcheckers.model.*;
 import spark.ModelAndView;
 import spark.Request;
@@ -41,54 +42,65 @@ public class GetGameRoute implements Route{
 
     private final String CHOSEN_PLAYER = "challenge";
 
+    private Gson gson;
+
     /**
      * The constructor for the {@code GET /signin} route handler.
      *
      * @param templateEngine
      *    The {@link TemplateEngine} used for rendering page HTML.
      */
-    GetGameRoute(final TemplateEngine templateEngine, PlayerLobby pLobby){
+    GetGameRoute(final TemplateEngine templateEngine, PlayerLobby pLobby, Gson gson){
 
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
 
         this.templateEngine = templateEngine;
         this.pLobby = pLobby;
+        this.gson = gson;
     }
 
     @Override
     public String handle(Request request, Response response) {
-
-        //todo assign player colors based on rules "The red player moves first."
-
-
-        //todo call model classes to make model board
-
-
-        //todo sent java board info the game .ftl
-
-
-
         final Session httpSession = request.session();
         final Map<String, Object> vm = new HashMap<>();
         httpSession.attribute(GetHomeRoute.PLAYER_LOBBY, pLobby);
         httpSession.attribute(NAME_PARAM, NAME_PARAM);
-        vm.put(VIEW_MODE, ViewMode.PLAY); // Need to pass in 3 players
-
         Player youPlayer = httpSession.attribute(USER); // originally "YOU"
+
+
+
         final String opponentPlayerName = request.queryParams(CHOSEN_PLAYER);
-
-        //System.out.println("ln80 Chosen Player: "+opponentPlayerName);
-        //System.out.println("ln81 you player: "+youPlayer.getName());
-
         Player opponentPlayer = pLobby.getPlayer(opponentPlayerName);
-        //System.out.println("ln84 httpSession.attributes(): "+ httpSession.attributes());
-
 
         //If User calling this route is in a Game, gets game info and renders it
         if(opponentPlayer == null) {
+            if (youPlayer.getGame() == null){
+                String playerName = httpSession.attribute("playerName");
+                Message message = Message.info("Welcome " + playerName + " to the world of online checkers");
+                vm.put("name", NAME_PARAM);
+                vm.put("currentUser",httpSession.attribute("currentUser"));
+                vm.put("message", message);
+                vm.put("title", "Welcome!");
+                vm.put("players", pLobby.getNamesInUse());
+                vm.put("playerName", playerName);
+                Player user = pLobby.getPlayer(playerName);
+                user.leaveGame();
+                return templateEngine.render(new ModelAndView(vm, "home.ftl"));
+            }
+            if (!youPlayer.getGame().getOtherPlayer(youPlayer).isInGame()) //Complicated way to check if the other player of your game is not still in your game
+            {
+                final Map<String, Object> modeOptions = new HashMap<>();
+                modeOptions.put("isGameOver", true);
+                modeOptions.put("gameOverMessage", new Message("Your opponent resigned", Message.Type.INFO));
+                vm.put("modeOptionsAsJSON", gson.toJson(modeOptions));
+                return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
+            }
+
+
             if (youPlayer.getGame().getWhitePlayer() != null) {
                 vm.put("title", "Welcome!");
                 vm.put(USER, youPlayer);
+                vm.put(VIEW_MODE, ViewMode.PLAY);
                 vm.put(BOARD, youPlayer.getGame().getGameBoard());
                 vm.put(RED_PLAYER, youPlayer.getGame().getRedPlayer());
                 vm.put(WHITE_PLAYER, youPlayer.getGame().getWhitePlayer());
@@ -103,19 +115,17 @@ public class GetGameRoute implements Route{
             {
               vm.put("message", new Message("Player already in Game", Message.Type.ERROR));
               response.redirect("/");
-              //System.out.println("Player " + opponentPlayer.getName() + " is already in a game.");
               return null;
             }
             youPlayer.setColor(Color.RED);
             opponentPlayer.setColor(Color.WHITE);
             vm.put("title", "Welcome!");
             Game newGame = new Game(youPlayer, opponentPlayer);
-            //System.out.println("ln 113 youPlayer: "+youPlayer);
-            //System.out.println("ln 114 opponentPlayer: "+opponentPlayer);
             youPlayer.setGame(newGame);
             youPlayer.setInGame();
             opponentPlayer.setGame(newGame);
             opponentPlayer.setInGame();
+            vm.put(VIEW_MODE, ViewMode.PLAY);
             vm.put(USER, youPlayer);
             vm.put(BOARD, newGame.getGameBoard());
             vm.put(RED_PLAYER, youPlayer);
