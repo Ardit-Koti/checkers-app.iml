@@ -130,7 +130,7 @@ public class Game {
                     System.out.println("Red player");
                 if (this.winner == com.webcheckers.model.Color.WHITE)
                     System.out.println("WHITE player");
-                    
+                // TODO: 11/15/21    implement game over properly
             }
 
 
