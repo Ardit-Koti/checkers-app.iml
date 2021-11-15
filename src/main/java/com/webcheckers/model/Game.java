@@ -204,7 +204,11 @@ public class Game {
     }
 
     public String resignGame(Color color){
-        return "FooBar";
+        if(activeColor.equals(color))
+        {
+            return "Foo";
+        }
+        return "";
 
     }
 
