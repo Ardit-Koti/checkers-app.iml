@@ -11,7 +11,7 @@ public class GameCenter {
     private HashMap<Integer, Game > GameList = new HashMap<>();
     private PlayerLobby pLobby;
     private ArrayList<Player> Playing_players;
-    public static int id;
+    public static Integer id;
 
 
     public GameCenter() {
@@ -28,9 +28,19 @@ public class GameCenter {
         GameList.remove(game.getGameId());
     }
 
-    public void addGame(Game game){GameList.put(game.getGameId(), game);}
-
     public PlayerLobby getPlayerLobby(){return this.pLobby;}
+
+    public Game createGame(Player you, Player opponent){
+        Game game = new Game(you, opponent, id);
+        GameList.put(id,game);
+        id++;
+        return game;
+    }
+
+    public Game getGame(Integer id){
+        return GameList.get(id);
+    }
+
 
 
 

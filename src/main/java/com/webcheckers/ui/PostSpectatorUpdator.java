@@ -8,7 +8,6 @@ import com.webcheckers.model.Player;
 import com.webcheckers.util.Message;
 import spark.*;
 
-import java.util.Objects;
 
 public class PostSpectatorUpdator implements Route{
 
@@ -33,19 +32,28 @@ public class PostSpectatorUpdator implements Route{
         final Player user = httpSession.attribute("currentUser");
 
         Game game = user.getGame();
+        if (game == null)
+        {
+            return gson.toJson(Message.info("false"));
+        }
         Color currentColor = game.getActiveColor();
+
+
 
         if(user.getColor() == null){
             user.setColor(currentColor);
             return gson.toJson(Message.info(JOINED_MESS));
         }
-        else if(user.getColor().equals(currentColor)){
+        if (game.getWinner() != null){
+            return gson.toJson(Message.info("true"));
+        }
+
+        if(user.getColor().equals(currentColor)){
             return gson.toJson(Message.info("false"));
         }
         else{
             user.setColor(currentColor);
             return gson.toJson(Message.info("true"));
         }
-
     }
 }

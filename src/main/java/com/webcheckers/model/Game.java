@@ -43,7 +43,7 @@ public class Game {
 
     private String gameOverMessage = "";
 
-    public Game(Player redPlayer, Player whitePlayer) {
+    public Game(Player redPlayer, Player whitePlayer, int gameId) {
         this.gameBoard = new Board();
         this.futureBoard = this.gameBoard;
         this.redPlayer = redPlayer;
@@ -52,8 +52,7 @@ public class Game {
         this.boardList = new LinkedList<Board>();
         boardList.add(gameBoard.copyBoard());
         validator = new MoveValidator(this);
-        GameCenter.id = GameCenter.id +1;
-        gameId = GameCenter.id;
+        this.gameId = gameId;
     }
 
     public Board getGameBoard(){return this.gameBoard;}

@@ -60,7 +60,7 @@ public class WebServer {
   public static final String SIGN_OUT_URL= "/signout";
   public static final String VALIDATE_MOVE_URL = "/validateMove";
   public static final String SUBMIT_MOVE_URL = "/submitTurn";
-  public static final String CHECK_TURN_URL = "/spectator/checkTurn";
+  public static final String CHECK_TURN_URL = "/checkTurn";
   public static final String RESIGN_URL = "/resignGame";
   public static final String BACKUP_MOVE_URL = "/backupMove";
   public static final String SPEC_GAME_URL = "/spectator/game";
@@ -177,11 +177,11 @@ public class WebServer {
 
     post(BACKUP_MOVE_URL, new PostBackupRoute(templateEngine, gameCenter, gson));
 
-    get(SPEC_GAME_URL, new GetSpectatorRoute(templateEngine, gameCenter));
+    get(SPEC_GAME_URL, new GetSpectatorRoute(templateEngine, gameCenter, gson));
 
     get(SPEC_STOP_URL, new GetSpecStopRoute(templateEngine, gameCenter));
 
-    post(SPEC_CHECK_URL, new PostSpectatorRoute(templateEngine, gameCenter));
+    post(SPEC_CHECK_URL, new PostSpectatorUpdator(gson, gameCenter, templateEngine));
 
     LOG.config("WebServer is initialized.");
   }

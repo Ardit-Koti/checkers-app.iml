@@ -92,7 +92,7 @@ public class GetGameRoute implements Route{
                 return null;
             }
 
-            game = new Game(youPlayer, opponentPlayer);
+            game = gameCenter.createGame(youPlayer, opponentPlayer);
             game.setActiveColor(Color.RED);
             youPlayer.setInGame();
             youPlayer.setGame(game);
