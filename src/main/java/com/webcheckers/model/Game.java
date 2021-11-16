@@ -124,18 +124,17 @@ public class Game {
         /** TIE STUFF*/
         // check if no possible moves exist
          if (validator.possibleMoves().isEmpty()){ // no possible moves need to ask ryan how to do this
-             System.out.println("TIE!!");
+             System.out.println("TIE due to no possible moves!!");
+             this.isTied= true;
         }
         // FORTY MOVES WITHOUT CAPTURE, = tie
         for (Move m:this.currentMove) {
             if (m.isJumpMove()){
                 movesSinceCapture=0;
-                this.isTied=true;
             }
-
         }
 
-        if (movesSinceCapture<= 40){
+        if (movesSinceCapture >= 40){
             this.isTied=true;
             System.out.println("TIE!!");
         }
