@@ -14,6 +14,7 @@ import java.util.Map;
 
 public class GetSpectatorRoute implements Route {
     private final String VIEW_NAME = "game.ftl";
+    static final String NAME_PARAM = "name";
     private final String WHO_YOU_ARE_WATCHING = "spectate";
     private final String USER = "currentUser";
     private final String VIEW = "viewMode";
@@ -45,8 +46,17 @@ public class GetSpectatorRoute implements Route {
         if (user.getGame() == null) {
             String SpecTarName = request.queryParams(WHO_YOU_ARE_WATCHING);
             Player SpecTar = gameCenter.getPlayerLobby().getPlayer(SpecTarName);
+            if (!SpecTar.isInGame()){
+                vm.put("message", new Message("Player is not in a game to spectate", Message.Type.INFO));
+                vm.put("name", NAME_PARAM);
+                vm.put("currentUser",httpSession.attribute("currentUser"));
+                vm.put("title", "Welcome!");
+                vm.put("players", gameCenter.getPlayerLobby().getNamesInUse());
+                vm.put("playerName", user.getName());
+                response.redirect("/");
+                return templateEngine.render(new ModelAndView(vm, "home.ftl"));
+            }
             Integer gameId = SpecTar.getGame().getGameId();
-            System.out.println(gameId);
             game = gameCenter.getGame(gameId);
             user.setGame(game);
             user.setInGame();

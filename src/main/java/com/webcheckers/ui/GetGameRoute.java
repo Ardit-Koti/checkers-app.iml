@@ -130,7 +130,7 @@ public class GetGameRoute implements Route{
         if (game.getWinner() != null){
             final Map<String, Object> modeOptions = new HashMap<>(2);
             modeOptions.put("isGameOver", true);
-            modeOptions.put("gameOverMessage", String.format("Congratulation, %s won!", game.getWinPlayer().getName()));
+            modeOptions.put("gameOverMessage", game.getGameOverMessage());
             vm.put("modeOptionsAsJSON", gson.toJson(modeOptions));
             youPlayer.setGame(null);
             youPlayer.leaveGame();

@@ -113,12 +113,14 @@ public class Game {
         if (redPieces == 0 ){ //white won
             //System.out.println("zero red Pieces");
             winner = com.webcheckers.model.Color.WHITE;
+            gameOverMessage = String.format("Congratulation, %s won!", getWinPlayer().getName());
             return true;
         }
 
         if (whitePieces==0){ // red won
             //System.out.println("zero white Pieces");
             winner = com.webcheckers.model.Color.RED;
+            gameOverMessage = String.format("Congratulation, %s won!", getWinPlayer().getName());
             return true;
         }
 
@@ -253,6 +255,7 @@ public class Game {
     public boolean declareWinner(Player winner) {
         if((winner.equals(redPlayer) || winner.equals(whitePlayer)) && this.winner == null) {
             this.winner = winner.getColor();
+            gameOverMessage = "You won by resignation";
             return true;
         }
         return false;
@@ -267,7 +270,7 @@ public class Game {
         }
         else
         {
-            this.gameBoard = boardList.getLast();
+            this.gameBoard = boardList.getLast().copyBoard();
             currentMove.clear();
             return BACKUP_SUCCESS;
         }
@@ -288,4 +291,5 @@ public class Game {
         return RESIGN_ERROR;
     }
 
+    public String getGameOverMessage(){return this.gameOverMessage;}
 }
