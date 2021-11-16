@@ -39,7 +39,7 @@ public class Game {
 
     private LinkedList<Board> boardList;
 
-    private boolean isTied;
+    private boolean isTied = false;
 
     public Game(Player redPlayer, Player whitePlayer) {
         this.gameBoard = new Board();
