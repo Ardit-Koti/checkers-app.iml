@@ -41,6 +41,8 @@ public class Game {
 
     private boolean isTied = false;
 
+    private String gameOverMessage = "";
+
     public Game(Player redPlayer, Player whitePlayer) {
         this.gameBoard = new Board();
         this.futureBoard = this.gameBoard;
@@ -124,7 +126,8 @@ public class Game {
         /** TIE STUFF*/
         // check if no possible moves exist
          if (validator.possibleMoves().isEmpty()){ // no possible moves need to ask ryan how to do this
-             System.out.println("TIE due to no possible moves!!");
+             //System.out.println("TIE due to no possible moves!!");
+             this.gameOverMessage = "TIE due to no possible moves!!";
              this.isTied= true;
         }
         // FORTY MOVES WITHOUT CAPTURE, = tie
@@ -136,7 +139,9 @@ public class Game {
 
         if (movesSinceCapture >= 40){
             this.isTied=true;
-            System.out.println("TIE!!");
+            //System.out.println("TIE due to 40 moves without capture!!");
+            this.gameOverMessage = "TIE due to 40 moves without capture!!";
+
         }
         movesSinceCapture++;
 
@@ -154,11 +159,11 @@ public class Game {
         public String submitMove() {
 
             if(this.isOver()){
-                System.out.print(" WINNER WINNER CHICKEN DINNER!! Congratulations ");
+                String s = " WINNER WINNER CHICKEN DINNER!! Congratulations ";
                 if (this.winner == com.webcheckers.model.Color.RED)
-                    System.out.println("Red player");
+                    s += "Red player";
                 if (this.winner == com.webcheckers.model.Color.WHITE)
-                    System.out.println("WHITE player");
+                    s += "WHITE player";
                 // TODO: 11/15/21    implement game over properly
             }
 
