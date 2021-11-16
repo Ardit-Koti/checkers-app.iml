@@ -113,6 +113,7 @@ public class GetGameRoute implements Route{
                 vm.put("players", gameCenter.getPlayerLobby().getNamesInUse());
                 vm.put("playerName", playerName);
                 youPlayer.leaveGame();
+                response.redirect("/");
                 return templateEngine.render(new ModelAndView(vm , "home.ftl"));
             }
             game = youPlayer.getGame();
