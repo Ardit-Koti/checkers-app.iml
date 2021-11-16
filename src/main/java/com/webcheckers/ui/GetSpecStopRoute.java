@@ -1,15 +1,14 @@
 package com.webcheckers.ui;
 
 import com.webcheckers.application.GameCenter;
-import spark.Request;
-import spark.Response;
-import spark.Route;
-import spark.TemplateEngine;
+import com.webcheckers.model.Player;
+import spark.*;
 
 public class GetSpecStopRoute implements Route {
 
     private final GameCenter gameCenter;
     private TemplateEngine templateEngine;
+    private final String USER = "currentUser";
 
     public GetSpecStopRoute(TemplateEngine templateEngine, GameCenter gameCenter)
     {
@@ -19,6 +18,10 @@ public class GetSpecStopRoute implements Route {
 
     @Override
     public Object handle(Request request, Response response) throws Exception {
+        Session httpSession = request.session();
+        Player user = httpSession.attribute(USER);
+        user.setOutOfGame();
+        response.redirect("/");
         return null;
     }
 }
