@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import com.google.gson.Gson;
 
+import com.webcheckers.application.GameCenter;
 import com.webcheckers.model.PlayerLobby;
 import spark.TemplateEngine;
 
@@ -57,6 +58,15 @@ public class WebServer {
   public static final String SIGN_IN_URL= "/signin";
   public static final String GAME_URL = "/game";
   public static final String SIGN_OUT_URL= "/signout";
+  public static final String VALIDATE_MOVE_URL = "/validateMove";
+  public static final String SUBMIT_MOVE_URL = "/submitTurn";
+  public static final String CHECK_TURN_URL = "/checkTurn";
+  public static final String RESIGN_URL = "/resignGame";
+  public static final String BACKUP_MOVE_URL = "/backupMove";
+  public static final String SPEC_GAME_URL = "/spectator/game";
+  public static final String SPEC_STOP_URL = "/spectator/stopWatching";
+  public static final String SPEC_CHECK_URL = "/spectator/checkTurn";
+
 
 
   //
@@ -65,7 +75,7 @@ public class WebServer {
 
   private final TemplateEngine templateEngine;
   private final Gson gson;
-  private final PlayerLobby pLobby;
+  private final GameCenter gameCenter;
   //
   // Constructor
   //
@@ -81,14 +91,14 @@ public class WebServer {
    * @throws NullPointerException
    *    If any of the parameters are {@code null}.
    */
-  public WebServer(final TemplateEngine templateEngine, final Gson gson, final PlayerLobby pLobby) {
+  public WebServer(final TemplateEngine templateEngine, final Gson gson, final GameCenter gameCenter) {
     // validation
     Objects.requireNonNull(templateEngine, "templateEngine must not be null");
     Objects.requireNonNull(gson, "gson must not be null");
     //
     this.templateEngine = templateEngine;
     this.gson = gson;
-    this.pLobby = pLobby;
+    this.gameCenter = gameCenter;
   }
 
   //
@@ -143,19 +153,36 @@ public class WebServer {
     //// code clean; using small classes.
     //ardit change
     // Shows the Checkers game Home page.
-    get(HOME_URL, new GetHomeRoute(templateEngine, pLobby));
+    get(HOME_URL, new GetHomeRoute(templateEngine, gameCenter));
 
-    get(SIGN_IN_URL, new GetSignInRoute(templateEngine));
+    get(SIGN_IN_URL, new GetSignInRoute(templateEngine, gameCenter));
 
-    get(GAME_URL, new GetGameRoute(templateEngine, pLobby));
 
-    post(SIGN_IN_URL, new PostSignInRoute(templateEngine,pLobby));
+    get(GAME_URL, new GetGameRoute(templateEngine, gameCenter, gson));
 
-    post(HOME_URL, new PostHomeRoute(templateEngine,pLobby));
 
-    post(SIGN_OUT_URL, new PostSignOutRoute(templateEngine, pLobby));
+    post(SIGN_IN_URL, new PostSignInRoute(templateEngine, gameCenter));
 
-    //
+    post(HOME_URL, new PostHomeRoute(templateEngine, gameCenter));
+
+    post(SIGN_OUT_URL, new PostSignOutRoute(templateEngine, gameCenter));
+
+    post(VALIDATE_MOVE_URL, new PostValidateMove(templateEngine, gameCenter, gson));
+
+    post(SUBMIT_MOVE_URL, new PostSubmitRoute(templateEngine, gameCenter, gson));
+
+    post(CHECK_TURN_URL, new PostCheckTurnRoute(templateEngine, gameCenter, gson));
+
+    post(RESIGN_URL, new PostResignRoute(templateEngine, gameCenter ,gson));
+
+    post(BACKUP_MOVE_URL, new PostBackupRoute(templateEngine, gameCenter, gson));
+
+    get(SPEC_GAME_URL, new GetSpectatorRoute(templateEngine, gameCenter, gson));
+
+    get(SPEC_STOP_URL, new GetSpecStopRoute(templateEngine, gameCenter));
+
+    post(SPEC_CHECK_URL, new PostSpectatorUpdator(gson, gameCenter, templateEngine));
+
     LOG.config("WebServer is initialized.");
   }
 

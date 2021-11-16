@@ -37,10 +37,14 @@
             <form action="/game" method="GET">
               <li style="margin-bottom: 20px;">
                 ${player}
-                  <button style="margin-left: 50%;" type="submit" name="spectate" value="Spectate">Spectate</button>
                   <button type="submit" name="challenge" value=${player}>Challenge</button>
               </li>
             </form>
+              <form action="/spectator/game" method="GET">
+                  <li style="margin-bottom: 10px;">
+                      <button style="margin-left: 5%;" type="submit" name="spectate" value=${player}>Spectate</button>
+                  </li>
+              </form>
             <#--  <form action="/game" method="GET">
               <button type="submit" name="white" value="${player}">${player}</button>
             </form>  -->

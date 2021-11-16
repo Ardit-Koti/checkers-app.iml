@@ -1,6 +1,6 @@
 package com.webcheckers.model;
 
-public enum ActiveColor {
+public enum Color {
     RED,
     WHITE
 }

@@ -61,25 +61,47 @@
         <div class="game-board">
           <table id="game-board">
             <tbody>
-            <#list board.iterator() as row>
-              <tr data-row="${row.index}">
-              <#list row.iterator() as space>
-                <td data-cell="${space.cellIdx}"
+            <#if redPlayer.name == currentUser.name>
+              <#list board.iterate_by_color(true) as row>
+                <tr data-row="${row.index}">
+                <#list row.iterate_by_color(true) as space>
+                  <td data-cell="${space.cellIdx}"
                     <#if space.isValid() >
                     class="Space"
                     </#if>
                     >
-                <#if space.piece??>
-                  <div class="Piece"
+                  <#if space.piece??>
+                    <div class="Piece"
                        id="piece-${row.index}-${space.cellIdx}"
                        data-type="${space.piece.type}"
                        data-color="${space.piece.color}">
-                  </div>
-                </#if>
-                </td>
+                    </div>
+                  </#if>
+                  </td>
+                </#list>
+                </tr>
               </#list>
-              </tr>
-            </#list>
+            <#else>
+                <#list board.iterate_by_color(false) as row>
+                    <tr data-row="${row.index}">
+                        <#list row.iterate_by_color(false) as space>
+                            <td data-cell="${space.cellIdx}"
+                                    <#if space.isValid() >
+                                        class="Space"
+                                    </#if>
+                            >
+                                <#if space.piece??>
+                                    <div class="Piece"
+                                         id="piece-${row.index}-${space.cellIdx}"
+                                         data-type="${space.piece.type}"
+                                         data-color="${space.piece.color}">
+                                    </div>
+                                </#if>
+                            </td>
+                        </#list>
+                    </tr>
+                </#list>
+            </#if>
             </tbody>
           </table>
         </div>

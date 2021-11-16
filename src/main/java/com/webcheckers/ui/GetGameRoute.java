@@ -4,6 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+
+import com.google.gson.Gson;
+
+import com.webcheckers.application.GameCenter;
+
 import com.webcheckers.model.*;
 import spark.ModelAndView;
 import spark.Request;
@@ -21,7 +26,6 @@ public class GetGameRoute implements Route{
 
     private final TemplateEngine templateEngine;
 
-    private final PlayerLobby pLobby;
 
     private static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
 
@@ -40,6 +44,11 @@ public class GetGameRoute implements Route{
     private final String BOARD = "board";
 
     private final String CHOSEN_PLAYER = "challenge";
+    private final GameCenter gameCenter;
+    private final PlayerLobby pLobby;
+
+    private Gson gson;
+    private Game game;
 
     /**
      * The constructor for the {@code GET /signin} route handler.
@@ -47,83 +56,89 @@ public class GetGameRoute implements Route{
      * @param templateEngine
      *    The {@link TemplateEngine} used for rendering page HTML.
      */
-    GetGameRoute(final TemplateEngine templateEngine, PlayerLobby pLobby){
+
+    GetGameRoute(final TemplateEngine templateEngine, GameCenter gameCenter, Gson gson){
+
 
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
 
         this.templateEngine = templateEngine;
-        this.pLobby = pLobby;
+
+        this.gson = gson;
+
+        this.gameCenter = gameCenter;
+        this.pLobby = gameCenter.getPlayerLobby();
+
     }
 
     @Override
     public String handle(Request request, Response response) {
-
-        //todo assign player colors based on rules "The red player moves first."
-
-
-        //todo call model classes to make model board
-
-
-        //todo sent java board info the game .ftl
-
-
-
         final Session httpSession = request.session();
         final Map<String, Object> vm = new HashMap<>();
-        httpSession.attribute(GetHomeRoute.PLAYER_LOBBY, pLobby);
         httpSession.attribute(NAME_PARAM, NAME_PARAM);
-        vm.put(VIEW_MODE, ViewMode.PLAY); // Need to pass in 3 players
-
         Player youPlayer = httpSession.attribute(USER); // originally "YOU"
-        final String opponentPlayerName = request.queryParams(CHOSEN_PLAYER);
 
-        System.out.println("ln80 Chosen Player: "+opponentPlayerName);
-        System.out.println("ln81 you player: "+youPlayer.getName());
-
-        Player opponentPlayer = pLobby.getPlayer(opponentPlayerName);
-        System.out.println("ln84 httpSession.attributes(): "+ httpSession.attributes());
+        if(!youPlayer.isInGame()) { // handles creating a new game between two players
 
 
-        //If User calling this route is in a Game, gets game info and renders it
-        if(opponentPlayer == null) {
-            if (youPlayer.getGame().getWhitePlayer() != null) {
-                vm.put("title", "Welcome!");
-                vm.put(USER, youPlayer);
-                vm.put(BOARD, youPlayer.getGame().getGameBoard());
-                vm.put(RED_PLAYER, youPlayer.getGame().getRedPlayer());
-                vm.put(WHITE_PLAYER, youPlayer.getGame().getWhitePlayer());
-                vm.put(ACTIVE, youPlayer.getGame().getColor());
-                System.out.println("ln 97 putting player in Game");
-                return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
-            }
-        }
-        else {
-            //If user is looking to start a game
+
+            final String opponentPlayerName = request.queryParams(CHOSEN_PLAYER);
+            Player opponentPlayer = gameCenter.getPlayerLobby().getPlayer(opponentPlayerName);
+
             if(opponentPlayer.isInGame())
             {
-              vm.put("message", new Message("Player already in Game", Message.Type.ERROR));
-              response.redirect("/");
-              return null;
+                vm.put("message", new Message("Player already in Game", Message.Type.ERROR));
+                response.redirect("/");
+                return null;
             }
-            youPlayer.setColor(Player.Color.RED);
-            opponentPlayer.setColor(Player.Color.WHITE);
-            vm.put("title", "Welcome!");
-            Game newGame = new Game(youPlayer, opponentPlayer);
-            System.out.println("ln 113 youPlayer: "+youPlayer);
-            System.out.println("ln 114 opponentPlayer: "+opponentPlayer);
-            youPlayer.setGame(newGame);
+
+            game = gameCenter.createGame(youPlayer, opponentPlayer);
+            game.setActiveColor(Color.RED);
             youPlayer.setInGame();
-            opponentPlayer.setGame(newGame);
+            youPlayer.setGame(game);
+            youPlayer.setColor(Color.RED);
+            opponentPlayer.setGame(game);
             opponentPlayer.setInGame();
-            vm.put(USER, youPlayer);
-            vm.put(BOARD, newGame.getGameBoard());
-            vm.put(RED_PLAYER, youPlayer);
-            vm.put(WHITE_PLAYER, opponentPlayer);
-            vm.put(ACTIVE, ActiveColor.RED);
-            newGame.setActiveColor(ActiveColor.RED);
-            System.out.println("Game Started");
+            opponentPlayer.setColor(Color.WHITE);
+
+        }
+        else{
+            if (youPlayer.getGame() == null) { // if player resigned
+                String playerName = httpSession.attribute("playerName");
+                Message message = Message.info("Welcome " + playerName + " to the world of online checkers");
+                vm.put("name", NAME_PARAM);
+                vm.put("currentUser",httpSession.attribute("currentUser"));
+                vm.put("message", message);
+                vm.put("title", "Welcome!");
+                vm.put("players", gameCenter.getPlayerLobby().getNamesInUse());
+                vm.put("playerName", playerName);
+                youPlayer.leaveGame();
+                response.redirect("/");
+                return templateEngine.render(new ModelAndView(vm , "home.ftl"));
+            }
+            game = youPlayer.getGame();
+        }
+
+        vm.put("title", "Welcome!");
+        vm.put(USER, youPlayer);
+        vm.put(VIEW_MODE, ViewMode.PLAY);
+        vm.put(BOARD, game.getGameBoard());
+        vm.put(RED_PLAYER, game.getRedPlayer());
+        vm.put(WHITE_PLAYER, game.getWhitePlayer());
+        vm.put(ACTIVE, game.getActiveColor());
+        game.isOver();
+        if (game.getWinner() != null){
+            final Map<String, Object> modeOptions = new HashMap<>(2);
+            modeOptions.put("isGameOver", true);
+            modeOptions.put("gameOverMessage", game.getGameOverMessage());
+            vm.put("modeOptionsAsJSON", gson.toJson(modeOptions));
+            youPlayer.setGame(null);
+            youPlayer.leaveGame();
         }
         return templateEngine.render(new ModelAndView(vm, VIEW_NAME));
+
+
+
     }
 
 }

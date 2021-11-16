@@ -9,10 +9,7 @@ public class Piece {
         SINGLE, KING
     }
 
-    public enum color{
 
-        RED, WHITE
-    }
 
     public enum State{
         Alive, Dead
@@ -21,21 +18,30 @@ public class Piece {
 
 
     private final type Type;
-    private final color Color;
+    private final Color Color;
     private State state;
 
 
-    public Piece(type Type, color Color) {
+    public Piece(type Type, Color Color) {
         this.Type = Type;
         this.Color = Color;
         this.state = State.Alive;
 
     }
 
+    public Piece(type Type, Color Color, State state) {
+        this.Type = Type;
+        this.Color = Color;
+        this.state = state;
+
+    }
+
     public void killPiece(){this.state = State.Dead;}
     public type getType(){return this.Type;}
-    public color getColor(){return this.Color;}
+    public Color getColor(){return this.Color;}
     public State getState(){return this.state;}
+
+    public Piece copyPiece(){ return new Piece(getType(), getColor(), getState()); }
 
 
 }

@@ -3,7 +3,7 @@ package com.webcheckers.model;
 import java.util.Iterator;
 
 public class Player {
-    public enum Color{RED, WHITE}
+
     private boolean inGame;
     private Game game;
 
@@ -29,6 +29,10 @@ public class Player {
     public boolean isInGame(){return inGame;}
 
     public void setInGame(){inGame = true;}
+
+    public void setOutOfGame(){inGame = false;}
+
+    public void leaveGame(){inGame = false;}
 
     public Game getGame(){return this.game;}
 

@@ -5,8 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
 
-import com.webcheckers.model.ActiveColor;
-import com.webcheckers.model.Game;
+import com.webcheckers.application.GameCenter;
 import com.webcheckers.model.Player;
 import com.webcheckers.model.PlayerLobby;
 import spark.*;
@@ -27,7 +26,7 @@ public class GetHomeRoute implements Route {
   private static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
 
   private final String NUM_PLAYERS = "playernum";
-  private PlayerLobby pLobby;
+  private GameCenter gameCenter;
   private final String PLAYERS = "players";
   private final TemplateEngine templateEngine;
 
@@ -38,10 +37,10 @@ public class GetHomeRoute implements Route {
    * @param templateEngine
    *   the HTML template rendering engine
    */
-  public GetHomeRoute(final TemplateEngine templateEngine, PlayerLobby pLobby) {
+  public GetHomeRoute(final TemplateEngine templateEngine, GameCenter gameCenter) {
     this.templateEngine = Objects.requireNonNull(templateEngine, "templateEngine is required");
     //
-    this.pLobby = pLobby;
+    this.gameCenter = gameCenter;
     LOG.config("GetHomeRoute is initialized.");
   }
 
@@ -67,10 +66,10 @@ public class GetHomeRoute implements Route {
       vm.put("currentUser",httpSession.attribute("currentUser"));
       vm.put("message", message);
       vm.put("title", "Welcome!");
-      vm.put(PLAYERS, pLobby.getNamesInUse());
+      vm.put(PLAYERS, gameCenter.getPlayerLobby().getNamesInUse());
       vm.put("playerName", playerName);
       //System.out.println("Ploby:" + pLobby.NamesInUse);
-      Player into_game = pLobby.getPlayer(playerName);
+      Player into_game = gameCenter.getPlayerLobby().getPlayer(playerName);
       if(into_game.isInGame())
       {
         response.redirect("/game");
@@ -85,8 +84,8 @@ public class GetHomeRoute implements Route {
     vm.put("title", "Welcome!");
     // display a user message in the Home page
     vm.put("message", WELCOME_MSG);
-    vm.put(NUM_PLAYERS, pLobby.numberOfPlayers());
-    httpSession.attribute(PLAYER_LOBBY, pLobby);
+    vm.put(NUM_PLAYERS, gameCenter.getPlayerLobby().numberOfPlayers());
+    httpSession.attribute(PLAYER_LOBBY, gameCenter.getPlayerLobby());
     httpSession.maxInactiveInterval(SESSION_TIMEOUT_PERIOD);
 
     // render the View

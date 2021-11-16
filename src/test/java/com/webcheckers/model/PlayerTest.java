@@ -29,9 +29,9 @@ public class PlayerTest {
      */
     @Test
     public void nameAndColorConstructTest() {
-        CuT = new Player("Bobby", Player.Color.RED);
+        CuT = new Player("Bobby", Color.RED);
         assertEquals("Bobby",CuT.getName());
-        assertEquals(Player.Color.RED, CuT.getColor());
+        assertEquals(Color.RED, CuT.getColor());
     }
 
     /**
@@ -62,10 +62,10 @@ public class PlayerTest {
      */
     @Test
     public void setColorTest() {
-        CuT = new Player("Null :^)", Player.Color.RED);
-        CuT.setColor(Player.Color.WHITE);
+        CuT = new Player("Null :^)", Color.RED);
+        CuT.setColor(Color.WHITE);
 
-        assertEquals(Player.Color.WHITE, CuT.getColor());
+        assertEquals(Color.WHITE, CuT.getColor());
     }
 
     /**
@@ -73,11 +73,11 @@ public class PlayerTest {
      */
     @Test
     public void multSetColorTest() {
-        CuT = new Player("Null :^)", Player.Color.RED);
-        CuT.setColor(Player.Color.WHITE);
-        assertEquals(Player.Color.WHITE, CuT.getColor());
+        CuT = new Player("Null :^)", Color.RED);
+        CuT.setColor(Color.WHITE);
+        assertEquals(Color.WHITE, CuT.getColor());
 
-        CuT.setColor(Player.Color.RED);
-        assertEquals(Player.Color.RED, CuT.getColor());
+        CuT.setColor(Color.RED);
+        assertEquals(Color.RED, CuT.getColor());
     }
 }
