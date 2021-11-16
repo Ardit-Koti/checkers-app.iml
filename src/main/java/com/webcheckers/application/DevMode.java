@@ -6,5 +6,6 @@ public enum DevMode {
     KING_CHAINING,
     ENDGAME,
     TIE,
+    EMPTY,
     NONE;
 }

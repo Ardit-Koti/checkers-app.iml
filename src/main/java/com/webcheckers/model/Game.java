@@ -21,10 +21,15 @@ public class Game {
 
     private Color winner = null;
 
+    private com.webcheckers.model.Color Color;
+
     private Color activeColor;
 
     private int gameId; // TODO: 10/6/21  implement number generator for multiple games
 
+    // initilized to red as red goes first
+
+    private int movesSinceCapture = 0;
 
     private final MoveValidator validator;
 
@@ -33,6 +38,8 @@ public class Game {
     private Board futureBoard;
 
     private LinkedList<Board> boardList;
+
+    private boolean isTied;
 
     public Game(Player redPlayer, Player whitePlayer) {
         this.gameBoard = new Board();
@@ -78,6 +85,10 @@ public class Game {
      */
     public boolean isOver(){
         // check if all pieces are dead
+        if (winner != null){ // already a winner
+            return true;
+        }
+
         int redPieces = 0;
         int whitePieces = 0;
 
@@ -95,24 +106,40 @@ public class Game {
                     if(tempSpace.getPiece().getColor() == (com.webcheckers.model.Color.WHITE))
                         whitePieces++;
                 }
-
             }
         }
 
         if (redPieces == 0 ){ //white won
-            System.out.println("zero red Pieces");
-            winner = Color.WHITE;
+            //System.out.println("zero red Pieces");
+            winner = com.webcheckers.model.Color.WHITE;
             return true;
         }
 
         if (whitePieces==0){ // red won
-            System.out.println("zero white Pieces");
-            winner = Color.RED;
+            //System.out.println("zero white Pieces");
+            winner = com.webcheckers.model.Color.RED;
             return true;
         }
 
+        /** TIE STUFF*/
+        // check if no possible moves exist
+         if (validator.possibleMoves().isEmpty()){ // no possible moves need to ask ryan how to do this
+             System.out.println("TIE!!");
+        }
+        // FORTY MOVES WITHOUT CAPTURE, = tie
+        for (Move m:this.currentMove) {
+            if (m.isJumpMove()){
+                movesSinceCapture=0;
+                this.isTied=true;
+            }
 
-        //todo check if no possible moves exist
+        }
+
+        if (movesSinceCapture<= 40){
+            this.isTied=true;
+            System.out.println("TIE!!");
+        }
+        movesSinceCapture++;
 
         return false; // game is not over
     }

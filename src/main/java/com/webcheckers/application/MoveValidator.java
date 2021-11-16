@@ -319,7 +319,7 @@ public class MoveValidator {
     public HashSet<Move> possibleMoves() {
         HashSet<Move> simpleMoves = new HashSet<>();
         HashSet<Move> jumpMoves = new HashSet<>();
-
+        this.activeColor = game.getActiveColor();
         Iterator<Row> boardItr = board.iterate_by_color(!activeColor.equals(Color.WHITE));
 
         while(boardItr.hasNext()) {
