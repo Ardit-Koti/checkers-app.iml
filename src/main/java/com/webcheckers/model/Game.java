@@ -143,6 +143,9 @@ public class Game {
         return false; // game is not over
     }
 
+    public boolean isTied(){
+        return isTied;
+    }
 
     public void declareWinner(Color winnerColor){
         this.winner= winnerColor;
