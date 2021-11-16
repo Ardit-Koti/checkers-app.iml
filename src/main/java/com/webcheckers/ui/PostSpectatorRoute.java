@@ -6,11 +6,15 @@ import com.webcheckers.util.Message;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+import spark.TemplateEngine;
 
 public class PostSpectatorRoute implements Route {
     private final GameCenter gameCenter;
+    private TemplateEngine templateEngine;
 
-    public PostSpectatorRoute(GameCenter gameCenter) {
+    public PostSpectatorRoute(TemplateEngine templateEngine, GameCenter gameCenter)
+    {
+        this.templateEngine = templateEngine;
         this.gameCenter = gameCenter;
     }
 
