@@ -1,25 +1,28 @@
 package com.webcheckers.ui;
 
 import com.webcheckers.application.GameCenter;
+import com.webcheckers.model.Game;
 import com.webcheckers.model.Player;
 import com.webcheckers.model.PlayerLobby;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+import spark.TemplateEngine;
 
 public class GetSpectatorRoute implements Route {
     private final GameCenter gameCenter;
-    private final PlayerLobby playerLobby;
+    private final TemplateEngine templateEngine;
 
-    public GetSpectatorRoute(GameCenter gameCenter, PlayerLobby playerLobby) {
+    public GetSpectatorRoute(TemplateEngine templateEngine, GameCenter gameCenter) {
         this.gameCenter = gameCenter;
-        this.playerLobby = playerLobby;
+        this.templateEngine = templateEngine;
     }
 
     @Override
     public Object handle(Request request, Response response) throws Exception {
+        PlayerLobby pLobby = gameCenter.getPlayerLobby();
         Player spectator = request.session().attribute("Player");
-        Player gamePlayer = playerLobby.getPlayer(request.queryParams("redPlayer"));
+        Player gamePlayer = pLobby.getPlayer(request.queryParams("redPlayer"));
 
         //gamecenter.addspectator(spectator, gameplayer);
 
