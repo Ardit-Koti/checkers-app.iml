@@ -175,14 +175,14 @@ public class WebServer {
 
     post(RESIGN_URL, new PostResignRoute(templateEngine, gameCenter ,gson));
 
-    post(BACKUP_MOVE_URL, new PostBackupRoute());
+    post(BACKUP_MOVE_URL, new PostBackupRoute(templateEngine, gameCenter, gson));
 
     get(SPEC_GAME_URL, new GetSpectatorRoute(templateEngine, gameCenter));
 
     get(SPEC_STOP_URL, new GetSpecStopRoute(templateEngine, gameCenter));
 
     post(SPEC_CHECK_URL, new PostSpectatorRoute(templateEngine, gameCenter));
-    //
+
     LOG.config("WebServer is initialized.");
   }
 

@@ -29,10 +29,19 @@ public class Piece {
 
     }
 
+    public Piece(type Type, Color Color, State state) {
+        this.Type = Type;
+        this.Color = Color;
+        this.state = state;
+
+    }
+
     public void killPiece(){this.state = State.Dead;}
     public type getType(){return this.Type;}
     public Color getColor(){return this.Color;}
     public State getState(){return this.state;}
+
+    public Piece copyPiece(){ return new Piece(getType(), getColor(), getState()); }
 
 
 }

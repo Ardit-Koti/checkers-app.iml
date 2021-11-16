@@ -29,9 +29,15 @@ public class Row{
         this.index = index;
         for(int a = 0; a<8; a++)
         {   //devmode determines the board start arrangement
-            spaceList.add(new Space(a, index, DevMode.TIE));
+            spaceList.add(new Space(a, index, DevMode.NONE));
         }
     }
+
+    public Row(int index, ArrayList<Space> spaces){
+        this.index = index;
+        this.spaceList = spaces;
+    }
+
     public int getIndex(){return this.index;}
 
 
@@ -80,5 +86,13 @@ public class Row{
      */
     public Piece getPieceAtIndex(int column) {
         return spaceList.get(column).getPiece();
+    }
+
+    public Row copyRow(){
+        ArrayList<Space> copySpaces = new ArrayList<>();
+        for (Space s: spaceList){
+            copySpaces.add(s.copySpace());
+        }
+        return new Row(getIndex(), copySpaces);
     }
 }

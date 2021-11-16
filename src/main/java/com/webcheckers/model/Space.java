@@ -20,6 +20,15 @@ public class Space {
     public Piece piece = null;
     private int cellIdx;
     private final int limit = 7;
+    public Space(int cellIdx, Piece piece, Status status, Shade shade){
+        this.cellIdx = cellIdx;
+        this.piece = piece;
+        this.status = status;
+        this.shade = shade;
+    }
+
+
+
 
     public Space(int cellIdx, int row_index)
     {
@@ -228,6 +237,13 @@ public class Space {
     public Status getState() {
         return this.status;
     }
+
+    public Space copySpace(){
+        if(this.piece != null)
+            return new Space(getCellIdx(), piece.copyPiece(), getState(), getShade());
+        return new Space(getCellIdx(), null, getState(), getShade());
+    }
+
 
 
 

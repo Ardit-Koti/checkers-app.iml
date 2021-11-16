@@ -50,7 +50,7 @@ public class Game {
         this.whitePlayer = whitePlayer;
         this.currentMove = new LinkedList<>();
         this.boardList = new LinkedList<Board>();
-        boardList.add(new Board(this.gameBoard));
+        boardList.add(gameBoard.copyBoard());
         validator = new MoveValidator(this);
         GameCenter.id = GameCenter.id +1;
         gameId = GameCenter.id;
@@ -181,7 +181,7 @@ public class Game {
                 if (activeColor.equals(com.webcheckers.model.Color.RED)) {setActiveColor(com.webcheckers.model.Color.WHITE);}
                 else {setActiveColor(com.webcheckers.model.Color.RED);}
                 currentMove.clear();
-                this.boardList.add(new Board(this.gameBoard));
+                this.boardList.add(gameBoard.copyBoard());
                 return SUBMITTED;
             }
         }
@@ -261,6 +261,7 @@ public class Game {
 
     public String backup()
     {
+        System.out.println("Size of boardList" + boardList.size());
         if(this.currentMove.isEmpty())
         {
             return ERROR_NO_MOVE_BACKUP;

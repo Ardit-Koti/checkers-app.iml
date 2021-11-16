@@ -148,13 +148,20 @@ public class Board{
             RowList.add(new Row(a));
         }
 
-
-
     }
 
-    public Board(Board prev_board)
+    public Board(ArrayList<Row> rowList){
+        this.RowList = rowList;
+    }
+
+    public Board copyBoard()
     {
-        this.RowList = prev_board.RowList;
+        ArrayList<Row> copyBoard = new ArrayList<>();
+        for (Row r : RowList){
+            copyBoard.add(r.copyRow());
+        }
+        return new Board(copyBoard);
+
     }
 
     public void addMove(Move m){
@@ -164,4 +171,4 @@ public class Board{
         return moves;
     }
 
-    }
+}
