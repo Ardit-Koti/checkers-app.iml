@@ -29,7 +29,7 @@ public class Row{
         this.index = index;
         for(int a = 0; a<8; a++)
         {   //devmode determines the board start arrangement
-            spaceList.add(new Space(a, index, DevMode.NONE));
+            spaceList.add(new Space(a, index, DevMode.KING_CHAINING));
         }
     }
 

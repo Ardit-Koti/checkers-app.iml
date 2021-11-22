@@ -147,10 +147,16 @@ public class Space {
         }
 
         else if(devMode == DevMode.TIE){
-            if(this.shade.equals(Shade.DARK) &&  row_index == 0 && cellIdx ==7)
+            if(this.shade.equals(Shade.DARK) &&  row_index == 7 && cellIdx ==0)
                 addCurrentPiece(new Piece(Piece.type.SINGLE, Color.RED));
+            if(this.shade.equals(Shade.DARK) &&  row_index == 5 && cellIdx ==4)
+                addCurrentPiece(new Piece(Piece.type.SINGLE, Color.RED));
+
+            if(this.shade.equals(Shade.DARK) &&  row_index == 3 && cellIdx ==4)
+                addCurrentPiece(new Piece(Piece.type.SINGLE, Color.WHITE));
             if(this.shade.equals(Shade.DARK) &&  row_index == 6 && cellIdx ==1)
                 addCurrentPiece(new Piece(Piece.type.SINGLE, Color.WHITE));
+
         }
         else if(devMode == DevMode.NONE) { //no dev mode
             if(this.shade.equals(Shade.DARK) && row_index >= 5 && row_index <= 7)

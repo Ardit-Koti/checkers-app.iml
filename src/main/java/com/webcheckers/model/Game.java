@@ -135,16 +135,20 @@ public class Game {
         for (Move m:this.currentMove) {
             if (m.isJumpMove()){
                 movesSinceCapture=0;
+                System.out.println("jump move, movesSinceCapture reset");
             }
         }
 
-        if (movesSinceCapture >= 40){
+        if (movesSinceCapture >= 3){
             this.isTied=true;
             //System.out.println("TIE due to 40 moves without capture!!");
             this.gameOverMessage = "TIE due to 40 moves without capture!!";
+            System.out.println("TIEEEE");
+            return true;
 
         }
-        movesSinceCapture++;
+
+        System.out.println("movesSinceCapture: "+movesSinceCapture);
 
         return false; // game is not over
     }
@@ -158,7 +162,7 @@ public class Game {
     }
 
         public String submitMove() {
-
+            movesSinceCapture++;
             if(this.isOver()){
                 String s = " WINNER WINNER CHICKEN DINNER!! Congratulations ";
                 if (this.winner == com.webcheckers.model.Color.RED)

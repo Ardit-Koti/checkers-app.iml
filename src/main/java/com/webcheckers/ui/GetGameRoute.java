@@ -127,7 +127,7 @@ public class GetGameRoute implements Route{
         vm.put(WHITE_PLAYER, game.getWhitePlayer());
         vm.put(ACTIVE, game.getActiveColor());
         game.isOver();
-        if (game.getWinner() != null){
+        if (game.getWinner() != null || game.isTied()){
             final Map<String, Object> modeOptions = new HashMap<>(2);
             modeOptions.put("isGameOver", true);
             modeOptions.put("gameOverMessage", game.getGameOverMessage());
