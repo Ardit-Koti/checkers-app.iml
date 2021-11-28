@@ -55,6 +55,10 @@ public class GetGameRoute implements Route{
      *
      * @param templateEngine
      *    The {@link TemplateEngine} used for rendering page HTML.
+     * @param gameCenter
+     *    The program-wide gameCenter which keeps track of games and players.
+     * @param gson
+     *    The Gson used.
      */
 
     GetGameRoute(final TemplateEngine templateEngine, GameCenter gameCenter, Gson gson){
@@ -71,6 +75,14 @@ public class GetGameRoute implements Route{
 
     }
 
+    /**
+     * The handle function for GetGameRoute.
+     * Depemding on conditions, may create a new game session, put challenged players into
+     * already created sessions, update game sessions, etc.
+     * @param request request body for GET request.
+     * @param response response body
+     * @return Model View render
+     */
     @Override
     public String handle(Request request, Response response) {
         final Session httpSession = request.session();
