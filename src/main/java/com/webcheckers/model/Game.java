@@ -43,6 +43,12 @@ public class Game {
 
     private String gameOverMessage = "";
 
+    /**
+     * Game constructor
+     * @param redPlayer the player to be assigned red
+     * @param whitePlayer the playert to be assigned white
+     * @param gameId the game ID
+     */
     public Game(Player redPlayer, Player whitePlayer, int gameId) {
         this.gameBoard = new Board();
         this.futureBoard = this.gameBoard;
@@ -55,12 +61,29 @@ public class Game {
         this.gameId = gameId;
     }
 
+    /**
+     * Retrieves gameBoard
+     * @return Board
+     */
     public Board getGameBoard(){return this.gameBoard;}
 
+    /**
+     * Retrieves red player of game
+     * @return Player
+     */
     public Player getRedPlayer(){return this.redPlayer;}
 
+    /**
+     * Retrieves white player of game
+     * @return Player
+     */
     public Player getWhitePlayer(){return this.whitePlayer;}
 
+    /**
+     * Retrieves other player of game
+     * @param you player calling method
+     * @return Player
+     */
     public Player getOtherPlayer(Player you){
         if (you.getColor().equals(Color.RED)) { return getWhitePlayer();}
         return getRedPlayer();
@@ -82,7 +105,7 @@ public class Game {
      *
      * if a game is over, the winner object is set.
      *
-     * @return
+     * @return boolean
      */
     public boolean isOver(){
         // check if all pieces are dead
@@ -153,10 +176,18 @@ public class Game {
         return false; // game is not over
     }
 
+    /**
+     * Checks if game is tied
+     * @return boolean
+     */
     public boolean isTied(){
         return isTied;
     }
 
+    /**
+     * Declares winner of game
+     * @param winnerColor player color who won
+     */
     public void declareWinner(Color winnerColor){
         this.winner= winnerColor;
     }
@@ -242,20 +273,46 @@ public class Game {
         }
     }
 
+    /**
+     * Sets active color of game
+     * @param activeColor the Color to set to
+     */
     public void setActiveColor(Color activeColor){this.activeColor = activeColor;}
 
+    /**
+     * Retrieves active color of game
+     * @return Color
+     */
     public Color getActiveColor(){return this.activeColor;}
 
     public void setGameBoard(Board gameBoard){this.gameBoard = gameBoard;}
 
+    /**
+     * Retrieves winner color of game
+     * @return Color
+     */
     public Color getWinner(){return this.winner;}
+
+    /**
+     * Retrieves winning player
+     * @return Player
+     */
     public Player getWinPlayer(){
         if (winner.equals(Color.RED)) return getRedPlayer();
         else return getWhitePlayer();
     }
 
+    /**
+     * Retrieves ID of game
+     * @return int
+     */
     public int getGameId(){return this.gameId;}
 
+    /**
+     * Declares winner, returns false if issue
+     * @param winner Player who won
+     * @return boolean
+     */
     public boolean declareWinner(Player winner) {
         if((winner.equals(redPlayer) || winner.equals(whitePlayer)) && this.winner == null) {
             this.winner = winner.getColor();
@@ -265,6 +322,10 @@ public class Game {
         return false;
     }
 
+    /**
+     * Backs up moves in current turn
+     * @return String for success or ERROR
+     */
     public String backup()
     {
         System.out.println("Size of boardList" + boardList.size());
@@ -295,5 +356,9 @@ public class Game {
         return RESIGN_ERROR;
     }
 
+    /**
+     * Retrieves game over message
+     * @return String
+     */
     public String getGameOverMessage(){return this.gameOverMessage;}
 }
