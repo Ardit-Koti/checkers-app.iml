@@ -19,11 +19,23 @@ public class PostSignOutRoute implements Route {
     private final String player = "currentUser";
     private final GameCenter gameCenter;
 
+    /**
+     * The constructor for the {@code post /signout} route handler
+     * @param templateEngine the templateEngine for rendering HTML
+     * @param gameCenter the program-wide gameCenter for tracking games
+     */
     public PostSignOutRoute(TemplateEngine templateEngine, GameCenter gameCenter) {
         this.templateEngine = templateEngine;
         this.gameCenter = gameCenter;
     }
 
+    /**
+     * Signs player out of site if player is signed in list of players.
+     * @param request the HTTP request
+     * @param response the HTTP response
+     * @return null ; redirect to home page
+     * @throws Exception
+     */
     @Override
     public Object handle(Request request, Response response) throws Exception {
         final Session httpSession = request.session();

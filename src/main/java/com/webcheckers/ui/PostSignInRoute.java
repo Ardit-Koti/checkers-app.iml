@@ -35,9 +35,9 @@ public class PostSignInRoute implements Route{
     private final GameCenter gameCenter;
 
     /**
-     * Constructor takes in templateEngine and plobby where
-     * @param templateEngine is how the page is rendered  and
-     * @param gameCenter the gameCenter
+     * Constructor for the {@code post /signin} route handler
+     * @param templateEngine the templateEngine for rendering HTML.
+     * @param gameCenter the program-wide gameCenter which tracks games.
      */
     PostSignInRoute(TemplateEngine templateEngine, GameCenter gameCenter){
         Objects.requireNonNull(templateEngine, "templateEngine must not be null");
@@ -46,10 +46,10 @@ public class PostSignInRoute implements Route{
     }
 
     /**
-     * handle method gets called when sign in
-     * @param request
-     * @param response
-     * @return
+     * Signs player into the site and adds player to list of players.
+     * @param request the HTTP request
+     * @param response the HTTP response
+     * @return new ModelAndView
      */
     @Override
     public String handle(Request request, Response response) { //called again for each sign in
