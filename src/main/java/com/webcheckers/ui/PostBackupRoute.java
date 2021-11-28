@@ -21,13 +21,26 @@ public class PostBackupRoute implements Route {
     private Gson gson;
     private TemplateEngine templateEngine;
 
+    /**
+     * The constructor for the {@code Post /backupMove} route handler.
+     * @param templateEngine the templateEngine used for rendering HTML.
+     * @param gameCenter The program-wide gameCenter which tracks games
+     * @param gson the Gson
+     */
     public PostBackupRoute(TemplateEngine templateEngine, GameCenter gameCenter, Gson gson){
         this.gson = gson;
         this.gameCenter = gameCenter;
         this.templateEngine = templateEngine;
     }
 
-
+    /**
+     * Backups up a series of attempted moves on the board to beginning of turn. Returns error
+     * if no moves have been attempted when request is sent.
+     * @param request the HTTP request
+     * @param response the HTTP response
+     * @return gson.toJson whch tells success or ERROR
+     * @throws Exception
+     */
     @Override
     public Object handle(Request request, Response response) throws Exception {
         final Session httpSession = request.session();
