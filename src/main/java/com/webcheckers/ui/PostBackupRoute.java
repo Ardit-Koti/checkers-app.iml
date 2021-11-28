@@ -24,7 +24,7 @@ public class PostBackupRoute implements Route {
     /**
      * The constructor for the {@code Post /backupMove} route handler.
      * @param templateEngine the templateEngine used for rendering HTML.
-     * @param gameCenter The program-wide gameCenter which tracks games
+     * @param gameCenter The program-wide gameCenter which tracks games.
      * @param gson the Gson
      */
     public PostBackupRoute(TemplateEngine templateEngine, GameCenter gameCenter, Gson gson){

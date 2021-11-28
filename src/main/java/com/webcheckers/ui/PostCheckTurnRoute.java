@@ -27,6 +27,12 @@ class PostCheckTurnRoute implements Route {
 
     private final GameCenter gameCenter;
 
+    /**
+     * Constructor for the {@code Post /checkTurn} route handler.
+     * @param templateEngine the templateEngine used for rendering HTML.
+     * @param gameCenter The program-wide gameCenter which tracks games.
+     * @param gson the Gson.
+     */
 
     public PostCheckTurnRoute(final TemplateEngine templateEngine, GameCenter gameCenter, final Gson gson) {
         this.gson = gson;
@@ -34,6 +40,12 @@ class PostCheckTurnRoute implements Route {
         this.gameCenter = gameCenter;
     }
 
+    /**
+     * Checks turn to see if it is your turn or if the game has a winner, then updates.
+     * @param request the HTTP request
+     * @param response the HTTP response
+     * @return gson.toJson message
+     */
 
     @Override
     public String handle(Request request, Response response) {
