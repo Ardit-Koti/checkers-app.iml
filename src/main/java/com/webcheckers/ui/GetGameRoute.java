@@ -19,7 +19,9 @@ import spark.Session;
 
 import com.webcheckers.util.Message;
 
-
+/**
+ * class that allows for the two players and any spectators to join the game session.
+ */
 public class GetGameRoute implements Route{
 
     static final String VIEW_NAME = "game.ftl"; // route for the game

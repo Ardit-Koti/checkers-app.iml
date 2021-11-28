@@ -11,8 +11,8 @@ import java.util.List;
  */
 public class Row{
     private final int index;
-    private final int redlimit = 7;
-    private final int whitelimit = 0;
+    private final int redLimit = 7;
+    private final int whiteLimit = 0;
 
     public ArrayList<Space> spaceList;
 
@@ -70,7 +70,7 @@ public class Row{
                 int i = -1;
                 @Override
                 public boolean hasNext() {
-                    return i+1 <= redlimit;
+                    return i+1 <= redLimit;
                 }
 
                 @Override
@@ -85,7 +85,7 @@ public class Row{
                 int a = 8;
                 @Override
                 public boolean hasNext() {
-                    return a-1 >= whitelimit;
+                    return a-1 >= whiteLimit;
                 }
 
                 @Override

@@ -6,8 +6,8 @@ import java.util.*;
  * Board class for rendering checkersBoard
  */
 public class Board{
-    private final int redlimit = 7;
-    private final int whitelimit = 0;
+    private final int redLimit = 7;
+    private final int whiteLimit = 0;
 
     public ArrayList<Row> RowList;
     private List<Move> moves = new ArrayList<>();
@@ -36,7 +36,7 @@ public class Board{
                 int i = -1;
                 @Override
                 public boolean hasNext() {
-                    return i+1 <= redlimit;
+                    return i+1 <= redLimit;
                 }
 
                 @Override
@@ -51,7 +51,7 @@ public class Board{
                 int a = 8;
                 @Override
                 public boolean hasNext() {
-                    return a-1 >= whitelimit;
+                    return a-1 >= whiteLimit;
                 }
 
                 @Override

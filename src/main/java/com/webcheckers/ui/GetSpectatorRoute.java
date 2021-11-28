@@ -12,6 +12,9 @@ import spark.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * class that allows the spectator to watch whatever game is available.
+ */
 public class GetSpectatorRoute implements Route {
     private final String VIEW_NAME = "game.ftl";
     static final String NAME_PARAM = "name";
@@ -30,6 +33,12 @@ public class GetSpectatorRoute implements Route {
     private final PlayerLobby pLobby;
     private Game game;
 
+    /**
+     * Constructor for GetSpectatorRoute
+     * @param templateEngine templateEngine used for the spectator
+     * @param gameCenter gameCenter used to control spectators in lobby
+     * @param gson gson used for games
+     */
     public GetSpectatorRoute(TemplateEngine templateEngine, GameCenter gameCenter, Gson gson) {
         this.gameCenter = gameCenter;
         this.templateEngine = templateEngine;
@@ -37,6 +46,14 @@ public class GetSpectatorRoute implements Route {
         this.pLobby = gameCenter.getPlayerLobby();
     }
 
+    /**
+     * handle used to replicate getGameRoute but specifically for user who
+     * wants to spectate but still needs to initialize everything in getGameRoute.
+     * @param request request for the http session
+     * @param response so that someone can be redirected to another page
+     * @return templateEngine
+     * @throws Exception
+     */
     @Override
     public Object handle(Request request, Response response) throws Exception {
         final Session httpSession = request.session();
