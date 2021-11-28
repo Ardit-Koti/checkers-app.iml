@@ -9,7 +9,6 @@ import com.webcheckers.util.Message;
 import spark.*;
 
 
-
 public class PostBackupRoute implements Route {
     private static final String NO_BACKUP = "No moves to backup to!";
     private static final String BACKUP = "Go back to your last valid move!";
