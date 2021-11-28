@@ -43,7 +43,7 @@ public class GetSignInRoute implements Route{
      * Renders the sign-in page.
      * @param request the HTTP request
      * @param response the HTTP response
-     * @return the rendered HTML signin.ftl 
+     * @return the rendered HTML signin.ftl
      */
     @Override
     public String handle(Request request, Response response) {
