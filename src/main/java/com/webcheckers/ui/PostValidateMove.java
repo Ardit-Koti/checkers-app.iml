@@ -27,14 +27,25 @@ public class PostValidateMove implements Route{
     private final Gson gson;
     private final GameCenter gameCenter;
 
+    /**
+     * The constructor for the {@code post /validateMove} route handler.
+     * @param templateEngine the templateEngine for rendering HTML
+     * @param gameCenter The program-wide gameCenter which tracks games
+     * @param gson the Gson for messages.
+     */
     public PostValidateMove(TemplateEngine templateEngine, GameCenter gameCenter, Gson gson) {
         this.templateEngine = templateEngine;
         this.gameCenter = gameCenter;
         this.gson = gson;
     }
 
-
-
+    /**
+     * Validates moves that are attempted on the board. Returns Gson for success or ERROR.
+     * @param request the HTTP request
+     * @param response the HTTP response
+     * @return Gson.toJson
+     * @throws Exception
+     */
     @Override
     public Object handle(Request request, Response response) throws Exception {
         final Session httpSession = request.session();
