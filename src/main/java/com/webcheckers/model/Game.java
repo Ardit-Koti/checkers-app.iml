@@ -13,35 +13,35 @@ import java.util.LinkedList;
  */
 public class Game {
 
-    private Player redPlayer;
+    private Player redPlayer; // red player necessary for game
 
-    private LinkedList<Move> currentMove;
+    private LinkedList<Move> currentMove; // current move of the board at that specific state
 
-    private Player whitePlayer;
+    private Player whitePlayer; // white player necessary for game
 
-    private Color winner = null;
+    private Color winner = null; // winner is inherently null since upon start no winner has been called
 
-    private com.webcheckers.model.Color Color;
+    private com.webcheckers.model.Color Color; // unused
 
-    private Color activeColor;
+    private Color activeColor; // active color is used to see which player is up
 
     private int gameId; // TODO: 10/6/21  implement number generator for multiple games
 
     // initilized to red as red goes first
 
-    private int movesSinceCapture = 0;
+    private int movesSinceCapture = 0; // integer of moves so ties can be determined
 
-    private final MoveValidator validator;
+    private final MoveValidator validator; // checks for all moves
 
-    private Board gameBoard;
+    private Board gameBoard; // creates the initial game board for these players
 
-    private Board futureBoard;
+    private Board futureBoard; // used for replay mode
 
-    private LinkedList<Board> boardList;
+    private LinkedList<Board> boardList; // list of checkerboards
 
-    private boolean isTied = false;
+    private boolean isTied = false; // isTied will be false initially since a tie can't happen upon initialization
 
-    private String gameOverMessage = "";
+    private String gameOverMessage = ""; // message to show game is over.
 
     /**
      * Game constructor
