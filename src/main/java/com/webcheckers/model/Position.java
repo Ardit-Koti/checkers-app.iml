@@ -1,5 +1,8 @@
 package com.webcheckers.model;
 
+/**
+ * class that represents the position in the model tier
+ */
 public class Position {
     private int row; //0-7
     private int cell; // the cell in the row (should be called column). 0-7
