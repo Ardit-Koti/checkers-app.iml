@@ -15,7 +15,10 @@ public class Row{
 
     // to reverse board, create copy of board in reversed state
 
-
+    /**
+     * Makes string representation of Row contents.
+     * @return String
+     */
     @Override
     public String toString() {
         return "Row{" +
@@ -23,6 +26,10 @@ public class Row{
                 '}';
     }
 
+    /**
+     * Row constructor which creates list of spaces.
+     * @param index the index of the row
+     */
     public Row(int index)
     {
         spaceList = new ArrayList<>();
@@ -33,14 +40,27 @@ public class Row{
         }
     }
 
+    /**
+     * Row creator with pre-made list of spaces
+     * @param index row index
+     * @param spaces list of spaces
+     */
     public Row(int index, ArrayList<Space> spaces){
         this.index = index;
         this.spaceList = spaces;
     }
 
+    /**
+     * Retrieves index of row
+     * @return int row index
+     */
     public int getIndex(){return this.index;}
 
-
+    /**
+     * Iterator for row which iterates differently depending on color.
+     * @param color color for iterating (true for red, false for white)
+     * @return Iterator<Space>
+     */
     public Iterator<Space> iterate_by_color(boolean color) {
         if(color) {
             return new Iterator<Space>() {
@@ -74,6 +94,10 @@ public class Row{
         }
     }
 
+    /**
+     * Retrieves list of spaces
+     * @return List<Space></Space>
+     */
     public List<Space> getSpaces() {
         return spaceList;
     }
@@ -88,6 +112,10 @@ public class Row{
         return spaceList.get(column).getPiece();
     }
 
+    /**
+     * Copys Row contents
+     * @return new Row
+     */
     public Row copyRow(){
         ArrayList<Space> copySpaces = new ArrayList<>();
         for (Space s: spaceList){
