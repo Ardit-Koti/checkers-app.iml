@@ -2,6 +2,9 @@ package com.webcheckers.model;
 
 import com.webcheckers.application.DevMode;
 
+/**
+ * class that represents a space on the checkers board
+ */
 public class Space {
 
     public enum Shade {LIGHT, DARK}

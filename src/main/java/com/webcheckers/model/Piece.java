@@ -1,5 +1,9 @@
 package com.webcheckers.model;
 
+
+/**
+ * class that represents a piece  on the checkers board
+ */
 public class Piece {
 
 

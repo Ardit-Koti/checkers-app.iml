@@ -4,6 +4,9 @@ import com.webcheckers.model.Player;
 
 import java.util.*;
 
+/**
+ * class that checks for names and takes care of the lobby of players and dictates who plays.
+ */
 public class PlayerLobby {
     private final List<String> NamesInUse; // List of each name used, will be seen in lobby of game
     private final List<Player> Players; // List of the actual player, not just the name

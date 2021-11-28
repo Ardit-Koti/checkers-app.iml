@@ -1,18 +1,37 @@
 package com.webcheckers.model;
 
-public class Move {
-    private Position start;
-    private Position end;
+/**
+ * class that represents a move on the checkers board
+ */
 
+
+public class Move {
+    private Position start; // starting position
+    private Position end; // ending position
+
+    /**
+     * Constructor for the Move
+     * @param start the starting position for the piece
+     * @param end the ending position for the piece
+     */
     public Move(Position start, Position end) {
         this.start = start;
         this.end = end;
     }
 
+    /**
+     * getStartPos gets the initial position
+     * @return Position
+     */
+
     public Position getStartPos() {
         return start;
     }
 
+    /**
+     * getEndPos gets the ending position
+     * @return Position
+     */
     public Position getEndPos() {
         return end;
     }
@@ -35,6 +54,10 @@ public class Move {
         return Math.abs(start.getRow() - end.getRow()) == 2 && Math.abs(start.getCell() - end.getCell()) == 2;
     }
 
+    /**
+     * printMove prints the starting move and the ending move into cmd line
+     */
+
     public void printMove() {
         System.out.println("Move info:: (Row, Cell/Col) \n    " +
                 "start: (" + getStartPos().getCell()+ ","+ getStartPos().getRow() + ")"+"\n    " +
@@ -43,6 +66,11 @@ public class Move {
     }
 
 
+    /**
+     * Equals method to check the change in position if there is any
+     * @param o the other move being checked and compared
+     * @return boolean
+     */
     @Override
     public boolean equals(Object o){
         if (this == o) {return true;}

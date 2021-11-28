@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * class that represents a row on the checkers board
+ */
 public class Row{
     private final int index;
     private final int redlimit = 7;
