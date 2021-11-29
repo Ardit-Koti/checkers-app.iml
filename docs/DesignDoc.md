@@ -174,14 +174,37 @@ has not signed in at this point than only the amount of players currently signed
 GetSignIn is used to route the user to the signIn screen and prompt them for their login information.
 <br><br>
 PostSignIn is used to parse the login information entered. If the login is invalid an error message is displayed
-to the User so that they can enter correct information. Otherwise the player is routed back toward the home page to 
+to the User so that they can enter correct information. Otherwise, the player is routed back toward the home page to 
 engage with other users
 <br><br>
-PostSignOut is called when the user interacts with the sign out button. This removes them from the active
+PostSignOut is called when the user interacts with the sign-out button. This removes them from the active
 player base and makes them unable to join or watch games. It then directs them to the home page.
 <br><br>
 GetGame is used to start a game when one player challenges another. Both players are moved into the game view and shown
 the starting position of the board.
+<br><br>
+GetSpecStop is used to stop the spectator from actually spectating the game, either because they want to watch another game
+or because the game they are currently watching stopped.
+<br><br>
+GetSpectatorRoute is used specifically so that a player is actually able to watch the game that they want to watch. So, 
+all entities need to be passed through the .ftl pages just like in GetGameRoute.
+<br><br>
+PostBackupRoute is used so that when a player selects a move, they will be able to change their mind and go backwards in a sense.
+They will be able to change their move to whatever they want, IF there is a move that they can go back to. 
+<br><br>
+PostCheckTurnRoute is used to check whether its the player's turn or not, while checking the conditions that the game is still going on. 
+<br><br>
+PostHomeRoute is used so that either when the user wants to leave or when the game is over, they are able to go 
+back to the homepage.
+<br><br>
+PostSpectatorUpdater is used so that as the moves are changing within the game, the spectator is updated on what is happening
+in current time, and it is constantly checking whether the game is over or not. 
+<br><br>
+PostSubmitRoute is used so that when a player has locked in a move, they are able to submit their turn by using the submit button
+on the game page.
+<br><br>
+Finally, PostValidateMove is used so that player moves are checked and validated to make sure they can be moved, while checking
+the conditions of the game.
 
 
 
@@ -200,7 +223,7 @@ we can easily show off these scenarios with the DevMode class.
 
 During Sprint 3, we decided that the best way to check if a move was valid or not, was to implement a MoveValidator class.
 This allows us to check every condition for a move and to see which moves are possible for the player to make. This is the center 
-of all of our logic regarding move making and it is has proved to be a great tool. 
+of all of our logic regarding move making, and it is has proved to be a great tool. 
 
 Along with MoveValidator, we decided as a team that the best possible way to manage games was to create a GameCenter class. 
 The GameCenter class allows us to get available games, create games, and see the player lobby entirely. 
