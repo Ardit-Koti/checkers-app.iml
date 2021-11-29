@@ -1,7 +1,7 @@
 package com.webcheckers.application;
 
 /**
- * An enum used for the differen dev modes that we want
+ * An enum used for the different dev modes that we want
  * to showcase during our Sprint presentations
  */
 public enum DevMode {
