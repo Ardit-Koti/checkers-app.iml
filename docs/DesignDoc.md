@@ -29,7 +29,6 @@ replay feature, it allows for the best possible experience when playing
 checkers. 
 
 ### Glossary and Acronyms
-> _Provide a table of terms and acronyms._
 
 | Term | Definition |
 |------|------------|
@@ -40,9 +39,6 @@ checkers.
 
 Placeholder
 
-> _In this section you do not need to be exhaustive and list every
-> story.  Focus on top-level features from the Vision document and
-> maybe Epics and critical Stories._
 
 ### Definition of MVP
 In order to satisfy the Product Owner, the MVP needs to include these 3 key features:
@@ -92,13 +88,13 @@ In order to satisfy the Product Owner, certain Epics and top-level stories need 
 Two possible future enhancements are as follows:
 <br>
 
-> _Spectator Mode_
+
 <li> Spectator mode</li>
 <ul class="square">
   <li>While signed-in, players should be able to view on-going game that they are not playing.</li>
 </ul>
 
-> _Replay Mode_
+
 
 <li> Replay Backlog
 </li>
@@ -189,7 +185,7 @@ the starting position of the board.
 
 
 
-> A Sequence Diagram from GetGameRoute
+
 
 ![A Sequence Diagram from GetGameRoute](SeqFinal.PNG)
 
@@ -214,11 +210,21 @@ This change definitely made implementing spectator way easier.
 
 
 ### Model Tier
-The Model Tier encompasses all of the logic within the game based off the <a href="http://www.se.rit.edu/~swen-261/projects/WebCheckers/American%20Rules.html">American Checker Rules.</a>
+The Model Tier encompasses all the logic within the game based off the <a href="http://www.se.rit.edu/~swen-261/projects/WebCheckers/American%20Rules.html">American Checker Rules.</a>
 Within the actual tier, you have the Board and Player classes. The board class creates the actual board using the Row class
 to make it 2D. The player class is used for setting their name for the game. The Game class creates two Players, red and white. The PlayerLobby
 class handles the name and password of the Player. Within that class, usernames and passwords are checked to see if they are valid. The Piece class has multiple states, including Color (Red or White), Variety (Regular or King), or State (Alive or Dead ).
 The Space class goes through each spot on the checkerboard and whether the spot is vacant, invalid, or not, will add a piece based on the American Rules.
+
+
+The Move class within the Model tier takes a starting position 
+and an ending position and makes sure to check conditions on whether there are jumps.
+The actual Position class takes in a row and a cell and that is how the actual position of the piece is determined. 
+
+ViewMode is an enum which has two entities, Spectator and Play. Essentially determines whether the current user is a player or is just someone who is watching 
+the game. 
+
+
 
 ![Model class diagram](ModelTierClassDiagram.PNG)
 
@@ -247,5 +253,5 @@ stories did not reach the stage of testing.
 
 Our overall coverage for testing was fairly low due to a last minute rush of development with which testing was not able to 
 keep pace with. This sort of rapid development can create issues later down the line when untested methods are relied upon in
-futher development. In the next sprint of development the team will address these issues to give us a solid base for final development.
+further development. In the next sprint of development the team will address these issues to give us a solid base for final development.
 
