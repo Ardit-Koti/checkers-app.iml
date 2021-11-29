@@ -294,9 +294,11 @@ Game.isOver() methods are higher than the target range. The cyclomatic complexit
 MoveValidator.simpleJumpMoves(), MoveValidator.kingJumpMoves(), Game.isOver(), and other Space.Space() methods are
 higher than the target range.
 ###Javadoc Coverage Metrics
-
+No values in this analysis were outside of their target ranges.
 ###Lines of Code Metrics
-
+No values were outside a target range. The `MoveValidator` class had the most comment lines of code, and the most
+total lines of code. The test classes had the least comment lines of code.
 ###Martin Package metrics
-
+No values were outside a target range. Every package had 0 abstractness. The model package had the highest value for
+afferent couplings. The application package had the highest value for efferent couplings. 
 
