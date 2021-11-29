@@ -13,36 +13,42 @@ import java.util.LinkedList;
  */
 public class Game {
 
-    private Player redPlayer;
+    private Player redPlayer; // red player necessary for game
 
-    private LinkedList<Move> currentMove;
+    private LinkedList<Move> currentMove; // current move of the board at that specific state
 
-    private Player whitePlayer;
+    private Player whitePlayer; // white player necessary for game
 
-    private Color winner = null;
+    private Color winner = null; // winner is inherently null since upon start no winner has been called
 
-    private com.webcheckers.model.Color Color;
+    private com.webcheckers.model.Color Color; // unused
 
-    private Color activeColor;
+    private Color activeColor; // active color is used to see which player is up
 
     private int gameId; // TODO: 10/6/21  implement number generator for multiple games
 
     // initilized to red as red goes first
 
-    private int movesSinceCapture = 0;
+    private int movesSinceCapture = 0; // integer of moves so ties can be determined
 
-    private final MoveValidator validator;
+    private final MoveValidator validator; // checks for all moves
 
-    private Board gameBoard;
+    private Board gameBoard; // creates the initial game board for these players
 
-    private Board futureBoard;
+    private Board futureBoard; // used for replay mode
 
-    private LinkedList<Board> boardList;
+    private LinkedList<Board> boardList; // list of checkerboards
 
-    private boolean isTied = false;
+    private boolean isTied = false; // isTied will be false initially since a tie can't happen upon initialization
 
-    private String gameOverMessage = "";
+    private String gameOverMessage = ""; // message to show game is over.
 
+    /**
+     * Game constructor
+     * @param redPlayer the player to be assigned red
+     * @param whitePlayer the playert to be assigned white
+     * @param gameId the game ID
+     */
     public Game(Player redPlayer, Player whitePlayer, int gameId) {
         this.gameBoard = new Board();
         this.futureBoard = this.gameBoard;
@@ -55,12 +61,29 @@ public class Game {
         this.gameId = gameId;
     }
 
+    /**
+     * Retrieves gameBoard
+     * @return Board
+     */
     public Board getGameBoard(){return this.gameBoard;}
 
+    /**
+     * Retrieves red player of game
+     * @return Player
+     */
     public Player getRedPlayer(){return this.redPlayer;}
 
+    /**
+     * Retrieves white player of game
+     * @return Player
+     */
     public Player getWhitePlayer(){return this.whitePlayer;}
 
+    /**
+     * Retrieves other player of game
+     * @param you player calling method
+     * @return Player
+     */
     public Player getOtherPlayer(Player you){
         if (you.getColor().equals(Color.RED)) { return getWhitePlayer();}
         return getRedPlayer();
@@ -82,7 +105,7 @@ public class Game {
      *
      * if a game is over, the winner object is set.
      *
-     * @return
+     * @return boolean
      */
     public boolean isOver(){
         // check if all pieces are dead
@@ -135,30 +158,42 @@ public class Game {
         for (Move m:this.currentMove) {
             if (m.isJumpMove()){
                 movesSinceCapture=0;
+                System.out.println("jump move, movesSinceCapture reset");
             }
         }
 
-        if (movesSinceCapture >= 40){
+        if (movesSinceCapture >= 3){
             this.isTied=true;
             //System.out.println("TIE due to 40 moves without capture!!");
             this.gameOverMessage = "TIE due to 40 moves without capture!!";
+            System.out.println("TIEEEE");
+            return true;
 
         }
-        movesSinceCapture++;
+
+        System.out.println("movesSinceCapture: "+movesSinceCapture);
 
         return false; // game is not over
     }
 
+    /**
+     * Checks if game is tied
+     * @return boolean
+     */
     public boolean isTied(){
         return isTied;
     }
 
+    /**
+     * Declares winner of game
+     * @param winnerColor player color who won
+     */
     public void declareWinner(Color winnerColor){
         this.winner= winnerColor;
     }
 
         public String submitMove() {
-
+            movesSinceCapture++;
             if(this.isOver()){
                 String s = " WINNER WINNER CHICKEN DINNER!! Congratulations ";
                 if (this.winner == com.webcheckers.model.Color.RED)
@@ -238,20 +273,46 @@ public class Game {
         }
     }
 
+    /**
+     * Sets active color of game
+     * @param activeColor the Color to set to
+     */
     public void setActiveColor(Color activeColor){this.activeColor = activeColor;}
 
+    /**
+     * Retrieves active color of game
+     * @return Color
+     */
     public Color getActiveColor(){return this.activeColor;}
 
     public void setGameBoard(Board gameBoard){this.gameBoard = gameBoard;}
 
+    /**
+     * Retrieves winner color of game
+     * @return Color
+     */
     public Color getWinner(){return this.winner;}
+
+    /**
+     * Retrieves winning player
+     * @return Player
+     */
     public Player getWinPlayer(){
         if (winner.equals(Color.RED)) return getRedPlayer();
         else return getWhitePlayer();
     }
 
+    /**
+     * Retrieves ID of game
+     * @return int
+     */
     public int getGameId(){return this.gameId;}
 
+    /**
+     * Declares winner, returns false if issue
+     * @param winner Player who won
+     * @return boolean
+     */
     public boolean declareWinner(Player winner) {
         if((winner.equals(redPlayer) || winner.equals(whitePlayer)) && this.winner == null) {
             this.winner = winner.getColor();
@@ -261,6 +322,10 @@ public class Game {
         return false;
     }
 
+    /**
+     * Backs up moves in current turn
+     * @return String for success or ERROR
+     */
     public String backup()
     {
         System.out.println("Size of boardList" + boardList.size());
@@ -291,5 +356,9 @@ public class Game {
         return RESIGN_ERROR;
     }
 
+    /**
+     * Retrieves game over message
+     * @return String
+     */
     public String getGameOverMessage(){return this.gameOverMessage;}
 }

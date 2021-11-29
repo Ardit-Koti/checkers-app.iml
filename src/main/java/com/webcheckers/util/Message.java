@@ -50,6 +50,10 @@ public final class Message {
     return getText().equals(message.getText()) && getType() == message.getType();
   }
 
+  /**
+   * hashCode
+   * @return int 0
+   */
   @Override
   public int hashCode() {
     return 0;
@@ -70,8 +74,8 @@ public final class Message {
   // Attributes
   //
 
-  private final String text;
-  private final Type type;
+  private final String text; // the actual message
+  private final Type type; // whether this message should be seen as error or info
 
   //
   // Constructor
@@ -121,6 +125,10 @@ public final class Message {
   // Object methods
   //
 
+  /**
+   * toString function that actually shows the type and message
+   * @return String
+   */
   @Override
   public String toString() {
     return "{Msg " + type + " '" + text + "'}";

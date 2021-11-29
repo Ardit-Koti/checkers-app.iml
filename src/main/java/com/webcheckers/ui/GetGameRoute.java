@@ -19,42 +19,48 @@ import spark.Session;
 
 import com.webcheckers.util.Message;
 
-
+/**
+ * class that allows for the two players and any spectators to join the game session.
+ */
 public class GetGameRoute implements Route{
 
-    static final String VIEW_NAME = "game.ftl";
+    static final String VIEW_NAME = "game.ftl"; // route for the game
 
-    private final TemplateEngine templateEngine;
+    private final TemplateEngine templateEngine; // template engine needed for game
 
 
-    private static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers.");
+    private static final Message WELCOME_MSG = Message.info("Welcome to the world of online Checkers."); // welcome message given to every player and spectator
 
-    private final String ACTIVE = "activeColor";
+    private final String ACTIVE = "activeColor"; // active color is the current player
 
-    static final String NAME_PARAM = "name";
+    static final String NAME_PARAM = "name"; // name of the current user
 
-    private final String VIEW_MODE = "viewMode";
+    private final String VIEW_MODE = "viewMode"; // the view mode that the user is in
 
-    private final String USER = "currentUser";
+    private final String USER = "currentUser"; // current user is the user
 
-    private final String RED_PLAYER = "redPlayer";
+    private final String RED_PLAYER = "redPlayer"; // redPlayer is the redPlayer for this game
 
-    private final String WHITE_PLAYER = "whitePlayer";
+    private final String WHITE_PLAYER = "whitePlayer"; //whitePlayer is the white player for this game
 
-    private final String BOARD = "board";
+    private final String BOARD = "board"; // board is the specific board for this game
 
-    private final String CHOSEN_PLAYER = "challenge";
-    private final GameCenter gameCenter;
-    private final PlayerLobby pLobby;
+    private final String CHOSEN_PLAYER = "challenge"; // challenge is seeing which player was challenged by current user
+    private final GameCenter gameCenter; // gamecenter class initialized
+    private final PlayerLobby pLobby; //unused
 
-    private Gson gson;
-    private Game game;
+    private Gson gson; // gson for the game
+    private Game game; // creates the game class
 
     /**
      * The constructor for the {@code GET /signin} route handler.
      *
      * @param templateEngine
      *    The {@link TemplateEngine} used for rendering page HTML.
+     * @param gameCenter
+     *    The program-wide gameCenter which keeps track of games and players.
+     * @param gson
+     *    The Gson used.
      */
 
     GetGameRoute(final TemplateEngine templateEngine, GameCenter gameCenter, Gson gson){
@@ -71,6 +77,14 @@ public class GetGameRoute implements Route{
 
     }
 
+    /**
+     * The handle function for GetGameRoute.
+     * Depending on conditions, may create a new game session, put challenged players into
+     * already created sessions, update game sessions, etc.
+     * @param request request body for GET request.
+     * @param response response body
+     * @return Model View render
+     */
     @Override
     public String handle(Request request, Response response) {
         final Session httpSession = request.session();
@@ -127,7 +141,7 @@ public class GetGameRoute implements Route{
         vm.put(WHITE_PLAYER, game.getWhitePlayer());
         vm.put(ACTIVE, game.getActiveColor());
         game.isOver();
-        if (game.getWinner() != null){
+        if (game.getWinner() != null || game.isTied()){
             final Map<String, Object> modeOptions = new HashMap<>(2);
             modeOptions.put("isGameOver", true);
             modeOptions.put("gameOverMessage", game.getGameOverMessage());

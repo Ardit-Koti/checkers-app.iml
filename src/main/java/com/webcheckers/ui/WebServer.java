@@ -54,18 +54,18 @@ public class WebServer {
   /**
    * The URL pattern to request the Home page.
    */
-  public static final String HOME_URL = "/";
-  public static final String SIGN_IN_URL= "/signin";
-  public static final String GAME_URL = "/game";
-  public static final String SIGN_OUT_URL= "/signout";
-  public static final String VALIDATE_MOVE_URL = "/validateMove";
-  public static final String SUBMIT_MOVE_URL = "/submitTurn";
-  public static final String CHECK_TURN_URL = "/checkTurn";
-  public static final String RESIGN_URL = "/resignGame";
-  public static final String BACKUP_MOVE_URL = "/backupMove";
-  public static final String SPEC_GAME_URL = "/spectator/game";
-  public static final String SPEC_STOP_URL = "/spectator/stopWatching";
-  public static final String SPEC_CHECK_URL = "/spectator/checkTurn";
+  public static final String HOME_URL = "/"; // home page URL
+  public static final String SIGN_IN_URL= "/signin"; // signin page URL
+  public static final String GAME_URL = "/game"; // game URL
+  public static final String SIGN_OUT_URL= "/signout"; // signing out of site
+  public static final String VALIDATE_MOVE_URL = "/validateMove"; // move validation
+  public static final String SUBMIT_MOVE_URL = "/submitTurn"; // submitting turn
+  public static final String CHECK_TURN_URL = "/checkTurn"; // updates turn or win state
+  public static final String RESIGN_URL = "/resignGame"; // resignation route
+  public static final String BACKUP_MOVE_URL = "/backupMove"; // backup route
+  public static final String SPEC_GAME_URL = "/spectator/game"; //spectator game route
+  public static final String SPEC_STOP_URL = "/spectator/stopWatching"; // spectator stop route
+  public static final String SPEC_CHECK_URL = "/spectator/checkTurn"; // spectator update route
 
 
 

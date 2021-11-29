@@ -2,6 +2,9 @@ package com.webcheckers.model;
 
 import com.webcheckers.application.DevMode;
 
+/**
+ * class that represents a space on the checkers board
+ */
 public class Space {
 
     public enum Shade {LIGHT, DARK}
@@ -9,6 +12,10 @@ public class Space {
     private Status status;
     private Shade shade;
 
+    /**
+     * Produces string rep. of space
+     * @return String
+     */
     @Override
     public String toString() {
         return "Space{" +
@@ -28,8 +35,11 @@ public class Space {
     }
 
 
-
-
+    /**
+     * Space Constructor
+     * @param cellIdx the column id for the space
+     * @param row_index the row number of the space
+     */
     public Space(int cellIdx, int row_index)
     {
         this.cellIdx = cellIdx;
@@ -63,6 +73,12 @@ public class Space {
         }
     }
 
+    /**
+     * Space Constructor with devMode capability
+     * @param cellIdx the column id of space
+     * @param row_index the row number of space
+     * @param devMode the mode to create the board in, used for testing and demo
+     */
     public Space(int cellIdx, int row_index, DevMode devMode)
     {
 
@@ -147,10 +163,16 @@ public class Space {
         }
 
         else if(devMode == DevMode.TIE){
-            if(this.shade.equals(Shade.DARK) &&  row_index == 0 && cellIdx ==7)
+            if(this.shade.equals(Shade.DARK) &&  row_index == 7 && cellIdx ==0)
                 addCurrentPiece(new Piece(Piece.type.SINGLE, Color.RED));
+            if(this.shade.equals(Shade.DARK) &&  row_index == 5 && cellIdx ==4)
+                addCurrentPiece(new Piece(Piece.type.SINGLE, Color.RED));
+
+            if(this.shade.equals(Shade.DARK) &&  row_index == 3 && cellIdx ==4)
+                addCurrentPiece(new Piece(Piece.type.SINGLE, Color.WHITE));
             if(this.shade.equals(Shade.DARK) &&  row_index == 6 && cellIdx ==1)
                 addCurrentPiece(new Piece(Piece.type.SINGLE, Color.WHITE));
+
         }
         else if(devMode == DevMode.NONE) { //no dev mode
             if(this.shade.equals(Shade.DARK) && row_index >= 5 && row_index <= 7)
@@ -166,24 +188,43 @@ public class Space {
     }
 
 
-
+    /**
+     * Returns column of space
+     * @return cellIdx
+     */
     public int getCellIdx() { return cellIdx; }
 
     public void setShade(Space.Shade shade) {this.shade = shade; }
 
+    /**
+     * Checks to see if a space is a valid areas for a move.
+     * @return boolean
+     */
     public boolean isValid()
     {
         return this.shade.equals(Shade.DARK) && this.status.equals(Status.VACANT);
     }
 
+    /**
+     * Gets shade of space
+     * @return Shade
+     */
     public Shade getShade(){
         return shade;
     }
 
+    /**
+     * Gets piece of space (if any)
+     * @return Piece or null
+     */
     public Piece getPiece() {
         return piece;
     }
 
+    /**
+     * Checks if a space has a piece
+     * @return boolean
+     */
     public Boolean hasPiece(){
         if (this.piece == null)
             return false;
@@ -206,6 +247,11 @@ public class Space {
         return true;
     }
 
+    /**
+     * Adds piece to space
+     * @param pieceHelper a piece to be added
+     * @return status of space
+     */
     public Status addCurrentPiece(Piece pieceHelper) {
         if(status.equals(Status.VACANT)) {
             this.piece = pieceHelper;
@@ -216,6 +262,9 @@ public class Space {
         }
     }
 
+    /**
+     * Removes the piece on the space and changes the space's status to VACANT
+     */
     public void removeCurrentPiece() {
             this.piece = null;
             status = Status.VACANT;
@@ -234,10 +283,18 @@ public class Space {
         return(this.status == Status.VACANT);
     }
 
+    /**
+     * Gets the status of a space
+     * @return Status
+     */
     public Status getState() {
         return this.status;
     }
 
+    /**
+     * Makes a copy of a space.
+     * @return Space
+     */
     public Space copySpace(){
         if(this.piece != null)
             return new Space(getCellIdx(), piece.copyPiece(), getState(), getShade());

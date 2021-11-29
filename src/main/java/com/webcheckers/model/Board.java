@@ -2,14 +2,21 @@ package com.webcheckers.model;
 
 import java.util.*;
 
+/**
+ * Board class for rendering checkersBoard
+ */
 public class Board{
-    private final int redlimit = 7;
-    private final int whitelimit = 0;
+    private final int redLimit = 7;
+    private final int whiteLimit = 0;
 
     public ArrayList<Row> RowList;
     private List<Move> moves = new ArrayList<>();
 
-
+    /**
+     * Creates string rep. of board rows.
+     * Primarily used for debugging.
+     * @return String rows of board
+     */
     @Override
     public String toString() {
         return "Board{" +
@@ -17,14 +24,19 @@ public class Board{
                 '}';
     }
 
-
+    /**
+     * Personal iterator method which shows board contents in different orientation depending
+     * on player color.
+     * @param color the color of the player. (true for red, false for white)
+     * @return new Iterator<Row></Row>
+     */
     public Iterator<Row> iterate_by_color(boolean color) {
         if(color) {
             return new Iterator<Row>() {
                 int i = -1;
                 @Override
                 public boolean hasNext() {
-                    return i+1 <= redlimit;
+                    return i+1 <= redLimit;
                 }
 
                 @Override
@@ -39,7 +51,7 @@ public class Board{
                 int a = 8;
                 @Override
                 public boolean hasNext() {
-                    return a-1 >= whitelimit;
+                    return a-1 >= whiteLimit;
                 }
 
                 @Override
@@ -83,6 +95,12 @@ public class Board{
 //        }
 //    }
 
+    /**
+     * Retrieves the piece at a position on the board
+     * @param position the position of the space being accessed on the board
+     * @param perspective the color of the player
+     * @return Piece the piece (if any) at the space
+     */
     public Piece getPiece(Position position, Color perspective) {
         if(position == null || perspective  == null) {
             return null;
@@ -140,7 +158,10 @@ public class Board{
             return RowList.get(position.getRow()).getPieceAtIndex(position.getCell());
     }
 
-
+    /**
+     * Board constructor.
+     * Creates 8 rows and puts them in a list.
+     */
     public Board(){
         RowList = new ArrayList<>();
         for(int a = 0; a < 8; a++)
@@ -154,6 +175,10 @@ public class Board{
         this.RowList = rowList;
     }
 
+    /**
+     * Copy function for creating copy of board.
+     * @return Board the copyBoard
+     */
     public Board copyBoard()
     {
         ArrayList<Row> copyBoard = new ArrayList<>();
@@ -167,6 +192,11 @@ public class Board{
     public void addMove(Move m){
         moves.add(m);
     }
+
+    /**
+     * Gets moves made
+     * @return List<Move> moves list
+     */
     public List<Move> getMoves(){
         return moves;
     }

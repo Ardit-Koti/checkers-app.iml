@@ -4,10 +4,18 @@ import com.webcheckers.model.Player;
 
 import java.util.*;
 
+/**
+ * class that checks for names and takes care of the lobby of players and dictates who plays.
+ */
 public class PlayerLobby {
-    private final List<String> NamesInUse; //
-    private final List<Player> Players;
-    private final Map<String, String> passcodes;
+    private final List<String> NamesInUse; // List of each name used, will be seen in lobby of game
+    private final List<Player> Players; // List of the actual player, not just the name
+    private final Map<String, String> passcodes; // passcodes stored for each individual user.
+
+    /**
+     * Constructor for PlayerLobby
+     *
+     */
 
     public PlayerLobby() {
         NamesInUse = new ArrayList<>();
@@ -45,7 +53,10 @@ public class PlayerLobby {
     }
 
 
-
+    /**
+     * removeName which removes whatever name is given from the list.
+      * @param Name
+     */
     public void removeName(String Name)
     {
         NamesInUse.remove(Name);
@@ -59,24 +70,56 @@ public class PlayerLobby {
         }
     }
 
+    /**
+     * isNameValid method to check whether name can be used.
+     * @param Name the name in question that is being checked.
+     * @return boolean
+     */
+
     private boolean isNameValid(String Name) {
         //if name does NOT contain alphanumeric chars, return false,
         return this.containsAlphanumeric(Name);
     }
 
+    /**
+     * containsAlphanumeric helper function for isNameValid
+     * @param str the name being checked for validity
+     * @return boolean
+     */
+
     private boolean containsAlphanumeric(String str) {
         return (!str.equals("")) && (str.matches("^[a-zA-Z0-9]*$")); // "^" - beginning of line | "*" - matches zero or more occurrences | "$" - end of the line
     }
 
+    /**
+     * isNameUnique method to check for uniqueness.
+     * @param Name the name being checked
+     * @return boolean
+     */
     private boolean isNameUnique(String Name) {
         return !NamesInUse.contains(Name);
     }
 
+    /**
+     * numberOfPlayers method to see how many players are in the list
+     * @return int
+     */
     public int numberOfPlayers() {
         return NamesInUse.size();
     }
+
+    /**
+     * getNamesInUse gives the String list
+     * @return String List
+     */
     public List<String> getNamesInUse() {return this.NamesInUse;}
 
+
+    /**
+     * getPlayer method which gets the player based off the name given.
+     * @param name
+     * @return Player
+     */
     public Player getPlayer(String name)
     {
         for(int i =0; i<Players.size(); i++)
@@ -89,6 +132,11 @@ public class PlayerLobby {
         return null;
     }
 
+
+    /**
+     * iterator which iterates through the list of players
+     * @return Iterator
+     */
 
     public Iterator<Player> iterator() {
         return Players.iterator();

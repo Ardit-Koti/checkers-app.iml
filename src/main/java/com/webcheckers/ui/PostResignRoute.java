@@ -19,11 +19,27 @@ public class PostResignRoute implements Route{
     private TemplateEngine templateEngine;
     private final GameCenter gameCenter;
 
+    /**
+     * The constructor for the {@code post /resignGame} route handler.
+     * @param templateEngine the templateEngine for rendering HTML
+     * @param gameCenter the program-wide gameCenter for tracking games.
+     * @param gson the Gson
+     */
+
     public PostResignRoute(TemplateEngine templateEngine, GameCenter gameCenter, Gson gson) {
         this.templateEngine = templateEngine;
         this.gson = gson;
         this.gameCenter = gameCenter;
     }
+
+    /**
+     * Resigns player from game and displays message that player has resigned. Ends game.
+     * @param request the HTTP request
+     * @param response the HTTP response
+     * @return gson.toJson message
+     * @throws Exception
+     */
+
     @Override
     public Object handle(Request request, Response response) throws Exception {
         final Session httpSession = request.session();
