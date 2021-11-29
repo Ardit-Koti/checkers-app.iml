@@ -278,3 +278,25 @@ Our overall coverage for testing was fairly low due to a last minute rush of dev
 keep pace with. This sort of rapid development can create issues later down the line when untested methods are relied upon in
 further development. In the next sprint of development the team will address these issues to give us a solid base for final development.
 
+#Metrics
+###Chidamber-Kemerer Metrics
+These Metrics showed no outliers in the analysis. All values were in the target ranges. 
+###Complexity Metrics 
+The `MoveValidator`, `PostSignInRoute`, and `Space` classes had average operational Complexity values higher than the 
+target range. In addition, the `Space`, `MoveValidator`, and `Game` classes had weighted method complexity values higher
+than the target range. The cognitive complexity values for the Space.Space(), MoveValidator.simpleJumpMoves(),
+Game.takeTurn(), Game.isOver(), and MoveValidator.kingJumpMoves() methods were higher than the target range. The
+Game.takeTurn(), PlayerLobby.checkAndAddName(), MoveValidator.isOneDiagonal(), Game.isOver(), 
+PostSpectatorUpdator.handle(), Game.submitMove(), Space.moveTo(), GetGameRoute.handle(), and GetSpectatorRoute.handle() 
+methods have essential cyclomatic complexity values higher than the target range. The design complexity values for the
+Space.Space(), MoveValidator.simpleJumpMoves(), MoveValidator.kingJumpMoves(), MoveValidator.kingDiagonalMoves(), and
+Game.isOver() methods are higher than the target range. The cyclomatic complexity values for the Space.Space(), 
+MoveValidator.simpleJumpMoves(), MoveValidator.kingJumpMoves(), Game.isOver(), and other Space.Space() methods are
+higher than the target range.
+###Javadoc Coverage Metrics
+
+###Lines of Code Metrics
+
+###Martin Package metrics
+
+
