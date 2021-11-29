@@ -206,7 +206,7 @@ on the game page.
 Finally, PostValidateMove is used so that player moves are checked and validated to make sure they can be moved, while checking
 the conditions of the game.
 
-
+![A Sequence Diagram from PostValidateMove](PostValidateMoveAdditions.png)
 
 
 
