@@ -183,6 +183,7 @@ player base and makes them unable to join or watch games. It then directs them t
 GetGame is used to start a game when one player challenges another. Both players are moved into the game view and shown
 the starting position of the board.
 <br><br>
+![A Sequence Diagram from GetGameRoute](SeqFinal.PNG)
 GetSpecStop is used to stop the spectator from actually spectating the game, either because they want to watch another game
 or because the game they are currently watching stopped.
 <br><br>
@@ -207,11 +208,6 @@ Finally, PostValidateMove is used so that player moves are checked and validated
 the conditions of the game.
 
 ![A Sequence Diagram from PostValidateMove](PostValidateMoveAdditions.png)
-
-
-
-![A Sequence Diagram from GetGameRoute](SeqFinal.PNG)
-
 
 ### Application Tier
 The Application Tier includes the Message, PlayerException, MoveValidator, DevMode, and GameCenter class. The Message
@@ -302,3 +298,4 @@ total lines of code. The test classes had the least comment lines of code.
 No values were outside a target range. Every package had 0 abstractness. The model package had the highest value for
 afferent couplings. The application package had the highest value for efferent couplings. 
 
+##Recommendations
