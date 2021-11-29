@@ -117,7 +117,7 @@ Two possible future enhancements are as follows:
 
 This section describes the application domain.
 
-![The WebCheckers Domain Model](Team-Model.PNG)
+![The WebCheckers Domain Model](FinalSWENDomainModel.PNG)
 
 We start off with the Player model for the Webcheckers application. 
 The Player has 4 options, regarding what they can do during their usage of the site.
