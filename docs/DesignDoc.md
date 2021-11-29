@@ -209,10 +209,12 @@ The Space class goes through each spot on the checkerboard and whether the spot 
 ![Model class diagram](ModelTierClassDiagram.PNG)
 
 ### Design Improvements
-Overall, during Sprint 2, we made great improvements to the overall design and structure of our code. To start, we didn't exactly use the vision documents given to us for each sprint until the last week of Sprint 2. 
-So, now our code is more aligned with the vision documents, so they repeat less and unnecessary code has been removed from the project.
-Yet, at this point, our code is far from perfect. In order for it to meet coding standards, Law of Demeter needs to be followed. At times, our code can violate Law of Demeter. Yet, the Piece class for example helps with high cohesion, so it helps maintain the rules for checker too!
-
+Regarding our project after Sprint 3, there are certainly designs that can be changed and that can be further improved.
+First off, like we mentioned back in Sprint 2, we didn't seem to follow the vision document as closely as we should have.
+So, repetitive code can be seen sometimes within our project along with some unnecessary design choices. 
+Yet, after our mistakes made in the previous sprints, we think that our design choices have made things easier for us as a team.
+For example, sometime during Sprint 3, we decided as a team that a GameCenter class would help organize games and help us manage
+who watches and plays games. This change actually helped us get our spectator mode working functionally.
 ## Testing
 
 
