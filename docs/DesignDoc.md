@@ -303,3 +303,12 @@ For the SignInRoute, no changes should be made as the route is unstable by defau
 The Space class definitely needs design changes. It should be split into other classes which have higher cohesion, such 
 as a single board populator, rather than having board population be done in Space. The MoveValidator and Game classes
 could also be split into other classes with more focused purposes. 
+
+##Future Enhancements
+Firstly, since the implementation process was rushed, an enhancement that was never reached, was the
+Replay mode for WebCheckers. The Replay Mode would have allowed players to watch previously played games
+on the website using a unique game-id. 
+
+Optional enhancements that can be added in the future can be AI (with varying difficulties), leaderboards,
+tournaments, and access to multiple games being played by a player. These additions are minor, yet provide so much
+more to the experience with WebCheckers and can definitely be looked at in the future. 
