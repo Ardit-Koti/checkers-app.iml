@@ -195,8 +195,22 @@ the starting position of the board.
 
 
 ### Application Tier
-The Application Tier includes the Message and PlayerException class. The Message
+The Application Tier includes the Message, PlayerException, MoveValidator, DevMode, and GameCenter class. The Message
 class is a useful and concise class that will display either an error type message or a information type message. The PlayerException class hasn't been used yet, but it still has valuable functionality that can come in handy later.
+
+The DevMode class has been extremely useful for us, as it lets us demonstrate different features within the WebCheckers game. 
+Whether we want to show what happens during the endgame of a checkers match or what happens when a multi-jump is detected,
+we can easily show off these scenarios with the DevMode class.
+
+During Sprint 3, we decided that the best way to check if a move was valid or not, was to implement a MoveValidator class.
+This allows us to check every condition for a move and to see which moves are possible for the player to make. This is the center 
+of all of our logic regarding move making and it is has proved to be a great tool. 
+
+Along with MoveValidator, we decided as a team that the best possible way to manage games was to create a GameCenter class. 
+The GameCenter class allows us to get available games, create games, and see the player lobby entirely. 
+This change definitely made implementing spectator way easier. 
+
+
 
 
 ### Model Tier
