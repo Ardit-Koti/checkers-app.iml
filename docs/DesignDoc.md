@@ -299,3 +299,7 @@ No values were outside a target range. Every package had 0 abstractness. The mod
 afferent couplings. The application package had the highest value for efferent couplings. 
 
 ##Recommendations
+For the SignInRoute, no changes should be made as the route is unstable by default and does its main purposes properly.
+The Space class definitely needs design changes. It should be split into other classes which have higher cohesion, such 
+as a single board populator, rather than having board population be done in Space. The MoveValidator and Game classes
+could also be split into other classes with more focused purposes. 
